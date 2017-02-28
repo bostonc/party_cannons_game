@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4381904819860250}
+  - component: {fileID: 114549602077402236}
   m_Layer: 0
   m_Name: Catapult
   m_TagString: Untagged
@@ -319,6 +320,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1813106507506978}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114549602077402236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982764958923756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373571e8fb28d274c9434298250b14e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136131539257782018
 CapsuleCollider:
   m_ObjectHideFlags: 1

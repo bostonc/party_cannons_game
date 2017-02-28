@@ -245,7 +245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Catapult_1
+      value: Cannon_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
@@ -474,7 +474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Catapult_2
+      value: Cannon_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
@@ -525,7 +525,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Catapult_0
+      value: Cannon_0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
