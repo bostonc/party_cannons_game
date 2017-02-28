@@ -29,11 +29,10 @@ public class InputManager : MonoBehaviour
     public bool _________________;
 
     //these will be dynamically rearranged
-    int player1JoyNum = 1;
+    int player1JoyNum = 1; //respective to cannon number, 4 = runner
     int player2JoyNum = 2;
     int player3JoyNum = 3;
     int player4JoyNum = 4;
-    int runnerPlayer = 4; //player number of runner
 
     private void Awake()
     {
@@ -51,7 +50,7 @@ public class InputManager : MonoBehaviour
     {
         //cannon1.GetComponent<CannonControl>().rotate(0f);
         //p1 input
-        if (runnerPlayer == 1)
+        if (player1JoyNum == 4)
         {
 
         }
@@ -62,7 +61,7 @@ public class InputManager : MonoBehaviour
 
 
         //p2 input
-        if (runnerPlayer == 2)
+        if (player2JoyNum == 4)
         {
 
         }
@@ -73,7 +72,7 @@ public class InputManager : MonoBehaviour
 
 
         //p3 input
-        if (runnerPlayer == 3)
+        if (player3JoyNum == 4)
         {
 
         }
@@ -84,7 +83,7 @@ public class InputManager : MonoBehaviour
 
 
         //p4 input
-        if (runnerPlayer == 4)
+        if (player4JoyNum == 4)
         {
 
         }
