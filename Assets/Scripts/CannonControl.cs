@@ -42,5 +42,10 @@ public class CannonControl : MonoBehaviour
     {
 
     }
+
+    public void stopFire(float f)
+    {
+
+    }
 }
 
