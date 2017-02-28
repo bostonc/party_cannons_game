@@ -4,9 +4,9 @@ using UnityEngine;
 
 
 /*
-Left stick (horizontal) to adjust rotation
-Right stick (vertical) to adjust pitch
-right trigger (hold for power adjust) to fire 
+    Left stick (horizontal) to adjust rotation
+    Right stick (vertical) to adjust pitch
+    right trigger (hold for power adjust) to fire 
 
 
     joy1-3 are launchers
@@ -15,6 +15,9 @@ right trigger (hold for power adjust) to fire
 
 public class CannonControl : MonoBehaviour
 {
+    public int maxRotation = 45;
+    public int minRotation = 45;
+
     public bool _________________;
 
     int player1JoyNum = 1;

@@ -245,7 +245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Cannon_1
+      value: Cannon_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
@@ -253,6 +253,11 @@ Prefab:
 --- !u!4 &693274122 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4381904819860250, guid: c1fabca0fcf03b5418bca813866c0132,
+    type: 2}
+  m_PrefabInternal: {fileID: 693274121}
+--- !u!1 &693274123 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132,
     type: 2}
   m_PrefabInternal: {fileID: 693274121}
 --- !u!1 &1118668603
@@ -354,6 +359,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004ee3787ca658444a18f5fcafe4d475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRotation: 45
+  minRotation: 45
+  cannon1: {fileID: 2027134858}
+  cannon2: {fileID: 693274123}
+  cannon3: {fileID: 1986838898}
+  runner: {fileID: 0}
+  _________________: 0
 --- !u!1 &1206158830
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Cannon_2
+      value: Cannon_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
@@ -494,6 +506,11 @@ Prefab:
 --- !u!4 &1986838897 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4381904819860250, guid: c1fabca0fcf03b5418bca813866c0132,
+    type: 2}
+  m_PrefabInternal: {fileID: 1986838896}
+--- !u!1 &1986838898 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132,
     type: 2}
   m_PrefabInternal: {fileID: 1986838896}
 --- !u!1001 &2027134856
@@ -537,7 +554,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
       propertyPath: m_Name
-      value: Cannon_0
+      value: Cannon_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
@@ -545,5 +562,10 @@ Prefab:
 --- !u!4 &2027134857 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4381904819860250, guid: c1fabca0fcf03b5418bca813866c0132,
+    type: 2}
+  m_PrefabInternal: {fileID: 2027134856}
+--- !u!1 &2027134858 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1982764958923756, guid: c1fabca0fcf03b5418bca813866c0132,
     type: 2}
   m_PrefabInternal: {fileID: 2027134856}
