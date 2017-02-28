@@ -15,15 +15,7 @@ using UnityEngine;
 
 public class CannonControl : MonoBehaviour
 {
-    public int maxRotation = 45;
-    public int minRotation = 45;
 
-    public bool _________________;
-
-    int player1JoyNum = 1;
-    int player2JoyNum = 2;
-    int player3JoyNum = 3;
-    int player4JoyNum = 4;
 
 
     // Use this for initialization
@@ -35,5 +27,20 @@ public class CannonControl : MonoBehaviour
 	void Update () {
 		
 	}
+
+    public void rotate(float f)
+    {
+
+    }
+
+    public void pitch(float f)
+    {
+
+    }
+
+    public void fire(float f)
+    {
+
+    }
 }
 

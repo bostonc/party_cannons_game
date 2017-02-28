@@ -24,14 +24,16 @@ public class InputManager : MonoBehaviour
     public GameObject cannon1;
     public GameObject cannon2;
     public GameObject cannon3;
-    public GameObject runner;
+    public GameObject runner;//4
 
     public bool _________________;
 
+    //these will be dynamically rearranged
     int player1JoyNum = 1;
     int player2JoyNum = 2;
     int player3JoyNum = 3;
     int player4JoyNum = 4;
+    int runnerPlayer = 4; //player number of runner
 
     private void Awake()
     {
@@ -45,7 +47,52 @@ public class InputManager : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        //cannon1.GetComponent<CannonControl>().rotate(0f);
+        //p1 input
+        if (runnerPlayer == 1)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
+        //p2 input
+        if (runnerPlayer == 2)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
+        //p3 input
+        if (runnerPlayer == 3)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
+        //p4 input
+        if (runnerPlayer == 4)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
+    }
 }
