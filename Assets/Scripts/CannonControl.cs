@@ -17,6 +17,11 @@ public class CannonControl : MonoBehaviour
 {
     public int maxRotation = 45;
     public int minRotation = 45;
+    public float rotationMultiplier = 1f;
+
+    public bool _______________;
+
+
 
 
     // Use this for initialization
@@ -25,13 +30,22 @@ public class CannonControl : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 
     public void rotate(float f)
     {
-        print("rotating " + gameObject.name);
+        print("rotating " + gameObject.name + " by " + f);
+        if (f > 0)
+        {
+            gameObject.transform.Rotate(Vector3.up * Time.deltaTime, f * rotationMultiplier);
+        }
+        if (f < 0)
+        {
+            gameObject.transform.Rotate(Vector3.up * Time.deltaTime, f * rotationMultiplier);
+        }
     }
 
     public void pitch(float f)
