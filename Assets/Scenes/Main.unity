@@ -194,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 629908720}
   m_LocalRotation: {x: -0.06975647, y: 0, z: 0, w: 0.9975641}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8363610}
@@ -366,6 +366,10 @@ MonoBehaviour:
   cannon3: {fileID: 1986838898}
   runner: {fileID: 0}
   _________________: 0
+  player1JoyNum: 1
+  player2JoyNum: 2
+  player3JoyNum: 3
+  player4JoyNum: 4
 --- !u!1 &1206158830
 GameObject:
   m_ObjectHideFlags: 0

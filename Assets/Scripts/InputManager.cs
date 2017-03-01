@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
         //p1 input on CONTROLLER 1
         if (player1JoyNum == 4)
         {
-
+            //control runner
         }
         else
         {
@@ -114,48 +114,248 @@ public class InputManager : MonoBehaviour
                 }
             }
             //RB
-            if (Input.GetButtonDown(KeyCode.Joystick1Button5.ToString()))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button5))
             {
-
+                switch (player1JoyNum)
+                {
+                    case 1:
+                        cc1.stopFire();
+                        break;
+                    case 2:
+                        cc2.stopFire();
+                        break;
+                    case 3:
+                        cc3.stopFire();
+                        break;
+                }
             }
-
-
-
-        }//end else
+        }//end p1 else
 
 
         //p2 input on CONTROLLER 2
         if (player2JoyNum == 4)
         {
-
+            //control runner
         }
         else
         {
-            //cannon1.GetComponent<CannonControl>().rotate(0f);
-        }
+            f = Input.GetAxis("Rotate_2");
+            if (f != 0)
+            {
+                switch (player2JoyNum)
+                {
+                    case 1:
+                        cc1.rotate(f);
+                        break;
+                    case 2:
+                        cc2.rotate(f);
+                        break;
+                    case 3:
+                        cc3.rotate(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Pitch_2");
+            if (f != 0)
+            {
+                switch (player2JoyNum)
+                {
+                    case 1:
+                        cc1.pitch(f);
+                        break;
+                    case 2:
+                        cc2.pitch(f);
+                        break;
+                    case 3:
+                        cc3.pitch(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Fire_2");
+            if (f != 0)
+            {
+                switch (player2JoyNum)
+                {
+                    case 1:
+                        cc1.fire(f);
+                        break;
+                    case 2:
+                        cc2.fire(f);
+                        break;
+                    case 3:
+                        cc3.fire(f);
+                        break;
+                }
+            }
+            //RB
+            if (Input.GetKeyDown(KeyCode.Joystick2Button5))
+            {
+                switch (player2JoyNum)
+                {
+                    case 1:
+                        cc1.stopFire();
+                        break;
+                    case 2:
+                        cc2.stopFire();
+                        break;
+                    case 3:
+                        cc3.stopFire();
+                        break;
+                }
+            }
+        }//end p2 else
 
 
         //p3 input on CONTROLLER 3
         if (player3JoyNum == 4)
         {
-
+            //control runner
         }
         else
         {
-
-        }
+            f = Input.GetAxis("Rotate_3");
+            if (f != 0)
+            {
+                switch (player3JoyNum)
+                {
+                    case 1:
+                        cc1.rotate(f);
+                        break;
+                    case 2:
+                        cc2.rotate(f);
+                        break;
+                    case 3:
+                        cc3.rotate(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Pitch_3");
+            if (f != 0)
+            {
+                switch (player3JoyNum)
+                {
+                    case 1:
+                        cc1.pitch(f);
+                        break;
+                    case 2:
+                        cc2.pitch(f);
+                        break;
+                    case 3:
+                        cc3.pitch(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Fire_3");
+            if (f != 0)
+            {
+                switch (player3JoyNum)
+                {
+                    case 1:
+                        cc1.fire(f);
+                        break;
+                    case 2:
+                        cc2.fire(f);
+                        break;
+                    case 3:
+                        cc3.fire(f);
+                        break;
+                }
+            }
+            //RB
+            if (Input.GetKeyDown(KeyCode.Joystick3Button5))
+            {
+                switch (player3JoyNum)
+                {
+                    case 1:
+                        cc1.stopFire();
+                        break;
+                    case 2:
+                        cc2.stopFire();
+                        break;
+                    case 3:
+                        cc3.stopFire();
+                        break;
+                }
+            }
+        }//end p3 else
 
 
         //p4 input on CONTROLLER 4
         if (player4JoyNum == 4)
         {
-
+            //control runner
         }
         else
         {
+            f = Input.GetAxis("Rotate_4");
+            if (f != 0)
+            {
+                switch (player4JoyNum)
+                {
+                    case 1:
+                        cc1.rotate(f);
+                        break;
+                    case 2:
+                        cc2.rotate(f);
+                        break;
+                    case 3:
+                        cc3.rotate(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Pitch_4");
+            if (f != 0)
+            {
+                switch (player4JoyNum)
+                {
+                    case 1:
+                        cc1.pitch(f);
+                        break;
+                    case 2:
+                        cc2.pitch(f);
+                        break;
+                    case 3:
+                        cc3.pitch(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Fire_4");
+            if (f != 0)
+            {
+                switch (player4JoyNum)
+                {
+                    case 1:
+                        cc1.fire(f);
+                        break;
+                    case 2:
+                        cc2.fire(f);
+                        break;
+                    case 3:
+                        cc3.fire(f);
+                        break;
+                }
+            }
+            //RB
+            if (Input.GetKeyDown(KeyCode.Joystick4Button5))
+            {
+                switch (player4JoyNum)
+                {
+                    case 1:
+                        cc1.stopFire();
+                        break;
+                    case 2:
+                        cc2.stopFire();
+                        break;
+                    case 3:
+                        cc3.stopFire();
+                        break;
+                }
+            }
+        }//end p4 else
 
-        }
+
+    }//end update
 
 
-    }
+
 }
