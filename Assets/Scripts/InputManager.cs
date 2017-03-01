@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
     Debugger should be able to use PC keyboard/mouse to control each player (one at a time).
@@ -23,6 +24,10 @@ public class InputManager : MonoBehaviour
     public GameObject cannon2;
     public GameObject cannon3;
     public GameObject runner;//4
+
+    public Text pausedText;
+
+    public bool paused = false;
 
     public bool _________________;
 
@@ -50,6 +55,8 @@ public class InputManager : MonoBehaviour
         cc1 = cannon1.GetComponent<CannonControl>();
         cc2 = cannon2.GetComponent<CannonControl>();
         cc3 = cannon3.GetComponent<CannonControl>();
+
+        pausedText.enabled = false;
     }
 	
 	// Update is called once per frame
@@ -444,6 +451,25 @@ public class InputManager : MonoBehaviour
         {
             print("debugger is controlling P4");
             debugPlayerNum = 4;
+        }
+
+        //pause
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) ||
+            Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) ||
+            Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7))
+        {
+            if (paused)
+            {
+                Time.timeScale = 1;
+                paused = false;
+                pausedText.enabled = false;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                paused = true;
+                pausedText.enabled = true;
+            }
         }
 
 
