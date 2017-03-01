@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviour
     public int player2JoyNum = 2;
     public int player3JoyNum = 3;
     public int player4JoyNum = 4;
+    public int debugPlayerNum = 1; //who is the keyboard controlling?
 
     CannonControl cc1;
     CannonControl cc2;
@@ -353,9 +354,87 @@ public class InputManager : MonoBehaviour
             }
         }//end p4 else
 
+        //debug player (keyboard)
+        if (debugPlayerNum == 4)
+        {
+            //control runner
+        }
+        else
+        {
+            f = Input.GetAxis("Rotate_D");
+            if (f != 0)
+            {
+                switch (debugPlayerNum)
+                {
+                    case 1:
+                        cc1.rotate(f);
+                        break;
+                    case 2:
+                        cc2.rotate(f);
+                        break;
+                    case 3:
+                        cc3.rotate(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Pitch_D");
+            if (f != 0)
+            {
+                switch (debugPlayerNum)
+                {
+                    case 1:
+                        cc1.pitch(f);
+                        break;
+                    case 2:
+                        cc2.pitch(f);
+                        break;
+                    case 3:
+                        cc3.pitch(f);
+                        break;
+                }
+            }
+            f = Input.GetAxis("Fire_D"); //space/left click
+            if (f != 0)
+            {
+                switch (debugPlayerNum)
+                {
+                    case 1:
+                        cc1.fire(f);
+                        break;
+                    case 2:
+                        cc2.fire(f);
+                        break;
+                    case 3:
+                        cc3.fire(f);
+                        break;
+                }
+            }
+            //RB (right click)
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                switch (debugPlayerNum)
+                {
+                    case 1:
+                        cc1.stopFire();
+                        break;
+                    case 2:
+                        cc2.stopFire();
+                        break;
+                    case 3:
+                        cc3.stopFire();
+                        break;
+                }
+            }
+        }//end debugger else
+
 
     }//end update
 
-
+    public void swapPlayer(int a, int b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
 
 }
