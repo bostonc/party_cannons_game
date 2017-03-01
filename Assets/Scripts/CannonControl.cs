@@ -27,6 +27,10 @@ public class CannonControl : MonoBehaviour
 	private float current_pitch;
 	private float current_yaw;
 
+	private float firing_rate = 120; // per minute
+
+	private float lastFired = 0;
+
     // Use this for initialization
     void Start () {
 		_barrel = transform.Find ("Barrel").gameObject;
@@ -38,8 +42,6 @@ public class CannonControl : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (current_yaw);
-		Debug.Log (current_pitch);
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
 		_base.transform.localRotation = Quaternion.Euler(0, current_yaw, 0);
 	}
@@ -64,7 +66,16 @@ public class CannonControl : MonoBehaviour
 
     public void fire(float f)
     {
-        print("firing " + gameObject.name);
+		if (Time.time - lastFired > 60 / firing_rate) {
+			Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
+
+			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject, 
+				               barrel_top, Quaternion.identity);
+		
+			go.GetComponent<Rigidbody> ().velocity =  
+				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
+			lastFired = Time.time;
+		}
     }
 
     public void stopFire()

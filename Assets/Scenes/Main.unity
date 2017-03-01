@@ -726,6 +726,17 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
+        type: 2}
+      propertyPath: maxPitch
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
+        type: 2}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 1822015782646642, guid: 004f586207d44394e8d5d5794e10fa44,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
   m_IsPrefabParent: 0
