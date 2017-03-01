@@ -30,22 +30,22 @@ public class CannonControl : MonoBehaviour
 
     public void rotate(float f)
     {
-
+        print("rotating " + gameObject.name);
     }
 
     public void pitch(float f)
     {
-
+        print("changing pitch of " + gameObject.name);
     }
 
     public void fire(float f)
     {
-
+        print("firing " + gameObject.name);
     }
 
     public void stopFire()
     {
-
+        print("cease firing " + gameObject.name);
     }
 }
 
