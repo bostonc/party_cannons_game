@@ -19,9 +19,6 @@ public class InputManager : MonoBehaviour
 {
     static public InputManager S;
 
-    public int maxRotation = 45;
-    public int minRotation = 45;
-
     public GameObject cannon1;
     public GameObject cannon2;
     public GameObject cannon3;
@@ -426,6 +423,29 @@ public class InputManager : MonoBehaviour
                 }
             }
         }//end debugger else
+
+        //debugger player switch
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            print("debugger is controlling P1");
+            debugPlayerNum = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            print("debugger is controlling P2");
+            debugPlayerNum = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            print("debugger is controlling P3");
+            debugPlayerNum = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            print("debugger is controlling P4");
+            debugPlayerNum = 4;
+        }
+
 
 
     }//end update

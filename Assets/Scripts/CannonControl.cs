@@ -15,7 +15,8 @@ using UnityEngine;
 
 public class CannonControl : MonoBehaviour
 {
-
+    public int maxRotation = 45;
+    public int minRotation = 45;
 
 
     // Use this for initialization
