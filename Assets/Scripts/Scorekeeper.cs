@@ -10,6 +10,16 @@ public class Scorekeeper : MonoBehaviour
 
     public Text highScoreText;
 
+    public Text p1ScoreText;
+    public Text p2ScoreText;
+    public Text p3ScoreText;
+    public Text p4ScoreText;
+
+    public GameObject cannon1;
+    public GameObject cannon2;
+    public GameObject cannon3;
+    public GameObject runner;
+
     public bool ___________________;
 
     int p1Score = 0;
@@ -17,7 +27,9 @@ public class Scorekeeper : MonoBehaviour
     int p3Score = 0;
     int p4Score = 0;
 
-
+    Vector3 c1Pos = Vector3.zero;
+    Vector3 c2Pos = Vector3.zero;
+    Vector3 c3Pos = Vector3.zero;
 
     private void Awake()
     {
@@ -28,8 +40,10 @@ public class Scorekeeper : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        c1Pos = cannon1.transform.position;
+        c2Pos = cannon2.transform.position;
+        c3Pos = cannon3.transform.position;
+    }
 	
 	// Update is called once per frame
 	void Update ()
