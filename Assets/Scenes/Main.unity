@@ -707,6 +707,9 @@ MonoBehaviour:
   cannon2: {fileID: 693274123}
   cannon3: {fileID: 1986838898}
   runner: {fileID: 0}
+  highscoreFadeDelay: 3
+  highscoreFadeSpeed: 0.02
+  debugHighscore: 0
   ___________________: 0
 --- !u!1 &1206158830
 GameObject:
