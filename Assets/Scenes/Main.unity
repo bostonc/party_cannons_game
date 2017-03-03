@@ -3005,6 +3005,7 @@ MonoBehaviour:
   highscoreFadeSpeed: 0.02
   debugHighscore: 0
   ___________________: 0
+  gameOver: 0
   highscoreHolder: 0
 --- !u!1 &1200091954
 GameObject:
@@ -4331,6 +4332,19 @@ GameObject:
   m_PrefabParentObject: {fileID: 1428389867854952, guid: 6b9ceae1ebf474d80b30f226b6d14e87,
     type: 2}
   m_PrefabInternal: {fileID: 1752669454}
+--- !u!114 &1709186573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1709186572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b397e0b99941745a290fd2a1e7be5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runner: {fileID: 1709186572}
+  runnerHealth: 10
 --- !u!114 &1709186578
 MonoBehaviour:
   m_ObjectHideFlags: 0
