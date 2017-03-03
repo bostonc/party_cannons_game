@@ -37,8 +37,8 @@ public class Scorekeeper : MonoBehaviour
     int p3Score = 0;
     int p4Score = 0;
 
+    public bool gameOver = false;
     public int highscoreHolder = 0; //0 for none, else player number 1-4
-
     float highScoreTime = 0f;
 
     Vector3 c1Pos = Vector3.zero;
@@ -139,16 +139,28 @@ public class Scorekeeper : MonoBehaviour
 
     public void collectHighScoreName()
     {
-        //TODO
+        //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
     }
 
     private void updateTimer()
     {
         float timer = (gameDuration * 60) - Time.time;
-        string minutes = Mathf.Floor(timer / 60).ToString("00");
-        string seconds = Mathf.Floor(timer % 60).ToString("00");
-        timerText.text = minutes + ":" + seconds;
 
+        if (timer > 0)
+        {
+            string minutes = Mathf.Floor(timer / 60).ToString("00");
+            string seconds = Mathf.Floor(timer % 60).ToString("00");
+            timerText.text = minutes + ":" + seconds;
+        }
+        if (timer <= 0)
+        {
+            timerText.text = "00:00";
+            gameOver = true;
+            collectHighScoreName();
+        }
 
     }
 
