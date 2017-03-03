@@ -160,6 +160,7 @@ public class Scorekeeper : MonoBehaviour
             timerText.text = "00:00";
             gameOver = true;
             collectHighScoreName();
+            InputManager.S.gameStop();
         }
 
     }

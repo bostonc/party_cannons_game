@@ -488,4 +488,10 @@ public class InputManager : MonoBehaviour
         b = temp;
     }
 
+    public void gameStop()
+    {
+        Time.timeScale = 0;
+        paused = true;
+    }
+
 }
