@@ -59,6 +59,7 @@ public class InputManager : MonoBehaviour
 		pc1 = runner.GetComponent<PlayerControl>();
 
         pausedText.enabled = false;
+        randomizePlayers();
     }
 	
 	// Update is called once per frame
@@ -492,6 +493,43 @@ public class InputManager : MonoBehaviour
     {
         Time.timeScale = 0;
         paused = true;
+    }
+
+    private void randomizePlayers()
+    {
+        int num = Random.Range(1, 5);
+        print("num: " + num);
+
+        switch(num)
+        {
+            case 1:
+                player1JoyNum = 1;
+                player2JoyNum = 2;
+                player3JoyNum = 3;
+                player4JoyNum = 4;
+                break;
+            case 2:
+                player1JoyNum = 2;
+                player2JoyNum = 3;
+                player3JoyNum = 4;
+                player4JoyNum = 1;
+                break;
+            case 3:
+                player1JoyNum = 3;
+                player2JoyNum = 4;
+                player3JoyNum = 1;
+                player4JoyNum = 2;
+                break;
+            case 4:
+                player1JoyNum = 4;
+                player2JoyNum = 1;
+                player3JoyNum = 2;
+                player4JoyNum = 3;
+                break;
+            default:
+                Debug.Assert(false);
+                break;
+        }
     }
 
 }
