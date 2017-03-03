@@ -16,11 +16,14 @@ public class Scorekeeper : MonoBehaviour
     public Text p2ScoreText;
     public Text p3ScoreText;
     public Text p4ScoreText;
+    public Text timerText;
 
     public GameObject cannon1;
     public GameObject cannon2;
     public GameObject cannon3;
     public GameObject runner;
+
+    public int gameDuration = 5; //minutes
 
     public float highscoreFadeDelay = 3f;
     public float highscoreFadeSpeed = 0.02f;
@@ -80,6 +83,7 @@ public class Scorekeeper : MonoBehaviour
         }
 
         highScoreFade();
+        updateTimer();
     }
 
     //player is 1-4
@@ -138,6 +142,14 @@ public class Scorekeeper : MonoBehaviour
         //TODO
     }
 
+    private void updateTimer()
+    {
+        float timer = (gameDuration * 60) - Time.time;
+        string minutes = Mathf.Floor(timer / 60).ToString("00");
+        string seconds = Mathf.Floor(timer % 60).ToString("00");
+        timerText.text = minutes + ":" + seconds;
 
+
+    }
 
 }
