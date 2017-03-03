@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
     CannonControl cc1;
     CannonControl cc2;
     CannonControl cc3;
+	PlayerControl pc1;
 
     float f = 0f;
 
@@ -55,6 +56,7 @@ public class InputManager : MonoBehaviour
         cc1 = cannon1.GetComponent<CannonControl>();
         cc2 = cannon2.GetComponent<CannonControl>();
         cc3 = cannon3.GetComponent<CannonControl>();
+		pc1 = runner.GetComponent<PlayerControl>();
 
         pausedText.enabled = false;
     }
@@ -66,7 +68,7 @@ public class InputManager : MonoBehaviour
         //p1 input on CONTROLLER 1
         if (player1JoyNum == 4)
         {
-            //control runner
+			//runner control
         }
         else
         {
@@ -140,7 +142,7 @@ public class InputManager : MonoBehaviour
         //p2 input on CONTROLLER 2
         if (player2JoyNum == 4)
         {
-            //control runner
+			//runner control
         }
         else
         {
@@ -214,7 +216,7 @@ public class InputManager : MonoBehaviour
         //p3 input on CONTROLLER 3
         if (player3JoyNum == 4)
         {
-            //control runner
+			//runner control
         }
         else
         {
@@ -288,7 +290,7 @@ public class InputManager : MonoBehaviour
         //p4 input on CONTROLLER 4
         if (player4JoyNum == 4)
         {
-            //control runner
+			//runner control
         }
         else
         {
@@ -361,7 +363,10 @@ public class InputManager : MonoBehaviour
         //debug player (keyboard)
         if (debugPlayerNum == 4)
         {
-            //control runner
+			f = Input.GetAxis ("Horizontal");
+			pc1.move(f);
+			f = Input.GetAxis ("Jump");
+			pc1.jump(f);
         }
         else
         {
