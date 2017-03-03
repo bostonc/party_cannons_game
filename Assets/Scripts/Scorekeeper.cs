@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//at end of game, need to get high score name from player
+
 public class Scorekeeper : MonoBehaviour
 {
     static public Scorekeeper S;
@@ -114,10 +116,6 @@ public class Scorekeeper : MonoBehaviour
         highScoreText.enabled = true;
         highScoreTime = Time.time;
         highscoreHolder = player;
-
-        //need to get player name and record that too (preferably at end of level)
-
-
     }
 
     private void highScoreFade()
@@ -134,6 +132,12 @@ public class Scorekeeper : MonoBehaviour
             }
         }
     }
+
+    public void collectHighScoreName()
+    {
+        //TODO
+    }
+
 
 
 }
