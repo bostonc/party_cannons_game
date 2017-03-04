@@ -6,7 +6,7 @@ using UnityEngine;
 /*
     Left stick (horizontal) to adjust rotation
     Right stick (vertical) to adjust pitch
-    right trigger (hold for power adjust) to fire 
+    right trigger (hold for power adjust) to fire
 
 
     joy1-3 are launchers
@@ -15,8 +15,8 @@ using UnityEngine;
 
 public class CannonControl : MonoBehaviour
 {
-    private float maxYaw = 45;
-    private float minYaw = -45;
+  private float maxYaw = 45;
+  private float minYaw = -45;
 
 	private float minPitch = 30;
 	private float maxPitch = 70;
@@ -31,6 +31,15 @@ public class CannonControl : MonoBehaviour
 
 	private float lastFired = 0;
 
+  private bool onAI = false;
+
+  public int controller;
+
+    void checkIfAIControlled() {
+		if(InputManager.S.getDebugPlayerNum() != controller)
+      		onAI = true;
+    }
+
     // Use this for initialization
     void Start () {
 		_barrel = transform.Find ("Barrel").gameObject;
@@ -39,7 +48,7 @@ public class CannonControl : MonoBehaviour
 		current_yaw = 0;
 		current_pitch = 45;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
@@ -66,21 +75,31 @@ public class CannonControl : MonoBehaviour
 
     public void fire(float f)
     {
-		if (Time.time - lastFired > 60 / firing_rate) {
-			Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
+  		if (Time.time - lastFired > 60 / firing_rate) {
+  			Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
 
-			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject, 
-				               barrel_top, Quaternion.identity);
-		
-			go.GetComponent<Rigidbody> ().velocity =  
-				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
-			lastFired = Time.time;
-		}
+  			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject,
+  				               barrel_top, Quaternion.identity);
+
+  			go.GetComponent<Rigidbody> ().velocity =
+  				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
+			go.GetComponent<CannonBallMetadata> ().setMetadata (controller, this);
+  			lastFired = Time.time;
+  		}
     }
 
     public void stopFire()
     {
         print("cease firing " + gameObject.name);
     }
-}
 
+	public void setMaterial(Material mat) {
+		_barrel.GetComponent<Renderer> ().material = mat;
+		_base.GetComponent<Renderer> ().material = mat;
+
+		Renderer[] childrenGOrenderers = GetComponentsInChildren<Renderer> ();
+		foreach(Renderer rend in childrenGOrenderers) {
+			rend.material = mat;
+		}
+	}
+}

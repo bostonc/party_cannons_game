@@ -9,7 +9,7 @@ public class RunnerHealth : MonoBehaviour {
 
 	void Awake () {
         // initialize to 10 for now
-        runnerHealth = 10;
+        runnerHealth = 1;
 	}
 
     void Start() {
@@ -39,5 +39,18 @@ public class RunnerHealth : MonoBehaviour {
             //reduce player health
             runnerHealth--;
         }
+
+		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
+			if (InputManager.S.getDebugPlayerNum () == PlayerControl.S.controller) {
+				InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
+			} else {
+				InputManager.S.swapPlayer (PlayerControl.S.controller);
+			}
+
+			Material runnerMaterial = runner.GetComponent<MeshRenderer> ().material;
+			runner.GetComponent<MeshRenderer>().material = collision.gameObject.GetComponent<Material> ();
+			collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
+		}
+
     }
 }

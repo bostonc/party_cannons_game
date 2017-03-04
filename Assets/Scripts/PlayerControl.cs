@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
+	static public PlayerControl S;
+
 	public int speed = 10;
 	public int jumpPower = 10;
 
 	private Rigidbody rb;
+
+	public int controller;
+
+
+	void Awake() {
+		S = this;
+	}
 
 	// Use this for initialization
 	void Start () {

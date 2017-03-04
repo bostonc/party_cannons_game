@@ -482,11 +482,13 @@ public class InputManager : MonoBehaviour
 
     }//end update
 
-    public void swapPlayer(int a, int b)
+	public void swapPlayer(int controllerThatFired)//, int otherController)
     {
-        int temp = a;
-        a = b;
-        b = temp;
+//        int temp = a;
+//        a = b;
+//        b = temp;
+		Debug.Log(debugPlayerNum);
+		debugPlayerNum = controllerThatFired;
     }
 
     public void gameStop()
@@ -532,4 +534,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+	public int getDebugPlayerNum() {
+		return debugPlayerNum;
+	}
 }
