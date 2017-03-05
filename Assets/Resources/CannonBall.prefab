@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54791663793455080}
   - component: {fileID: 96690981302643396}
   - component: {fileID: 114386200091417084}
+  - component: {fileID: 114914920563070586}
   m_Layer: 0
   m_Name: CannonBall
   m_TagString: Projectile
@@ -213,6 +214,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e285de55b33414296afa733aa345d0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114914920563070586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822015782646642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6497a8a28dd7147b6d90b257a1ce8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnSpeed: 0.05
 --- !u!135 &135835304005804252
 SphereCollider:
   m_ObjectHideFlags: 1
