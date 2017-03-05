@@ -157,10 +157,19 @@ public class Scorekeeper : MonoBehaviour
         }
         if (timer <= 0)
         {
+            //GAME OVER
+
             timerText.text = "00:00";
             gameOver = true;
             collectHighScoreName();
             InputManager.S.gameStop();
+
+            //game over message
+
+
+            //restart
+
+
         }
 
     }
