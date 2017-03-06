@@ -24,7 +24,7 @@ public class Scorekeeper : MonoBehaviour
     public GameObject cannon3;
     public GameObject runner;
 
-    public int gameDuration = 5; //minutes
+    public float gameDuration = 5; //minutes
     public int restartDuration = 5; //seconds
 
     public float highscoreFadeDelay = 3f;
@@ -35,7 +35,9 @@ public class Scorekeeper : MonoBehaviour
     public bool ___________________;
 
     float endgameTime = 0;
+    float sceneLoadTime = 0;
     bool restartTimerStarted = false;
+    
 
     int p1Score = 0;
     int p2Score = 0;
@@ -91,6 +93,8 @@ public class Scorekeeper : MonoBehaviour
         highScoreFade();
         updateTimer();
         restartCountdown();
+
+        print("Time: " + Time.time);
     }
 
     //player is 1-4
@@ -154,7 +158,8 @@ public class Scorekeeper : MonoBehaviour
 
     private void updateTimer()
     {
-        float timer = (gameDuration * 60) - Time.time;
+        float timer = (gameDuration * 60) - Time.timeSinceLevelLoad;
+        print("timer: " + timer);
 
         if (timer > 0)
         {
@@ -169,7 +174,7 @@ public class Scorekeeper : MonoBehaviour
             timerText.text = "00:00";
             gameOver = true;
             collectHighScoreName();
-            InputManager.S.gameStop();
+            //InputManager.S.gameStop();
 
             //game over message
             endgame();
@@ -240,6 +245,19 @@ public class Scorekeeper : MonoBehaviour
 
     private void restart()
     {
+        sceneLoadTime = Time.time;
+        endgameTime = 0;
+        restartTimerStarted = false;
+        p1Score = 0;
+        p2Score = 0;
+        p3Score = 0;
+        p4Score = 0;
+        gameOver = false;
+        highscoreHolder = 0;
+        highScoreTime = 0f;
+
+        print("SCENELOADTIME: " + sceneLoadTime);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
