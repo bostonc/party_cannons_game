@@ -45,6 +45,12 @@ public class Scorekeeper : MonoBehaviour
     Vector3 c2Pos = Vector3.zero;
     Vector3 c3Pos = Vector3.zero;
 
+	float startTime;
+
+	public float fractionOfGameComplete() {
+		return (gameDuration * 60 - (Time.time - startTime)) / (60 * gameDuration);
+	}
+
     private void Awake()
     {
         S = this;
@@ -59,6 +65,7 @@ public class Scorekeeper : MonoBehaviour
         if (cannon3 != null) c3Pos = cannon3.transform.position;
 
         if (debugHighscore) recordHighScore(1, 5);
+		startTime = Time.time;
     }
 	
 	// Update is called once per frame

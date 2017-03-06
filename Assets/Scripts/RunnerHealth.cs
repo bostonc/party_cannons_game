@@ -7,6 +7,10 @@ public class RunnerHealth : MonoBehaviour {
     public GameObject runner;
     public int runnerHealth;
 
+	int scoreAccumulation = 0;
+
+	float lastAccumulationTime = -1;
+
 	void Awake () {
         // initialize to 1 for now
         runnerHealth = 1;
@@ -17,7 +21,12 @@ public class RunnerHealth : MonoBehaviour {
     }
 	
 	void Update () {
-		
+		scoreAccumulation += (int)(10 * Scorekeeper.S.fractionOfGameComplete ());
+		if(Time.time - lastAccumulationTime > 0.1f) {
+			Scorekeeper.S.Score (InputManager.S.getPlayerJoyNumForController (4), scoreAccumulation);
+			scoreAccumulation = 0;
+			lastAccumulationTime = Time.time;
+		}
 	}
 
     // when the runner collides with something
@@ -44,15 +53,7 @@ public class RunnerHealth : MonoBehaviour {
 
 			Debug.Log ("OnCollisionEnter" + Time.time);
 			Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
-			if (InputManager.S.getDebugPlayerNum () == PlayerControl.S.controller) {
-				Debug.Log ("Just Before 1");
-				Debug.Log (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
-				InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
-			} else {
-				Debug.Log ("Just Before 2");
-				Debug.Log (PlayerControl.S.controller);
-				InputManager.S.swapPlayer (PlayerControl.S.controller);
-			}
+			InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 
 			Material runnerMaterial = new Material (runner.GetComponent<MeshRenderer> ().material);
 			runner.GetComponent<MeshRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
