@@ -101,7 +101,7 @@ public class Scorekeeper : MonoBehaviour
         updateTimer();
         restartCountdown();
 
-        print("Time: " + Time.time);
+        // print("Time: " + Time.time);
     }
 
     //player is 1-4
@@ -166,7 +166,7 @@ public class Scorekeeper : MonoBehaviour
     private void updateTimer()
     {
         float timer = (gameDuration * 60) - Time.timeSinceLevelLoad;
-        print("timer: " + timer);
+        // print("timer: " + timer);
 
         if (timer > 0)
         {
