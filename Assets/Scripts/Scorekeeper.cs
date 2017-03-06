@@ -17,6 +17,7 @@ public class Scorekeeper : MonoBehaviour
     public Text p3ScoreText;
     public Text p4ScoreText;
     public Text timerText;
+    public Text endGametext;
 
     public GameObject cannon1;
     public GameObject cannon2;
@@ -24,6 +25,7 @@ public class Scorekeeper : MonoBehaviour
     public GameObject runner;
 
     public int gameDuration = 5; //minutes
+    public int restartDuration = 5; //seconds
 
     public float highscoreFadeDelay = 3f;
     public float highscoreFadeSpeed = 0.02f;
@@ -31,6 +33,9 @@ public class Scorekeeper : MonoBehaviour
     public bool debugHighscore = false;
 
     public bool ___________________;
+
+    float endgameTime = 0;
+    bool restartTimerStarted = false;
 
     int p1Score = 0;
     int p2Score = 0;
@@ -49,6 +54,7 @@ public class Scorekeeper : MonoBehaviour
     {
         S = this;
         highScoreText.enabled = false;
+        endGametext.enabled = false;
     }
 
     // Use this for initialization
@@ -84,6 +90,7 @@ public class Scorekeeper : MonoBehaviour
 
         highScoreFade();
         updateTimer();
+        restartCountdown();
     }
 
     //player is 1-4
@@ -155,7 +162,7 @@ public class Scorekeeper : MonoBehaviour
             string seconds = Mathf.Floor(timer % 60).ToString("00");
             timerText.text = minutes + ":" + seconds;
         }
-        if (timer <= 0)
+        if (timer <= 0 && !gameOver)
         {
             //GAME OVER
 
@@ -165,13 +172,75 @@ public class Scorekeeper : MonoBehaviour
             InputManager.S.gameStop();
 
             //game over message
-
+            endgame();
 
             //restart
-
+            endgameTime = Time.time;
+            restartTimerStarted = true;
 
         }
 
+    }//updateTimer
+
+    private void endgame()
+    {
+        int winner = 0;
+        int winScore = 0;
+
+        if (p1Score > p2Score &&
+            p1Score > p3Score &&
+            p1Score > p4Score)
+        {
+            winner = 1;
+            winScore = p1Score;
+        }
+        if (p2Score > p1Score &&
+            p2Score > p3Score &&
+            p2Score > p4Score)
+        {
+            winner = 2;
+            winScore = p2Score;
+        }
+        if (p3Score > p1Score &&
+            p3Score > p2Score &&
+            p3Score > p4Score)
+        {
+            winner = 3;
+            winScore = p3Score;
+        }
+        if (p4Score > p1Score &&
+            p4Score > p2Score &&
+            p4Score > p3Score)
+        {
+            winner = 4;
+            winScore = p4Score;
+        }
+
+        endGametext.enabled = true;
+        endGametext.text = "Round Over\nPlayer " + winner + " wins with " + winScore + " points";
+
+        switch (highscoreHolder)
+        {
+            case 0:
+                break;
+            default:
+                endGametext.text += "\nas a new HIGH SCORE!";
+                break;
+        }        
+    }//endgame
+
+    //called in update
+    private void restartCountdown()
+    {
+        if (Time.time - endgameTime > restartDuration && restartTimerStarted)
+        {
+            restart();
+        }
+    }
+
+    private void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
