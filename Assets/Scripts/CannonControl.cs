@@ -94,12 +94,16 @@ public class CannonControl : MonoBehaviour
     }
 
 	public void setMaterial(Material mat) {
-		_barrel.GetComponent<Renderer> ().material = mat;
-		_base.GetComponent<Renderer> ().material = mat;
+		_barrel.GetComponent<MeshRenderer> ().material = mat;
+		_base.GetComponent<MeshRenderer> ().material = mat;
 
-		Renderer[] childrenGOrenderers = GetComponentsInChildren<Renderer> ();
-		foreach(Renderer rend in childrenGOrenderers) {
+		MeshRenderer[] childrenGOrenderers = GetComponentsInChildren<MeshRenderer> ();
+		foreach(MeshRenderer rend in childrenGOrenderers) {
 			rend.material = mat;
 		}
+	}
+
+	public Material getMaterial() {
+		return _base.GetComponent<MeshRenderer> ().material;
 	}
 }

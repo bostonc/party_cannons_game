@@ -8,7 +8,7 @@ public class RunnerHealth : MonoBehaviour {
     public int runnerHealth;
 
 	void Awake () {
-        // initialize to 10 for now
+        // initialize to 1 for now
         runnerHealth = 1;
 	}
 
@@ -41,16 +41,24 @@ public class RunnerHealth : MonoBehaviour {
         }
 
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
+
+			Debug.Log ("OnCollisionEnter" + Time.time);
+			Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
 			if (InputManager.S.getDebugPlayerNum () == PlayerControl.S.controller) {
+				Debug.Log ("Just Before 1");
+				Debug.Log (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 				InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 			} else {
+				Debug.Log ("Just Before 2");
+				Debug.Log (PlayerControl.S.controller);
 				InputManager.S.swapPlayer (PlayerControl.S.controller);
 			}
 
-			Material runnerMaterial = runner.GetComponent<MeshRenderer> ().material;
-			runner.GetComponent<MeshRenderer>().material = collision.gameObject.GetComponent<Material> ();
+			Material runnerMaterial = new Material (runner.GetComponent<MeshRenderer> ().material);
+			runner.GetComponent<MeshRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
 			collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
 		}
 
+		runnerHealth = 1;
     }
 }

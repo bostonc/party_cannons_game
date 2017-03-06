@@ -19,5 +19,9 @@ public class CannonBallMetadata : MonoBehaviour
 	public void setCannonControlMaterial(Material mat) {
 		_cc.setMaterial(mat);
 	}
+
+	public Material getCannonControlMaterial() {
+		return _cc.getMaterial ();
+	}
 }
 
