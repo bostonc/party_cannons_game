@@ -79,6 +79,9 @@ public class InputManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (Scorekeeper.S.gameOver)
+			return;
+		
 		//p1 input on CONTROLLER 1
 		if (player1JoyNum == 4) {
 			//runner control

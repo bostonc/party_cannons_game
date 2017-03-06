@@ -21,6 +21,8 @@ public class RunnerHealth : MonoBehaviour {
     }
 	
 	void Update () {
+		if (Scorekeeper.S.gameOver)
+			return; // Don't update scores anymore if game is over.
 		scoreAccumulation += (int)(10 * Scorekeeper.S.fractionOfGameComplete ());
 		if(Time.time - lastAccumulationTime > 0.1f) {
 			Scorekeeper.S.Score (InputManager.S.getPlayerJoyNumForController (4), scoreAccumulation);
