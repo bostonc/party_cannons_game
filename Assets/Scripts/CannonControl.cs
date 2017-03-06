@@ -15,11 +15,11 @@ using UnityEngine;
 
 public class CannonControl : MonoBehaviour
 {
-  private float maxYaw = 45;
-  private float minYaw = -45;
+	private float maxYaw = 45;
+	private float minYaw = -45;
 
 	private float minPitch = 30;
-	private float maxPitch = 70;
+	private float maxPitch = 90;
 
 	private GameObject _barrel;
 	private GameObject _base;
@@ -31,13 +31,22 @@ public class CannonControl : MonoBehaviour
 
 	private float lastFired = 0;
 
-  private bool onAI = false;
+    private bool onAI = false;
 
-  public int controller;
+  	public int controller;
+
+	private float desired_yaw;
+	private float desired_pitch;
+	private int desired_shots_fired;
+	private int shots_fired;
+
+	private float paused_ai_start_time = 0.0f;
 
     void checkIfAIControlled() {
-		if(InputManager.S.getDebugPlayerNum() != controller)
-      		onAI = true;
+		if (InputManager.S.getDebugPlayerNum () != controller)
+			onAI = true;
+		else
+			onAI = false;
     }
 
     // Use this for initialization
@@ -47,10 +56,62 @@ public class CannonControl : MonoBehaviour
 
 		current_yaw = 0;
 		current_pitch = 45;
+
+		desired_yaw = current_yaw;
+		desired_pitch = current_pitch;
+		shots_fired = 0;
+		desired_shots_fired = 0;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		checkIfAIControlled ();
+		if (onAI) {
+			if (Time.time - paused_ai_start_time < 0.5f) {
+				return;
+			}
+			paused_ai_start_time = 0.0f;
+			if (Mathf.Approximately(current_pitch, desired_pitch) && Mathf.Approximately(current_yaw, desired_yaw) && shots_fired == desired_shots_fired) {
+				int action = Random.Range (0, 4);
+				shots_fired = 0;
+				switch (action) {
+				case 0:
+					desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
+					Debug.Log (controller + " Pitch, " + desired_pitch);
+					break;
+				case 1:
+					desired_yaw = Random.Range ((int) minYaw, (int) maxYaw);
+					Debug.Log (controller + " Yaw, " + desired_yaw); 
+					break;
+				case 2:
+					desired_shots_fired = Random.Range (1, 10);
+					Debug.Log (controller + " Shots, " + desired_shots_fired); 
+					break;
+				}
+			} else {
+				if (Random.value < 0.2) {
+					paused_ai_start_time = Time.time;
+					return;
+				}
+				if (shots_fired < desired_shots_fired) {
+					fire (1.0f);
+					shots_fired += 1;
+					Debug.Log (shots_fired - desired_shots_fired);
+				} else if (desired_pitch > current_pitch) {
+					pitch (1.0f);
+					Debug.Log (current_pitch - desired_pitch);
+				} else if (desired_pitch < current_pitch) {
+					pitch (-1.0f);
+					Debug.Log (current_pitch - desired_pitch);
+				} else if (desired_yaw > current_yaw) {
+					rotate (1.0f);
+					Debug.Log (current_yaw - desired_yaw);
+				} else if (desired_yaw < current_yaw) {
+					rotate (-1.0f);
+					Debug.Log (current_yaw - desired_yaw);
+				}
+			}
+		}
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
 		_base.transform.localRotation = Quaternion.Euler(0, current_yaw, 0);
 	}
