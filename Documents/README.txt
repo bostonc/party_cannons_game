@@ -1,0 +1,2 @@
+Controls:
+	Use the arrow keys to aim as a cannon and press spacebar to shoot. As the runner, use the arrow keys to move and press spacebar to jump. When you hit the runner as a cannon, you become the runner. When you are hit as the runner, you become the cannon that hit you. Press '1', '2', '3', or '4' to switch between the cannons and runner freely. You will not be able to switch whenever you want in later versions of the game. It is only implemented that way right now for testing and debugging purposes.
