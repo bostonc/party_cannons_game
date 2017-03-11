@@ -142,6 +142,8 @@ public class CannonControl : MonoBehaviour
   			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject,
   				               barrel_top, Quaternion.identity);
 
+			go.GetComponent<Renderer> ().material = _barrel.GetComponent<Renderer> ().material;
+
   			go.GetComponent<Rigidbody> ().velocity =
   				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
 			go.GetComponent<CannonBallMetadata> ().setMetadata (controller, this);
