@@ -42,6 +42,8 @@ public class CannonControl : MonoBehaviour
 
 	private float paused_ai_start_time = 0.0f;
 
+	private GameObject predictiveLine;
+
     void checkIfAIControlled() {
 		if (InputManager.S.getDebugPlayerNum () != controller)
 			onAI = true;
@@ -61,6 +63,9 @@ public class CannonControl : MonoBehaviour
 		desired_pitch = current_pitch;
 		shots_fired = 0;
 		desired_shots_fired = 0;
+
+		predictiveLine = MonoBehaviour.Instantiate (Resources.Load ("PredictiveLine") as GameObject,
+			_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)), Quaternion.identity);
 	}
 
 	// Update is called once per frame
@@ -114,6 +119,29 @@ public class CannonControl : MonoBehaviour
 		}
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
 		_base.transform.localRotation = Quaternion.Euler(0, current_yaw, 0);
+
+		UpdateTrajectory (predictiveLine, _barrel.transform.TransformPoint (new Vector3 (0, 1, 0)), 
+			(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15, 
+			new Vector3 (0f, -9.8f, 0f)); 
+	}
+
+	void UpdateTrajectory(GameObject go, Vector3 initialPosition, Vector3 initialVelocity, Vector3 gravity)
+	{
+		int numSteps = 20; // for example
+		float timeDelta = 1.0f / initialVelocity.magnitude; // for example
+
+		LineRenderer lineRenderer = go.GetComponent<LineRenderer>();
+		lineRenderer.numPositions = numSteps;
+
+		Vector3 position = initialPosition;
+		Vector3 velocity = initialVelocity;
+		for (int i = 0; i < numSteps; ++i)
+		{
+			lineRenderer.SetPosition(i, position);
+
+			position += velocity * timeDelta + 0.5f * gravity * timeDelta * timeDelta;
+			velocity += gravity * timeDelta;
+		}
 	}
 
     public void rotate(float f)
