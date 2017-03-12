@@ -73,8 +73,29 @@ public class InputManager : MonoBehaviour
 
         pausedText.enabled = false;
         randomizePlayers();
-		debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
+
+		string[] Joysticks = Input.GetJoystickNames ();
+		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
+			debugAllow = false;
+			debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
+		} else { // No controllers attached!
+			debugAllow = true;
+		}
     }
+
+	float OsBasedGetAxis(string axis) {
+		if ((Application.platform == RuntimePlatform.OSXEditor) ||
+		    (Application.platform == RuntimePlatform.OSXPlayer))
+			return CalibratedGetAxis (axis + "_OSX");
+		else
+			return CalibratedGetAxis (axis);
+	}
+
+	float CalibratedGetAxis(string axis) {
+		float f = Input.GetAxis (axis);
+		return (Mathf.Abs (f) > 0.1f) ? f : 0.0f; // Safety mechanism to stop leakage of values 
+												  // (dead range could be incorrectly set.)
+	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -86,7 +107,7 @@ public class InputManager : MonoBehaviour
 		if (player1JoyNum == 4) {
 			//runner control
 		} else {
-			f = Input.GetAxis ("Rotate_1");
+			f = CalibratedGetAxis ("Rotate_1"); // Rotation axis same on OSX and Windows.
 			if (f != 0) {
 				switch (player1JoyNum) {
 				case 1:
@@ -100,7 +121,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Pitch_1");
+			f = OsBasedGetAxis ("Pitch_1");
 			if (f != 0) {
 				switch (player1JoyNum) {
 				case 1:
@@ -114,7 +135,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Fire_1");
+			f = OsBasedGetAxis ("Fire_1");
 			if (f != 0) {
 				switch (player1JoyNum) {
 				case 1:
@@ -149,7 +170,7 @@ public class InputManager : MonoBehaviour
 		if (player2JoyNum == 4) {
 			//runner control
 		} else {
-			f = Input.GetAxis ("Rotate_2");
+			f = CalibratedGetAxis ("Rotate_2");
 			if (f != 0) {
 				switch (player2JoyNum) {
 				case 1:
@@ -163,7 +184,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Pitch_2");
+			f = OsBasedGetAxis ("Pitch_2");
 			if (f != 0) {
 				switch (player2JoyNum) {
 				case 1:
@@ -177,7 +198,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Fire_2");
+			f = OsBasedGetAxis ("Fire_2");
 			if (f != 0) {
 				switch (player2JoyNum) {
 				case 1:
@@ -212,7 +233,7 @@ public class InputManager : MonoBehaviour
 		if (player3JoyNum == 4) {
 			//runner control
 		} else {
-			f = Input.GetAxis ("Rotate_3");
+			f = CalibratedGetAxis ("Rotate_3");
 			if (f != 0) {
 				switch (player3JoyNum) {
 				case 1:
@@ -226,7 +247,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Pitch_3");
+			f = OsBasedGetAxis ("Pitch_3");
 			if (f != 0) {
 				switch (player3JoyNum) {
 				case 1:
@@ -240,7 +261,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Fire_3");
+			f = OsBasedGetAxis ("Fire_3");
 			if (f != 0) {
 				switch (player3JoyNum) {
 				case 1:
@@ -275,7 +296,7 @@ public class InputManager : MonoBehaviour
 		if (player4JoyNum == 4) {
 			//runner control
 		} else {
-			f = Input.GetAxis ("Rotate_4");
+			f = CalibratedGetAxis ("Rotate_4");
 			if (f != 0) {
 				switch (player4JoyNum) {
 				case 1:
@@ -289,7 +310,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Pitch_4");
+			f = OsBasedGetAxis ("Pitch_4");
 			if (f != 0) {
 				switch (player4JoyNum) {
 				case 1:
@@ -303,7 +324,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Fire_4");
+			f = OsBasedGetAxis ("Fire_4");
 			if (f != 0) {
 				switch (player4JoyNum) {
 				case 1:
@@ -336,12 +357,12 @@ public class InputManager : MonoBehaviour
 
 		//debug player (keyboard). Keyboard emulates some controller!
 		if (debugPlayerNum == 4) {
-			f = Input.GetAxis ("Horizontal");
+			f = CalibratedGetAxis ("Horizontal");
 			pc1.move (f);
-			f = Input.GetAxis ("Jump");
+			f = CalibratedGetAxis ("Jump");
 			pc1.jump (f);
 		} else {
-			f = Input.GetAxis ("Rotate_D");
+			f = CalibratedGetAxis ("Rotate_D");
 			if (f != 0) {
 				switch (debugPlayerNum) {
 				case 1:
@@ -355,7 +376,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Pitch_D");
+			f = CalibratedGetAxis ("Pitch_D");
 			if (f != 0) {
 				switch (debugPlayerNum) {
 				case 1:
@@ -369,7 +390,7 @@ public class InputManager : MonoBehaviour
 					break;
 				}
 			}
-			f = Input.GetAxis ("Fire_D"); //space/left click
+			f = CalibratedGetAxis ("Fire_D"); //space/left click
 			if (f != 0) {
 				switch (debugPlayerNum) {
 				case 1:
