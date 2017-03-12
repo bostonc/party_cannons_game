@@ -134,7 +134,7 @@ public class Scorekeeper : MonoBehaviour
     public void recordHighScore(int player, int amt)
     {
         if (highscoreHolder == player) return;
-        AudioDriver.S.play(SoundType.highScore);
+        //AudioDriver.S.play(SoundType.highScore);
         PlayerPrefs.SetInt("highScore", p4Score);
         highScoreText.enabled = true;
         highScoreTime = Time.time;
@@ -183,7 +183,7 @@ public class Scorekeeper : MonoBehaviour
             timerText.text = "00:00";
             gameOver = true;
             collectHighScoreName();
-            //InputManager.S.gameStop();
+            //InputManager.S.gameStop(); THIS CReATES BAD AUDIO BUG ON SWAP, NOT SURE WHY
 
             //game over message
             endgame();
