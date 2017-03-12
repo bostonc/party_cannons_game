@@ -149,6 +149,7 @@ public class CannonControl : MonoBehaviour
 		if ((current_yaw >= maxYaw && f > 0) || (current_yaw <= minYaw && f < 0)) {
 			return;
 		} else {
+            AudioDriver.S.play(SoundType.rotate);
 			current_yaw += f;
 		}
     }
@@ -165,7 +166,8 @@ public class CannonControl : MonoBehaviour
     public void fire(float f)
     {
   		if (Time.time - lastFired > 60 / firing_rate) {
-  			Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
+            AudioDriver.S.play(SoundType.launch);
+            Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
 
   			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject,
   				               barrel_top, Quaternion.identity);
@@ -179,6 +181,7 @@ public class CannonControl : MonoBehaviour
   		}
     }
 
+    //break out of charging a shot
     public void stopFire()
     {
         print("cease firing " + gameObject.name);

@@ -49,19 +49,19 @@ public class AudioDriver : MonoBehaviour
 
     //SOURCES
     //cannon
-    public AudioSource rotateSource;
-    public AudioSource launchSource;
-    public AudioSource hitPlayerSource;
-    public AudioSource hitWallSource;
+    AudioSource rotateSource;
+    AudioSource launchSource;
+    AudioSource hitPlayerSource;
+    AudioSource hitWallSource;
     //runner
-    public AudioSource jumppSource;
+    AudioSource jumppSource;
     //general
-    public AudioSource gameStartSource;
-    public AudioSource gameEndSource;
-    public AudioSource swapSource;
-    public AudioSource splashSource;
-    public AudioSource musicSource;
-    public AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
+    AudioSource gameStartSource;
+    AudioSource gameEndSource;
+    AudioSource swapSource;
+    AudioSource splashSource;
+    AudioSource musicSource;
+    AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
 
 
     public bool _________________;
@@ -69,11 +69,12 @@ public class AudioDriver : MonoBehaviour
     private void Awake()
     {
         S = this;
+        generateAudioSources(); //MUST BE CALLED BEFORE ANY SOUNDS ARE MADE
     }
 
     private void Start()
-    {
-        startBackgroundMusic();
+    {        
+        startBackgroundMusic();        
     }
 
     private void Update()
@@ -156,6 +157,22 @@ public class AudioDriver : MonoBehaviour
         }
     }
 
+    private void generateAudioSources()
+    {
+        rotateSource = gameObject.AddComponent<AudioSource>();
+        rotateSource.volume = .2f;
+
+        launchSource = gameObject.AddComponent<AudioSource>();
+        hitPlayerSource = gameObject.AddComponent<AudioSource>();
+        hitWallSource = gameObject.AddComponent<AudioSource>();
+        jumppSource = gameObject.AddComponent<AudioSource>();
+        gameStartSource = gameObject.AddComponent<AudioSource>();
+        gameEndSource = gameObject.AddComponent<AudioSource>();
+        swapSource = gameObject.AddComponent<AudioSource>();
+        splashSource = gameObject.AddComponent<AudioSource>();
+        musicSource = gameObject.AddComponent<AudioSource>();
+        generalSource = gameObject.AddComponent<AudioSource>();
+    }
 
 
 }
