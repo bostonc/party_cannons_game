@@ -49,6 +49,8 @@ public class RunnerHealth : MonoBehaviour {
 
             //reduce player health
             runnerHealth--;
+
+            AudioDriver.S.play(SoundType.hitPlayer);
         }
 
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {

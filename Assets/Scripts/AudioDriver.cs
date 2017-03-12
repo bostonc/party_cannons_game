@@ -7,12 +7,12 @@ public enum SoundType
     rotate,
     launch,
     hitPlayer,
-    hitWall,
     jump,
     gameStart,
     gameEnd,
     swap,
-    splash
+    splash,
+    highScore
 };
 
 public class AudioDriver : MonoBehaviour
@@ -33,7 +33,6 @@ public class AudioDriver : MonoBehaviour
     public AudioClip launchSound_3;
     public AudioClip hitPlayerSound_0;
     public AudioClip hitPlayerSound_1;
-    public AudioClip hitWallSound;
     //runner
     public AudioClip jumpSound_0;
     public AudioClip jumpSound_1;
@@ -43,6 +42,7 @@ public class AudioDriver : MonoBehaviour
     public AudioClip gameEndSound;
     public AudioClip swapSound;
     public AudioClip splashSound;
+    public AudioClip highScoreSound;
     public AudioClip gameMusic_0;
     public AudioClip gameMusic_1;
     public AudioClip gameMusic_2;
@@ -52,7 +52,6 @@ public class AudioDriver : MonoBehaviour
     AudioSource rotateSource;
     AudioSource launchSource;
     AudioSource hitPlayerSource;
-    AudioSource hitWallSource;
     //runner
     AudioSource jumppSource;
     //general
@@ -60,6 +59,7 @@ public class AudioDriver : MonoBehaviour
     AudioSource gameEndSource;
     AudioSource swapSource;
     AudioSource splashSource;
+    AudioSource highScoreSource;
     AudioSource musicSource;
     AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
 
@@ -74,7 +74,8 @@ public class AudioDriver : MonoBehaviour
 
     private void Start()
     {        
-        startBackgroundMusic();        
+        startBackgroundMusic();
+        play(SoundType.gameStart);  
     }
 
     private void Update()
@@ -105,9 +106,6 @@ public class AudioDriver : MonoBehaviour
                 if (num == 0 && hitPlayerSource != null) hitPlayerSource.PlayOneShot(hitPlayerSound_0);
                 if (num == 1 && hitPlayerSource != null) hitPlayerSource.PlayOneShot(hitPlayerSound_1);
                 break;
-            case SoundType.hitWall:
-                if (hitWallSource != null) hitWallSource.PlayOneShot(hitWallSound);
-                break;
             case SoundType.jump:
                 num = Random.Range(0, 3);
                 if (num == 0 && jumppSource != null) jumppSource.PlayOneShot(jumpSound_0);
@@ -125,6 +123,9 @@ public class AudioDriver : MonoBehaviour
                 break;
             case SoundType.splash:
                 if (splashSource != null) splashSource.PlayOneShot(splashSound);
+                break;
+            case SoundType.highScore:
+                if (highScoreSource != null) highScoreSource.PlayOneShot(highScoreSound);
                 break;
             default:
                 Debug.Assert(false);
@@ -160,16 +161,20 @@ public class AudioDriver : MonoBehaviour
     private void generateAudioSources()
     {
         rotateSource = gameObject.AddComponent<AudioSource>();
-        rotateSource.volume = .2f;
+        rotateSource.volume = .1f;
 
         launchSource = gameObject.AddComponent<AudioSource>();
+        launchSource.volume = .7f;
+
         hitPlayerSource = gameObject.AddComponent<AudioSource>();
-        hitWallSource = gameObject.AddComponent<AudioSource>();
         jumppSource = gameObject.AddComponent<AudioSource>();
         gameStartSource = gameObject.AddComponent<AudioSource>();
         gameEndSource = gameObject.AddComponent<AudioSource>();
         swapSource = gameObject.AddComponent<AudioSource>();
         splashSource = gameObject.AddComponent<AudioSource>();
+        splashSource.volume = .4f;
+
+        highScoreSource = gameObject.AddComponent<AudioSource>();
         musicSource = gameObject.AddComponent<AudioSource>();
         generalSource = gameObject.AddComponent<AudioSource>();
     }

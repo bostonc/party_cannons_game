@@ -465,10 +465,11 @@ public class InputManager : MonoBehaviour
 
 	public void swapPlayer(int cannonThatFired)//, int otherController)
     {
-//        int temp = a;
-//        a = b;
-//        b = temp;
-		// Debug.Log(debugPlayerNum);
+        //        int temp = a;
+        //        a = b;
+        //        b = temp;
+        // Debug.Log(debugPlayerNum);
+        AudioDriver.S.play(SoundType.swap);
 
 		Debug.Log (cannonThatFired);
 		// NOTE: controllerThatFired will be a number from (1 - 3)

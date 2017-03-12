@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour {
 	public void jump(float f)
 	{
 		if (rb.velocity.y == 0 && f == 1) {
+            AudioDriver.S.play(SoundType.jump);
 			rb.velocity = new Vector3 (rb.velocity.x, jumpPower, 0);
 		}
 	}
