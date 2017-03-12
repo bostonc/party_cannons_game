@@ -3132,10 +3132,13 @@ MonoBehaviour:
   hitPlayerSound_0: {fileID: 8300000, guid: 2e22c2c3b83befa4c896f3e135075186, type: 3}
   hitPlayerSound_1: {fileID: 8300000, guid: ba5065435efba8c4884ff33d581227b5, type: 3}
   hitWallSound: {fileID: 8300000, guid: d37f6e470cc03ef4caad4f5137f8fd85, type: 3}
-  jumpSound: {fileID: 0}
+  jumpSound_0: {fileID: 8300000, guid: 89f7506935874e946ae384ab70a9ebf7, type: 3}
+  jumpSound_1: {fileID: 8300000, guid: ad5f7506fb7b4c34c96b1679fd7495b6, type: 3}
+  jumpSound_2: {fileID: 8300000, guid: ad5f7506fb7b4c34c96b1679fd7495b6, type: 3}
   gameStartSound: {fileID: 8300000, guid: 80977ffd7fc9f9541b44080de4895cbb, type: 3}
   gameEndSound: {fileID: 8300000, guid: a9fe2795e5f04484a9f01cad1b7270af, type: 3}
   swapSound: {fileID: 8300000, guid: 0541d4d080e88444c8ba2e8b8a9f3c38, type: 3}
+  splashSound: {fileID: 8300000, guid: 87b35ba165fdd714292d0a4e43c46fbf, type: 3}
   gameMusic_0: {fileID: 8300000, guid: 994a4e427e7664f44b173de0d21d2593, type: 3}
   gameMusic_1: {fileID: 8300000, guid: e30d3ed7ab7ff86469111a656a77a0af, type: 3}
   gameMusic_2: {fileID: 8300000, guid: 4007d79e5d5cfb64dbe56cc10d0c3fa2, type: 3}
@@ -3147,6 +3150,8 @@ MonoBehaviour:
   gameStartSource: {fileID: 0}
   gameEndSource: {fileID: 0}
   swapSource: {fileID: 0}
+  splashSource: {fileID: 0}
+  musicSource: {fileID: 0}
   generalSource: {fileID: 0}
   _________________: 0
 --- !u!1 &1200091954

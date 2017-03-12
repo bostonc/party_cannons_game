@@ -11,7 +11,8 @@ public enum SoundType
     jump,
     gameStart,
     gameEnd,
-    swap
+    swap,
+    splash
 };
 
 public class AudioDriver : MonoBehaviour
@@ -34,11 +35,14 @@ public class AudioDriver : MonoBehaviour
     public AudioClip hitPlayerSound_1;
     public AudioClip hitWallSound;
     //runner
-    public AudioClip jumpSound;
+    public AudioClip jumpSound_0;
+    public AudioClip jumpSound_1;
+    public AudioClip jumpSound_2;
     //general
     public AudioClip gameStartSound;
     public AudioClip gameEndSound;
     public AudioClip swapSound;
+    public AudioClip splashSound;
     public AudioClip gameMusic_0;
     public AudioClip gameMusic_1;
     public AudioClip gameMusic_2;
@@ -55,6 +59,8 @@ public class AudioDriver : MonoBehaviour
     public AudioSource gameStartSource;
     public AudioSource gameEndSource;
     public AudioSource swapSource;
+    public AudioSource splashSource;
+    public AudioSource musicSource;
     public AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
 
 
@@ -63,6 +69,17 @@ public class AudioDriver : MonoBehaviour
     private void Awake()
     {
         S = this;
+    }
+
+    private void Start()
+    {
+        startBackgroundMusic();
+    }
+
+    private void Update()
+    {
+        if (!musicSource.isPlaying) startBackgroundMusic();
+
     }
 
     public void play(SoundType s)
@@ -91,7 +108,10 @@ public class AudioDriver : MonoBehaviour
                 if (hitWallSource != null) hitWallSource.PlayOneShot(hitWallSound);
                 break;
             case SoundType.jump:
-                if (jumppSource != null) jumppSource.PlayOneShot(jumpSound);
+                num = Random.Range(0, 3);
+                if (num == 0 && jumppSource != null) jumppSource.PlayOneShot(jumpSound_0);
+                if (num == 1 && jumppSource != null) jumppSource.PlayOneShot(jumpSound_1);
+                if (num == 2 && jumppSource != null) jumppSource.PlayOneShot(jumpSound_2);
                 break;
             case SoundType.gameStart:
                 if (gameStartSource != null) gameStartSource.PlayOneShot(gameStartSound);
@@ -102,6 +122,9 @@ public class AudioDriver : MonoBehaviour
             case SoundType.swap:
                 if (swapSource != null) swapSource.PlayOneShot(swapSound);
                 break;
+            case SoundType.splash:
+                if (splashSource != null) splashSource.PlayOneShot(splashSound);
+                break;
             default:
                 Debug.Assert(false);
                 break;
@@ -111,6 +134,26 @@ public class AudioDriver : MonoBehaviour
     public void play(AudioClip clip, float volume)
     {
         if (generalSource != null) generalSource.PlayOneShot(clip, volume);
+    }
+
+    private void startBackgroundMusic()
+    {
+        int num = Random.Range(0, 3);
+        switch(num)
+        {
+            case 0:
+                if (musicSource != null) musicSource.PlayOneShot(gameMusic_0);
+                break;
+            case 1:
+                if (musicSource != null) musicSource.PlayOneShot(gameMusic_1);
+                break;
+            case 2:
+                if (musicSource != null) musicSource.PlayOneShot(gameMusic_2);
+                break;
+            default:
+                Debug.Assert(false);
+                break;
+        }
     }
 
 
