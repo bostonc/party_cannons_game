@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3e2d5e66901d53d409f6f981c2f800cd
+timeCreated: 1489104295
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: MuchoMacho
+  fontNames:
+  - MuchoMacho
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
