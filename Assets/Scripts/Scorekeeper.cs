@@ -134,6 +134,7 @@ public class Scorekeeper : MonoBehaviour
     public void recordHighScore(int player, int amt)
     {
         if (highscoreHolder == player) return;
+        AudioDriver.S.play(SoundType.highScore);
         PlayerPrefs.SetInt("highScore", p4Score);
         highScoreText.enabled = true;
         highScoreTime = Time.time;
@@ -177,6 +178,7 @@ public class Scorekeeper : MonoBehaviour
         if (timer <= 0 && !gameOver)
         {
             //GAME OVER
+            AudioDriver.S.play(SoundType.gameEnd);
 
             timerText.text = "00:00";
             gameOver = true;
