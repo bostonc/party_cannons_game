@@ -24,9 +24,14 @@ public class AudioDriver : MonoBehaviour
 
     //SOUNDS
     //cannon
-    public AudioClip rotateSound;
-    public AudioClip launchSound;    
-    public AudioClip hitPlayerSound;
+    public AudioClip rotateSound_0;
+    public AudioClip rotateSound_1;
+    public AudioClip launchSound_0;
+    public AudioClip launchSound_1;
+    public AudioClip launchSound_2;
+    public AudioClip launchSound_3;
+    public AudioClip hitPlayerSound_0;
+    public AudioClip hitPlayerSound_1;
     public AudioClip hitWallSound;
     //runner
     public AudioClip jumpSound;
@@ -34,6 +39,9 @@ public class AudioDriver : MonoBehaviour
     public AudioClip gameStartSound;
     public AudioClip gameEndSound;
     public AudioClip swapSound;
+    public AudioClip gameMusic_0;
+    public AudioClip gameMusic_1;
+    public AudioClip gameMusic_2;
 
     //SOURCES
     //cannon
@@ -59,16 +67,25 @@ public class AudioDriver : MonoBehaviour
 
     public void play(SoundType s)
     {
-        switch(s)
+        int num = -1;
+        switch (s)
         {
             case SoundType.rotate:
-                if (rotateSource != null) rotateSource.PlayOneShot(rotateSound);
+                num = Random.Range(0, 2);
+                if (num == 0 && rotateSource != null) rotateSource.PlayOneShot(rotateSound_0);
+                if (num == 1 && rotateSource != null) rotateSource.PlayOneShot(rotateSound_1);
                 break;
             case SoundType.launch:
-                if (launchSource != null) launchSource.PlayOneShot(launchSound);
+                num = Random.Range(0, 4);
+                if (num == 0 && launchSource != null) launchSource.PlayOneShot(launchSound_0);
+                if (num == 1 && launchSource != null) launchSource.PlayOneShot(launchSound_1);
+                if (num == 2 && launchSource != null) launchSource.PlayOneShot(launchSound_2);
+                if (num == 3 && launchSource != null) launchSource.PlayOneShot(launchSound_3);
                 break;
             case SoundType.hitPlayer:
-                if (hitPlayerSource != null) hitPlayerSource.PlayOneShot(hitPlayerSound);
+                num = Random.Range(0, 2);
+                if (num == 0 && hitPlayerSource != null) hitPlayerSource.PlayOneShot(hitPlayerSound_0);
+                if (num == 1 && hitPlayerSource != null) hitPlayerSource.PlayOneShot(hitPlayerSound_1);
                 break;
             case SoundType.hitWall:
                 if (hitWallSource != null) hitWallSource.PlayOneShot(hitWallSound);

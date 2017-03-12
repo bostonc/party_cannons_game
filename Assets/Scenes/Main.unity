@@ -3123,14 +3123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f6a9a9c32cb4342b3e2c309b77cf4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSound: {fileID: 0}
-  launchSound: {fileID: 0}
-  hitPlayerSound: {fileID: 0}
-  hitWallSound: {fileID: 0}
+  rotateSound_0: {fileID: 8300000, guid: 0ab6094e5adce734992bfa667ab595b5, type: 3}
+  rotateSound_1: {fileID: 8300000, guid: 4fba23f9a9f4c8e479a3d5d73bd675e3, type: 3}
+  launchSound_0: {fileID: 8300000, guid: f7b471d4bde0e1f42ad8a07cc2e089b3, type: 3}
+  launchSound_1: {fileID: 8300000, guid: 6efd010ef4122294ca7f456d246c85c3, type: 3}
+  launchSound_2: {fileID: 8300000, guid: e628c16d8e9fb104cbd1bb54eab9db4f, type: 3}
+  launchSound_3: {fileID: 8300000, guid: 6624314786423d64b962c706bae972ff, type: 3}
+  hitPlayerSound_0: {fileID: 8300000, guid: 2e22c2c3b83befa4c896f3e135075186, type: 3}
+  hitPlayerSound_1: {fileID: 8300000, guid: ba5065435efba8c4884ff33d581227b5, type: 3}
+  hitWallSound: {fileID: 8300000, guid: d37f6e470cc03ef4caad4f5137f8fd85, type: 3}
   jumpSound: {fileID: 0}
-  gameStartSound: {fileID: 0}
-  gameEndSound: {fileID: 0}
-  swapSound: {fileID: 0}
+  gameStartSound: {fileID: 8300000, guid: 80977ffd7fc9f9541b44080de4895cbb, type: 3}
+  gameEndSound: {fileID: 8300000, guid: a9fe2795e5f04484a9f01cad1b7270af, type: 3}
+  swapSound: {fileID: 8300000, guid: 0541d4d080e88444c8ba2e8b8a9f3c38, type: 3}
+  gameMusic_0: {fileID: 8300000, guid: 994a4e427e7664f44b173de0d21d2593, type: 3}
+  gameMusic_1: {fileID: 8300000, guid: e30d3ed7ab7ff86469111a656a77a0af, type: 3}
+  gameMusic_2: {fileID: 8300000, guid: 4007d79e5d5cfb64dbe56cc10d0c3fa2, type: 3}
   rotateSource: {fileID: 0}
   launchSource: {fileID: 0}
   hitPlayerSource: {fileID: 0}
