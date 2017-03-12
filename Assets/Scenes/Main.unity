@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2982,6 +2982,7 @@ GameObject:
   - component: {fileID: 1118668604}
   - component: {fileID: 1118668609}
   - component: {fileID: 1118668610}
+  - component: {fileID: 1118668611}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3111,6 +3112,35 @@ MonoBehaviour:
   ___________________: 0
   gameOver: 0
   highscoreHolder: 0
+--- !u!114 &1118668611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118668603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f6a9a9c32cb4342b3e2c309b77cf4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSound: {fileID: 0}
+  launchSound: {fileID: 0}
+  hitPlayerSound: {fileID: 0}
+  hitWallSound: {fileID: 0}
+  jumpSound: {fileID: 0}
+  gameStartSound: {fileID: 0}
+  gameEndSound: {fileID: 0}
+  swapSound: {fileID: 0}
+  rotateSource: {fileID: 0}
+  launchSource: {fileID: 0}
+  hitPlayerSource: {fileID: 0}
+  hitWallSource: {fileID: 0}
+  jumppSource: {fileID: 0}
+  gameStartSource: {fileID: 0}
+  gameEndSource: {fileID: 0}
+  swapSource: {fileID: 0}
+  generalSource: {fileID: 0}
+  _________________: 0
 --- !u!1 &1200091954
 GameObject:
   m_ObjectHideFlags: 0
