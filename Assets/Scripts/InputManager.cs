@@ -105,7 +105,10 @@ public class InputManager : MonoBehaviour
 		
 		//p1 input on CONTROLLER 1
 		if (player1JoyNum == 4) {
-			//runner control
+			f = CalibratedGetAxis ("Horizontal");
+			pc1.move (f);
+			f = CalibratedGetAxis ("Jump");
+			pc1.jump (f);
 		} else {
 			f = CalibratedGetAxis ("Rotate_1"); // Rotation axis same on OSX and Windows.
 			if (f != 0) {
@@ -168,7 +171,10 @@ public class InputManager : MonoBehaviour
 
 		//p2 input on CONTROLLER 2
 		if (player2JoyNum == 4) {
-			//runner control
+			f = CalibratedGetAxis ("Horizontal");
+			pc1.move (f);
+			f = CalibratedGetAxis ("Jump");
+			pc1.jump (f);
 		} else {
 			f = CalibratedGetAxis ("Rotate_2");
 			if (f != 0) {
@@ -231,7 +237,10 @@ public class InputManager : MonoBehaviour
 
 		//p3 input on CONTROLLER 3
 		if (player3JoyNum == 4) {
-			//runner control
+			f = CalibratedGetAxis ("Horizontal");
+			pc1.move (f);
+			f = CalibratedGetAxis ("Jump");
+			pc1.jump (f);
 		} else {
 			f = CalibratedGetAxis ("Rotate_3");
 			if (f != 0) {
@@ -294,7 +303,10 @@ public class InputManager : MonoBehaviour
 
 		//p4 input on CONTROLLER 4
 		if (player4JoyNum == 4) {
-			//runner control
+			f = CalibratedGetAxis ("Horizontal");
+			pc1.move (f);
+			f = CalibratedGetAxis ("Jump");
+			pc1.jump (f);
 		} else {
 			f = CalibratedGetAxis ("Rotate_4");
 			if (f != 0) {
