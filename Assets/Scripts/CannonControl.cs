@@ -72,49 +72,34 @@ public class CannonControl : MonoBehaviour
 	void Update () {
 		checkIfAIControlled ();
 		if (onAI) {
-			if (Time.time - paused_ai_start_time < 0.5f) {
-				return;
+
+			//AI Firing
+			int aiFire = Random.Range(0,40);
+			if (aiFire == 0) {
+				fire (0.1f);
 			}
-			paused_ai_start_time = 0.0f;
-			if (Mathf.Approximately(current_pitch, desired_pitch) && Mathf.Approximately(current_yaw, desired_yaw) && shots_fired == desired_shots_fired) {
-				int action = Random.Range (0, 4);
-				shots_fired = 0;
-				switch (action) {
-				case 0:
-					desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
-					Debug.Log (controller + " Pitch, " + desired_pitch);
-					break;
-				case 1:
-					desired_yaw = Random.Range ((int) minYaw, (int) maxYaw);
-					Debug.Log (controller + " Yaw, " + desired_yaw); 
-					break;
-				case 2:
-					desired_shots_fired = Random.Range (1, 10);
-					Debug.Log (controller + " Shots, " + desired_shots_fired); 
-					break;
+
+			//AI Movement
+			if (desired_yaw == current_yaw) {
+				if (transform.position.x > PlayerControl.S.GetComponent<Rigidbody> ().position.x) {
+					desired_yaw = Random.Range ((int)minYaw, 10);
+				} else {
+					desired_yaw = Random.Range (-10, (int) maxYaw);
 				}
+			}
+			if (desired_pitch == current_pitch) {
+				desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
+			}
+
+			if (desired_pitch > current_pitch) {
+				pitch (0.5f);
 			} else {
-				if (Random.value < 0.2) {
-					paused_ai_start_time = Time.time;
-					return;
-				}
-				if (shots_fired < desired_shots_fired) {
-					fire (1.0f);
-					shots_fired += 1;
-					Debug.Log (shots_fired - desired_shots_fired);
-				} else if (desired_pitch > current_pitch) {
-					pitch (1.0f);
-					Debug.Log (current_pitch - desired_pitch);
-				} else if (desired_pitch < current_pitch) {
-					pitch (-1.0f);
-					Debug.Log (current_pitch - desired_pitch);
-				} else if (desired_yaw > current_yaw) {
-					rotate (1.0f);
-					Debug.Log (current_yaw - desired_yaw);
-				} else if (desired_yaw < current_yaw) {
-					rotate (-1.0f);
-					Debug.Log (current_yaw - desired_yaw);
-				}
+				pitch (-0.5f);
+			}
+			if (desired_yaw > current_yaw) {
+				rotate (0.5f);
+			} else {
+				rotate (-0.5f);
 			}
 		}
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
