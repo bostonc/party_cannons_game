@@ -65,8 +65,8 @@ public class RunnerHealth : MonoBehaviour {
 			Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
 			InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 
-			Material runnerMaterial = new Material (runner.GetComponent<MeshRenderer> ().material);
-			runner.GetComponent<MeshRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
+			Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
+			runner.GetComponent<SpriteRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
 			collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
 		}
 
