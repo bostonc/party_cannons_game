@@ -55,12 +55,18 @@ public class RunnerHealth : MonoBehaviour {
 
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
 
+			// Destroy all cannonballs when runner is killed
+			var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
+			for (var i = 0; i < cannonBalls.Length; i++) {
+				Destroy (cannonBalls [i]);
+			}
+
 			Debug.Log ("OnCollisionEnter" + Time.time);
 			// Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
 			InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 
-			Material runnerMaterial = new Material (runner.GetComponent<MeshRenderer> ().material);
-			runner.GetComponent<MeshRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
+			Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
+			runner.GetComponent<SpriteRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
 			collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
 		}
 
