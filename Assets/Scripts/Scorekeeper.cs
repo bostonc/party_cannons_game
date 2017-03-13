@@ -126,7 +126,7 @@ public class Scorekeeper : MonoBehaviour
                 p4ScoreText.text = "P4: " + p4Score;
                 break;
             default:
-                Debug.Assert(false);
+                // Debug.Assert(false);
                 break;
         }
     }

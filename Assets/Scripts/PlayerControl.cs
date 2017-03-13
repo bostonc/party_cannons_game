@@ -17,10 +17,10 @@ public class PlayerControl : MonoBehaviour {
 	private int desiredX = 0;
 	private float moveCount = 0;
 
-	public int controller;
+	public InputManager.ControlID cID;
 
 	void checkIfAIControlled() {
-		if (InputManager.S.getDebugPlayerNum () != 4)
+		if (InputManager.S.getPlayerIDWithControlID (S.cID) == InputManager.PlayerID.AI)
 			onAI = true;
 		else
 			onAI = false;

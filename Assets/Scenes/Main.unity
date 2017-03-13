@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpPower: 10
-  controller: 0
+  cID: 0
 --- !u!1 &408389730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,7 +3104,7 @@ MonoBehaviour:
   cannon2: {fileID: 693274123}
   cannon3: {fileID: 1986838898}
   runner: {fileID: 1709186572}
-  gameDuration: 5
+  gameDuration: 2
   restartDuration: 5
   highscoreFadeDelay: 3
   highscoreFadeSpeed: 0.02
@@ -4673,7 +4673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpPower: 10
-  controller: 4
+  cID: 4
 --- !u!4 &1709186579
 Transform:
   m_ObjectHideFlags: 0

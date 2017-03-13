@@ -88,7 +88,7 @@ public class InputManager : MonoBehaviour
 			if (pcm.controlID == cID)
 				return pcm.playerID;
 		}
-
+		Debug.Log (cID);
 		Debug.Assert (false); // Controller does not exist! !!WARNING!!
 		return PlayerID.None;
 	}
@@ -99,6 +99,7 @@ public class InputManager : MonoBehaviour
 			if (pcm.playerID == correctedPlayerID)
 				return pcm.controlID;
 		} 
+
 		return ControlID.None; // Player does not exist! Not controlling anything.
 	}
 
@@ -304,12 +305,12 @@ public class InputManager : MonoBehaviour
 			else 
 				setPlayerIDForControlID (currentCID, PlayerID.Player2);
 		} else if (f > 1.0 / 3.0f && f <= 2.0f / 3.0f) {
-			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
+			if(getControlIDWithPlayerID(PlayerID.Player3) == ControlID.None)
 				setPlayerIDForControlID (currentCID, PlayerID.AI);
 			else 
 				setPlayerIDForControlID (currentCID, PlayerID.Player3);
 		} else if (f > 2.0 / 3.0f && f <= 3.0f / 3.0f) {
-			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
+			if(getControlIDWithPlayerID(PlayerID.Player4) == ControlID.None)
 				setPlayerIDForControlID (currentCID, PlayerID.AI);
 			else 
 				setPlayerIDForControlID (currentCID, PlayerID.Player4);
