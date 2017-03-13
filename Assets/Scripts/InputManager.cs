@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 /*
     Debugger should be able to use PC keyboard/mouse to control each player (one at a time).
@@ -23,7 +24,7 @@ public class InputManager : MonoBehaviour
     public GameObject cannon1;
     public GameObject cannon2;
     public GameObject cannon3;
-    public GameObject runner;//4
+    public GameObject runner; //4
 
     public Text pausedText;
 
@@ -32,11 +33,32 @@ public class InputManager : MonoBehaviour
     public bool _________________;
 
     //these will be dynamically rearranged
-    public int player1JoyNum = 1; //respective to cannon number, 4 = runner
-    public int player2JoyNum = 2;
-    public int player3JoyNum = 3;
-    public int player4JoyNum = 4;
-	public int debugPlayerNum = -1; //who is the keyboard controlling?
+
+	public enum PlayerID {
+		None, Player1, Player2, Player3, Player4, AI, Debug
+	};
+
+	public enum ControlID {
+		None, Cannon1, Cannon2, Cannon3, Runner
+	};
+
+	public class PlayerControllerMapping {
+		public PlayerID playerID;
+		public ControlID controlID; 
+
+		public PlayerControllerMapping(PlayerID pID, ControlID cID) {
+			playerID = pID;
+			controlID = cID;
+		}
+	};
+
+	public List<PlayerControllerMapping> playerControllerMappings = new List<PlayerControllerMapping>() {
+		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon1), 
+		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon2), 
+		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon3), 
+		new PlayerControllerMapping(PlayerID.AI, ControlID.Runner), 
+	};
+	// public int debugPlayerNum = -1; //who is the keyboard controlling?
 	public bool debugAllow = true;
 
     CannonControl cc1;
@@ -44,23 +66,40 @@ public class InputManager : MonoBehaviour
     CannonControl cc3;
 	PlayerControl pc1;
 
-    float f = 0f;
-
     private void Awake()
     {
         S = this;
     }
 
 	// get the JoyNum controlling a given cannon (1 - 3) or runner (4)
-	public int getPlayerJoyNumForController(int controller) {
-		if(player1JoyNum == controller) 
-			return 1;
-		else if(player2JoyNum == controller) 
-			return 2;
-		else if(player3JoyNum == controller) 
-			return 3;
-		else 
-			return 4;
+//	public int getPlayerJoyNumForController(int controller) {
+//		if(player1JoyNum == controller) 
+//			return 1;
+//		else if(player2JoyNum == controller) 
+//			return 2;
+//		else if(player3JoyNum == controller) 
+//			return 3;
+//		else 
+//			return 4;
+//	}
+
+	public PlayerID getPlayerIDWithControlID(ControlID cID) {
+		foreach (PlayerControllerMapping pcm in playerControllerMappings) {
+			if (pcm.controlID == cID)
+				return pcm.playerID;
+		}
+
+		Debug.Assert (false); // Controller does not exist! !!WARNING!!
+		return PlayerID.None;
+	}
+
+	public ControlID getControlIDWithPlayerID(PlayerID pID) {
+		PlayerID correctedPlayerID = (pID == PlayerID.Debug) ? PlayerID.Player1 : pID;
+		foreach (PlayerControllerMapping pcm in playerControllerMappings) {
+			if (pcm.playerID == correctedPlayerID)
+				return pcm.controlID;
+		} 
+		return ControlID.None; // Player does not exist! Not controlling anything.
 	}
 
     // Use this for initialization
@@ -72,14 +111,15 @@ public class InputManager : MonoBehaviour
 		pc1 = runner.GetComponent<PlayerControl>();
 
         pausedText.enabled = false;
-        randomizePlayers();
 
 		string[] Joysticks = Input.GetJoystickNames ();
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
 			debugAllow = false;
-			debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
+			randomizePlayers(Joysticks.Length);
 		} else { // No controllers attached!
 			debugAllow = true;
+			randomizePlayers (1);
+			// debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
 		}
     }
 
@@ -96,6 +136,72 @@ public class InputManager : MonoBehaviour
 		return (Mathf.Abs (f) > 0.1f) ? f : 0.0f; // Safety mechanism to stop leakage of values 
 												  // (dead range could be incorrectly set.)
 	}
+
+	void UpdateHelper(PlayerID pID) {
+		float yaw = 0.0f; 
+		float pitch = 0.0f;
+		float firing = 0.0f;
+
+		if (getControlIDWithPlayerID (pID) == ControlID.None)
+			return;
+
+		if (pID == PlayerID.Debug) {
+			yaw = CalibratedGetAxis ("Rotate_D"); // Debug same on OSX and Windows.
+			pitch = CalibratedGetAxis ("Pitch_D"); // Debug same on OSX and Windows.
+			firing = CalibratedGetAxis ("Fire_D"); // Debug same on OSX and Windows.
+		} else if (pID == PlayerID.Player1) {
+			yaw = CalibratedGetAxis ("Rotate_1"); // Rotation axis same on OSX and Windows.
+			pitch = OsBasedGetAxis ("Pitch_1");
+			firing = OsBasedGetAxis ("Fire_1");
+		} else if (pID == PlayerID.Player2) {
+			yaw = CalibratedGetAxis ("Rotate_2"); // Rotation axis same on OSX and Windows.
+			pitch = OsBasedGetAxis ("Pitch_2");
+			firing = OsBasedGetAxis ("Fire_2");
+		} else if (pID == PlayerID.Player3) {
+			yaw = CalibratedGetAxis ("Rotate_3"); // Rotation axis same on OSX and Windows.
+			pitch = OsBasedGetAxis ("Pitch_3");
+			firing = OsBasedGetAxis ("Fire_3");
+		} else if (pID == PlayerID.Player4) {
+			yaw = CalibratedGetAxis ("Rotate_4"); // Rotation axis same on OSX and Windows.
+			pitch = OsBasedGetAxis ("Pitch_4");
+			firing = OsBasedGetAxis ("Fire_4");
+		} else {
+			return; // PlayerID.AI;
+		}
+
+		switch(getControlIDWithPlayerID(pID)) {
+		case ControlID.Cannon1: 
+			if (yaw != 0)
+				cc1.rotate (yaw);
+			if (pitch != 0)
+				cc1.pitch (pitch);
+			if (firing != 0)
+				cc1.fire (firing);
+			break;
+		case ControlID.Cannon2: 
+			if (yaw != 0)
+				cc2.rotate (yaw);
+			if (pitch != 0)
+				cc2.pitch (pitch);
+			if (firing != 0)
+				cc2.fire (firing);
+			break;
+		case ControlID.Cannon3: 
+			if (yaw != 0)
+				cc3.rotate (yaw);
+			if (pitch != 0)
+				cc3.pitch (pitch);
+			if (firing != 0)
+				cc3.fire (firing);
+			break;
+		case ControlID.Runner:
+			if (yaw != 0)
+				pc1.move (yaw);
+			if (firing != 0)
+				pc1.jump (firing);
+			break;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -103,347 +209,64 @@ public class InputManager : MonoBehaviour
 		if (Scorekeeper.S.gameOver)
 			return;
 		
-		//p1 input on CONTROLLER 1
-		if (player1JoyNum == 4) {
-			//runner control
-		} else {
-			f = CalibratedGetAxis ("Rotate_1"); // Rotation axis same on OSX and Windows.
-			if (f != 0) {
-				switch (player1JoyNum) {
-				case 1:
-					cc1.rotate (f);
-					break;
-				case 2:
-					cc2.rotate (f);
-					break;
-				case 3:
-					cc3.rotate (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Pitch_1");
-			if (f != 0) {
-				switch (player1JoyNum) {
-				case 1:
-					cc1.pitch (f);
-					break;
-				case 2:
-					cc2.pitch (f);
-					break;
-				case 3:
-					cc3.pitch (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Fire_1");
-			if (f != 0) {
-				switch (player1JoyNum) {
-				case 1:
-					cc1.fire (f);
-					break;
-				case 2:
-					cc2.fire (f);
-					break;
-				case 3:
-					cc3.fire (f);
-					break;
-				}
-			}
-			//RB
-			if (Input.GetKeyDown (KeyCode.Joystick1Button5)) {
-				switch (player1JoyNum) {
-				case 1:
-					cc1.stopFire ();
-					break;
-				case 2:
-					cc2.stopFire ();
-					break;
-				case 3:
-					cc3.stopFire ();
-					break;
-				}
-			}
-		}//end p1 else
+		UpdateHelper (PlayerID.Player1);
+		UpdateHelper (PlayerID.Player2);
+		UpdateHelper (PlayerID.Player3);
+		UpdateHelper (PlayerID.Player4);
+	
+// Previous Stop Firing Code. TODO: Incorporate Above if Needed.
+//			if (Input.GetKeyDown (KeyCode.Joystick1Button5)) {
+//				switch (player1JoyNum) {
+//				case 1:
+//					cc1.stopFire ();
+//					break;
+//				case 2:
+//					cc2.stopFire ();
+//					break;
+//				case 3:
+//					cc3.stopFire ();
+//					break;
+//				}
+//			}
 
+		// Special Case! No controllers attached. Keyboard axes used.
+		// Debug player (keyboard). Keyboard emulates Player 1 (PlayerID.Player1)!
 
-		//p2 input on CONTROLLER 2
-		if (player2JoyNum == 4) {
-			//runner control
-		} else {
-			f = CalibratedGetAxis ("Rotate_2");
-			if (f != 0) {
-				switch (player2JoyNum) {
-				case 1:
-					cc1.rotate (f);
-					break;
-				case 2:
-					cc2.rotate (f);
-					break;
-				case 3:
-					cc3.rotate (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Pitch_2");
-			if (f != 0) {
-				switch (player2JoyNum) {
-				case 1:
-					cc1.pitch (f);
-					break;
-				case 2:
-					cc2.pitch (f);
-					break;
-				case 3:
-					cc3.pitch (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Fire_2");
-			if (f != 0) {
-				switch (player2JoyNum) {
-				case 1:
-					cc1.fire (f);
-					break;
-				case 2:
-					cc2.fire (f);
-					break;
-				case 3:
-					cc3.fire (f);
-					break;
-				}
-			}
-			//RB
-			if (Input.GetKeyDown (KeyCode.Joystick2Button5)) {
-				switch (player2JoyNum) {
-				case 1:
-					cc1.stopFire ();
-					break;
-				case 2:
-					cc2.stopFire ();
-					break;
-				case 3:
-					cc3.stopFire ();
-					break;
-				}
-			}
-		}//end p2 else
+		if (debugAllow) {
+			UpdateHelper (PlayerID.Debug);
+			// else {
+//				//RB (right click)
+//				if (Input.GetKeyDown (KeyCode.Mouse1)) {
+//					switch (debugPlayerNum) {
+//					case 1:
+//						cc1.stopFire ();
+//						break;
+//					case 2:
+//						cc2.stopFire ();
+//						break;
+//					case 3:
+//						cc3.stopFire ();
+//						break;
+//					}
+			//}end debugger else
 
-
-		//p3 input on CONTROLLER 3
-		if (player3JoyNum == 4) {
-			//runner control
-		} else {
-			f = CalibratedGetAxis ("Rotate_3");
-			if (f != 0) {
-				switch (player3JoyNum) {
-				case 1:
-					cc1.rotate (f);
-					break;
-				case 2:
-					cc2.rotate (f);
-					break;
-				case 3:
-					cc3.rotate (f);
-					break;
-				}
+			//debugger player switch
+			if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) {
+				print ("debugger is controlling cannon 1");
+				debugSwap (ControlID.Cannon1);
 			}
-			f = OsBasedGetAxis ("Pitch_3");
-			if (f != 0) {
-				switch (player3JoyNum) {
-				case 1:
-					cc1.pitch (f);
-					break;
-				case 2:
-					cc2.pitch (f);
-					break;
-				case 3:
-					cc3.pitch (f);
-					break;
-				}
+			if (Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Keypad2)) {
+				print ("debugger is controlling cannon 2");
+				debugSwap (ControlID.Cannon2);
 			}
-			f = OsBasedGetAxis ("Fire_3");
-			if (f != 0) {
-				switch (player3JoyNum) {
-				case 1:
-					cc1.fire (f);
-					break;
-				case 2:
-					cc2.fire (f);
-					break;
-				case 3:
-					cc3.fire (f);
-					break;
-				}
+			if (Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Keypad3)) {
+				print ("debugger is controlling cannon 3");
+				debugSwap (ControlID.Cannon3);
 			}
-			//RB
-			if (Input.GetKeyDown (KeyCode.Joystick3Button5)) {
-				switch (player3JoyNum) {
-				case 1:
-					cc1.stopFire ();
-					break;
-				case 2:
-					cc2.stopFire ();
-					break;
-				case 3:
-					cc3.stopFire ();
-					break;
-				}
+			if (Input.GetKeyDown (KeyCode.Alpha4) || Input.GetKeyDown (KeyCode.Keypad4)) {
+				print ("debugger is controlling runner");
+				debugSwap (ControlID.Runner);
 			}
-		}//end p3 else
-
-
-		//p4 input on CONTROLLER 4
-		if (player4JoyNum == 4) {
-			//runner control
-		} else {
-			f = CalibratedGetAxis ("Rotate_4");
-			if (f != 0) {
-				switch (player4JoyNum) {
-				case 1:
-					cc1.rotate (f);
-					break;
-				case 2:
-					cc2.rotate (f);
-					break;
-				case 3:
-					cc3.rotate (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Pitch_4");
-			if (f != 0) {
-				switch (player4JoyNum) {
-				case 1:
-					cc1.pitch (f);
-					break;
-				case 2:
-					cc2.pitch (f);
-					break;
-				case 3:
-					cc3.pitch (f);
-					break;
-				}
-			}
-			f = OsBasedGetAxis ("Fire_4");
-			if (f != 0) {
-				switch (player4JoyNum) {
-				case 1:
-					cc1.fire (f);
-					break;
-				case 2:
-					cc2.fire (f);
-					break;
-				case 3:
-					cc3.fire (f);
-					break;
-				}
-			}
-			//RB
-			if (Input.GetKeyDown (KeyCode.Joystick4Button5)) {
-				switch (player4JoyNum) {
-				case 1:
-					cc1.stopFire ();
-					break;
-				case 2:
-					cc2.stopFire ();
-					break;
-				case 3:
-					cc3.stopFire ();
-					break;
-				}
-			}
-		}//end p4 else
-
-
-		//debug player (keyboard). Keyboard emulates some controller!
-		if (debugPlayerNum == 4) {
-			f = CalibratedGetAxis ("Horizontal");
-			pc1.move (f);
-			f = CalibratedGetAxis ("Jump");
-			pc1.jump (f);
-		} else {
-			f = CalibratedGetAxis ("Rotate_D");
-			if (f != 0) {
-				switch (debugPlayerNum) {
-				case 1:
-					cc1.rotate (f);
-					break;
-				case 2:
-					cc2.rotate (f);
-					break;
-				case 3:
-					cc3.rotate (f);
-					break;
-				}
-			}
-			f = CalibratedGetAxis ("Pitch_D");
-			if (f != 0) {
-				switch (debugPlayerNum) {
-				case 1:
-					cc1.pitch (f);
-					break;
-				case 2:
-					cc2.pitch (f);
-					break;
-				case 3:
-					cc3.pitch (f);
-					break;
-				}
-			}
-			f = CalibratedGetAxis ("Fire_D"); //space/left click
-			if (f != 0) {
-				switch (debugPlayerNum) {
-				case 1:
-					cc1.fire (f);
-					break;
-				case 2:
-					cc2.fire (f);
-					break;
-				case 3:
-					cc3.fire (f);
-					break;
-				}
-			}
-			//RB (right click)
-			if (Input.GetKeyDown (KeyCode.Mouse1)) {
-				switch (debugPlayerNum) {
-				case 1:
-					cc1.stopFire ();
-					break;
-				case 2:
-					cc2.stopFire ();
-					break;
-				case 3:
-					cc3.stopFire ();
-					break;
-				}
-			}
-		}//end debugger else
-
-		//debugger player switch
-		if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) {
-			print ("debugger is controlling cannon 1");
-			debugPlayerNum = 1;
-			player1JoyNum = 1;
-			debugSwap ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Keypad2)) {
-			print ("debugger is controlling cannon 2");
-			debugPlayerNum = 2;
-			player1JoyNum = 2;
-			debugSwap ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Keypad3)) {
-			print ("debugger is controlling cannon 3");
-			debugPlayerNum = 3;
-			player1JoyNum = 3;
-			debugSwap ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha4) || Input.GetKeyDown (KeyCode.Keypad4)) {
-			print ("debugger is controlling runner");
-			debugPlayerNum = 4;
-			player1JoyNum = 4;
-			debugSwap ();
 		}
 
         //pause
@@ -470,21 +293,32 @@ public class InputManager : MonoBehaviour
     }//end update
 
 
-	public void debugSwap() {
-		int controller = getPlayerJoyNumForController (1);
+	public void debugSwap(ControlID desiredCID) {
+		ControlID currentCID = getControlIDWithPlayerID (PlayerID.Debug);
 
 		float f = Random.value;
 
 		if (f <= 1.0f / 3.0f) {
-			player2JoyNum = controller;
+			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
+				setPlayerIDForControlID (currentCID, PlayerID.AI);
+			else 
+				setPlayerIDForControlID (currentCID, PlayerID.Player2);
 		} else if (f > 1.0 / 3.0f && f <= 2.0f / 3.0f) {
-			player3JoyNum = controller;
+			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
+				setPlayerIDForControlID (currentCID, PlayerID.AI);
+			else 
+				setPlayerIDForControlID (currentCID, PlayerID.Player3);
 		} else if (f > 2.0 / 3.0f && f <= 3.0f / 3.0f) {
-			player4JoyNum = controller;
+			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
+				setPlayerIDForControlID (currentCID, PlayerID.AI);
+			else 
+				setPlayerIDForControlID (currentCID, PlayerID.Player4);
 		}
+
+		setPlayerIDForControlID (desiredCID, PlayerID.Player1);
 	}
 
-	public void swapPlayer(int cannonThatFired)//, int otherController)
+	public void swapPlayer(ControlID cID)//, int otherController)
     {
         //        int temp = a;
         //        a = b;
@@ -492,41 +326,45 @@ public class InputManager : MonoBehaviour
         // Debug.Log(debugPlayerNum);
         AudioDriver.S.play(SoundType.swap);
 
-		Debug.Log (cannonThatFired);
+		Debug.Log (cID);
 		// NOTE: controllerThatFired will be a number from (1 - 3)
-		Debug.Assert(cannonThatFired > 0 && cannonThatFired < 4);
+		Debug.Assert(cID != ControlID.None && cID != ControlID.Runner);
 
 		// get the player currently controlling the runner
-		int playerJoyNum = getPlayerJoyNumForController (4);
+		PlayerID playerControllingRunner  = getPlayerIDWithControlID(ControlID.Runner);
+		PlayerID playerControllingCannonThatFired = getPlayerIDWithControlID (cID);
 
-		if(playerJoyNum == 1) 
-			player1JoyNum = cannonThatFired;
-		else if(playerJoyNum == 2) 
-			player2JoyNum = cannonThatFired;
-		else if(playerJoyNum == 3) 
-			player3JoyNum = cannonThatFired;
+		if (playerControllingRunner == PlayerID.Player1)
+			setPlayerIDForControlID (cID, PlayerID.Player1);
+		else if(playerControllingRunner == PlayerID.Player2) 
+			setPlayerIDForControlID (cID, PlayerID.Player2);
+		else if(playerControllingRunner == PlayerID.Player3) 
+			setPlayerIDForControlID (cID, PlayerID.Player3);
+		else if(playerControllingRunner == PlayerID.Player4) 
+			setPlayerIDForControlID (cID, PlayerID.Player4);
 		else 
-			player4JoyNum = cannonThatFired;
-
+			setPlayerIDForControlID (cID, PlayerID.AI);
+		
 		// player who shot the cannon that hit the runner cannot be the player controlling the runner!
-		Debug.Assert (playerJoyNum != getPlayerJoyNumForController (cannonThatFired));
+		Debug.Assert (playerControllingRunner != getPlayerIDWithControlID (cID));
 
 		// Get the player currently controlling the cannon that fired.
-		playerJoyNum = getPlayerJoyNumForController (cannonThatFired);
 
-		if (playerJoyNum == 1)
-			player1JoyNum = 4;
-		else if (playerJoyNum == 2)
-			player2JoyNum = 4;
-		else if (playerJoyNum == 3)
-			player3JoyNum = 4;
+		if (playerControllingCannonThatFired == PlayerID.Player1)
+			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player1);
+		else if (playerControllingCannonThatFired == PlayerID.Player2)
+			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player2);
+		else if (playerControllingCannonThatFired == PlayerID.Player3)
+			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player3);
+		else if (playerControllingCannonThatFired == PlayerID.Player4)
+			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player4);
 		else 
-			player4JoyNum = 4;
-
-		if (debugPlayerNum == 4)
-			debugPlayerNum = cannonThatFired;
-		else
-			debugPlayerNum = 4;
+			setPlayerIDForControlID (ControlID.Runner, PlayerID.AI);
+		
+//		if (debugPlayerNum == 4)
+//			debugPlayerNum = cannonThatFired;
+//		else
+//			debugPlayerNum = 4;
     }
 
     public void gameStop()
@@ -535,44 +373,42 @@ public class InputManager : MonoBehaviour
         paused = true;
     }
 
-    private void randomizePlayers()
-    {
-        int num = Random.Range(1, 5);
-        print("num: " + num);
+	public void setPlayerIDForControlID (ControlID cID, PlayerID pID) {
+//		if(playerControllerMappings.Where  (pcm => pcm.playerID == pID).ToList().Count == 0) 
+//			playerControllerMappings.Where (pcm => pcm.controlID == cID).First ().playerID = PlayerID.AI;
+//		else 
+			playerControllerMappings.Where (pcm => pcm.controlID == cID).First ().playerID = pID;
+	}
 
-        switch(num)
-        {
-            case 1:
-                player1JoyNum = 1;
-                player2JoyNum = 2;
-                player3JoyNum = 3;
-                player4JoyNum = 4;
-                break;
-            case 2:
-                player1JoyNum = 2;
-                player2JoyNum = 3;
-                player3JoyNum = 4;
-                player4JoyNum = 1;
-                break;
-            case 3:
-                player1JoyNum = 3;
-                player2JoyNum = 4;
-                player3JoyNum = 1;
-                player4JoyNum = 2;
-                break;
-            case 4:
-                player1JoyNum = 4;
-                player2JoyNum = 1;
-                player3JoyNum = 2;
-                player4JoyNum = 3;
-                break;
-            default:
-                Debug.Assert(false);
-                break;
-        }
+	private void randomizePlayers(int numOfPlayers)
+    {
+		List<ControlID> cIDList = new List<ControlID> () {
+			ControlID.Cannon1, 
+			ControlID.Cannon2, 
+			ControlID.Cannon3, 
+			ControlID.Runner
+		};
+
+		List<PlayerID> pIDList = new List<PlayerID> () {
+			PlayerID.Player1, 
+			PlayerID.Player2, 
+			PlayerID.Player3, 
+			PlayerID.Player4
+		};
+
+		for(int i = 0; i < numOfPlayers; i++) {
+			int idx = Random.Range (0, cIDList.Count);
+			ControlID cID = cIDList[idx];
+			cIDList.RemoveAt (idx);
+			setPlayerIDForControlID (cID, pIDList[i]);
+		}
+
+		foreach (ControlID cID in cIDList) {
+			setPlayerIDForControlID (cID, PlayerID.AI);
+		}
     }
 
-	public int getDebugPlayerNum() {
-		return debugPlayerNum;
-	}
+//	public int getDebugPlayerNum() {
+//		return debugPlayerNum;
+//	}
 }

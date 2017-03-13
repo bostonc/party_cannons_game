@@ -2,18 +2,18 @@
 
 public class CannonBallMetadata : MonoBehaviour
 {
-	int _fired_from_controller = -1;
+	InputManager.ControlID _fired_from_control_id = InputManager.ControlID.None;
 	CannonControl _cc;
 
 	public CannonBallMetadata () {}
 
-	public void setMetadata(int controller, CannonControl cc) {
-		_fired_from_controller = controller;
+	public void setMetadata(InputManager.ControlID cID, CannonControl cc) {
+		_fired_from_control_id = cID;
 		_cc = cc;
 	}
 
-	public int controllerThatFired() {
-		return _fired_from_controller;
+	public InputManager.ControlID controllerThatFired() {
+		return _fired_from_control_id;
 	}
 
 	public void setCannonControlMaterial(Material mat) {

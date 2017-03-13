@@ -105,23 +105,23 @@ public class Scorekeeper : MonoBehaviour
     }
 
     //player is 1-4
-    public void Score(int player, int amt)
+	public void Score(InputManager.PlayerID pID, int amt)
     {
-        switch(player)
+        switch(pID)
         {
-            case 1:
+			case InputManager.PlayerID.Player1:
                 p1Score += amt;
                 p1ScoreText.text = "P1: " + p1Score;
                 break;
-            case 2:
+			case InputManager.PlayerID.Player2:
                 p2Score += amt;
                 p2ScoreText.text = "P2: " + p2Score;
                 break;
-            case 3:
+			case InputManager.PlayerID.Player3:
                 p3Score += amt;
                 p3ScoreText.text = "P3: " + p3Score;
                 break;
-            case 4:
+			case InputManager.PlayerID.Player4:
                 p4Score += amt;
                 p4ScoreText.text = "P4: " + p4Score;
                 break;

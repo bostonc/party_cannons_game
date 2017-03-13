@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /*
     Left stick (horizontal) to adjust rotation
     Right stick (vertical) to adjust pitch
@@ -33,7 +32,7 @@ public class CannonControl : MonoBehaviour
 
     private bool onAI = false;
 
-  	public int controller;
+	public InputManager.ControlID cID;
 
 	private float desired_yaw;
 	private float desired_pitch;
@@ -45,7 +44,7 @@ public class CannonControl : MonoBehaviour
 	private GameObject predictiveLine;
 
     void checkIfAIControlled() {
-		if (InputManager.S.getDebugPlayerNum () != controller)
+		if (InputManager.S.getPlayerIDWithControlID(cID) == InputManager.PlayerID.AI)
 			onAI = true;
 		else
 			onAI = false;
@@ -79,18 +78,19 @@ public class CannonControl : MonoBehaviour
 			if (Mathf.Approximately(current_pitch, desired_pitch) && Mathf.Approximately(current_yaw, desired_yaw) && shots_fired == desired_shots_fired) {
 				int action = Random.Range (0, 4);
 				shots_fired = 0;
+//				PlayerControl.S.getRunnerPos () - _barrel.transform.position;
 				switch (action) {
 				case 0:
 					desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
-					Debug.Log (controller + " Pitch, " + desired_pitch);
+					Debug.Log (cID + " Pitch, " + desired_pitch);
 					break;
 				case 1:
 					desired_yaw = Random.Range ((int) minYaw, (int) maxYaw);
-					Debug.Log (controller + " Yaw, " + desired_yaw); 
+					Debug.Log (cID + " Yaw, " + desired_yaw); 
 					break;
 				case 2:
-					desired_shots_fired = Random.Range (1, 10);
-					Debug.Log (controller + " Shots, " + desired_shots_fired); 
+					desired_shots_fired = Random.Range (1, 6);
+					Debug.Log (cID + " Shots, " + desired_shots_fired); 
 					break;
 				}
 			} else {
@@ -149,7 +149,6 @@ public class CannonControl : MonoBehaviour
 		if ((current_yaw >= maxYaw && f > 0) || (current_yaw <= minYaw && f < 0)) {
 			return;
 		} else {
-            AudioDriver.S.play(SoundType.rotate);
 			current_yaw += f;
 		}
     }
@@ -165,9 +164,10 @@ public class CannonControl : MonoBehaviour
 
     public void fire(float f)
     {
-  		if (Time.time - lastFired > 60 / firing_rate) {
-            AudioDriver.S.play(SoundType.launch);
-            Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
+		// TODO: Currently thresholding input to start/stop firing. Can modify to synchronize firing rate in 
+		// proportion to given float in range which is in range [0.0f, 1.0f].
+		if (Time.time - lastFired > 60 / firing_rate && f > 0.5f) {
+  			Vector3 barrel_top = _barrel.transform.TransformPoint (new Vector3 (0, 1, 0));
 
   			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject,
   				               barrel_top, Quaternion.identity);
@@ -176,12 +176,11 @@ public class CannonControl : MonoBehaviour
 
   			go.GetComponent<Rigidbody> ().velocity =
   				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
-			go.GetComponent<CannonBallMetadata> ().setMetadata (controller, this);
+			go.GetComponent<CannonBallMetadata> ().setMetadata (cID, this);
   			lastFired = Time.time;
   		}
     }
 
-    //break out of charging a shot
     public void stopFire()
     {
         print("cease firing " + gameObject.name);

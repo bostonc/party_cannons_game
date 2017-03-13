@@ -28,6 +28,10 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 
+	public Vector3 getRunnerPos() {
+		return rb.position;
+	}
+
 	public void move(float f)
 	{
 		transform.Translate (Time.deltaTime * speed * f, 0, 0);

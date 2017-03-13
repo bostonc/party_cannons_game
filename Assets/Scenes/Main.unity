@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2327,6 +2327,11 @@ Prefab:
       propertyPath: controller
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
+        type: 2}
+      propertyPath: cID
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
   m_IsPrefabParent: 0
@@ -3076,11 +3081,6 @@ MonoBehaviour:
   pausedText: {fileID: 2140039361}
   paused: 0
   _________________: 0
-  player1JoyNum: 1
-  player2JoyNum: 2
-  player3JoyNum: 3
-  player4JoyNum: 4
-  debugPlayerNum: 1
   debugAllow: 1
 --- !u!114 &1118668610
 MonoBehaviour:
@@ -5070,6 +5070,11 @@ Prefab:
       propertyPath: controller
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
+        type: 2}
+      propertyPath: cID
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1fabca0fcf03b5418bca813866c0132, type: 2}
   m_IsPrefabParent: 0
@@ -5251,6 +5256,11 @@ Prefab:
     - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
         type: 2}
       propertyPath: controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114549602077402236, guid: c1fabca0fcf03b5418bca813866c0132,
+        type: 2}
+      propertyPath: cID
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

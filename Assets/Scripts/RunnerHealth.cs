@@ -25,7 +25,7 @@ public class RunnerHealth : MonoBehaviour {
 			return; // Don't update scores anymore if game is over.
 		scoreAccumulation += (int)(10 * Scorekeeper.S.fractionOfGameComplete ());
 		if(Time.time - lastAccumulationTime > 0.1f) {
-			Scorekeeper.S.Score (InputManager.S.getPlayerJoyNumForController (4), scoreAccumulation);
+			Scorekeeper.S.Score (InputManager.S.getPlayerIDWithControlID(InputManager.ControlID.Runner), scoreAccumulation);
 			scoreAccumulation = 0;
 			lastAccumulationTime = Time.time;
 		}
@@ -56,7 +56,7 @@ public class RunnerHealth : MonoBehaviour {
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
 
 			Debug.Log ("OnCollisionEnter" + Time.time);
-			Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
+			// Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
 			InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
 
 			Material runnerMaterial = new Material (runner.GetComponent<MeshRenderer> ().material);
