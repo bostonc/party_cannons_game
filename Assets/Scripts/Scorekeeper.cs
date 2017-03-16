@@ -65,6 +65,19 @@ public class Scorekeeper : MonoBehaviour
         endGametext.enabled = false;
     }
 
+	void setScoreTextColor(InputManager.PlayerID pID, Text scoreText) {
+		InputManager.ControlID cID = InputManager.S.getPlayerInfoWithPlayerID (pID).controlID;
+
+		if (cID == InputManager.ControlID.Cannon1)
+			scoreText.color = cannon1.GetComponent<CannonControl> ().getMaterial ().color;
+		else if (cID == InputManager.ControlID.Cannon2)
+			scoreText.color = cannon2.GetComponent<CannonControl> ().getMaterial ().color;
+		else if (cID == InputManager.ControlID.Cannon3)
+			scoreText.color = cannon3.GetComponent<CannonControl> ().getMaterial ().color;
+		else if (cID == InputManager.ControlID.Runner)
+			scoreText.color = runner.GetComponent<Renderer> ().material.color;
+	}
+
     // Use this for initialization
     void Start ()
     {
@@ -74,6 +87,11 @@ public class Scorekeeper : MonoBehaviour
 
         if (debugHighscore) recordHighScore(1, 5);
 		startTime = Time.time;
+
+		setScoreTextColor (InputManager.PlayerID.Player1, p1ScoreText);
+		setScoreTextColor (InputManager.PlayerID.Player2, p2ScoreText);
+		setScoreTextColor (InputManager.PlayerID.Player3, p3ScoreText);
+		setScoreTextColor (InputManager.PlayerID.Player4, p4ScoreText);
     }
 	
 	// Update is called once per frame
