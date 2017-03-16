@@ -44,7 +44,7 @@ public class CannonControl : MonoBehaviour
 	private GameObject predictiveLine;
 
     void checkIfAIControlled() {
-		if (InputManager.S.getPlayerIDWithControlID(cID) == InputManager.PlayerID.AI)
+		if (InputManager.S.getPlayerInfoWithControlID(cID).aiMode == InputManager.AIMode.On)
 			onAI = true;
 		else
 			onAI = false;

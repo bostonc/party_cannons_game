@@ -10,7 +10,7 @@ using System.Linq;
 
     Left stick (horizontal) to adjust rotation
     Right stick (vertical) to adjust pitch
-    right trigger (hold for power adjust) to fire 
+    right trigger (hold for power adjust) to fire
     RB to cancel firing
 
     joy1-3 are launchers
@@ -32,31 +32,36 @@ public class InputManager : MonoBehaviour
 
     public bool _________________;
 
-    //these will be dynamically rearranged
+    public enum AIMode {
+		None, Off, On // Can add more here (like AI with different difficulties)
+    }
 
 	public enum PlayerID {
-		None, Player1, Player2, Player3, Player4, AI, Debug
+		None, Player1, Player2, Player3, Player4, Debug
 	};
 
 	public enum ControlID {
 		None, Cannon1, Cannon2, Cannon3, Runner
 	};
 
-	public class PlayerControllerMapping {
+	public class PlayerInfo {
 		public PlayerID playerID;
-		public ControlID controlID; 
+		public ControlID controlID;
+    	public AIMode aiMode;
 
-		public PlayerControllerMapping(PlayerID pID, ControlID cID) {
+		public PlayerInfo(PlayerID pID, ControlID cID,
+                          AIMode _aiMode) {
 			playerID = pID;
 			controlID = cID;
+     		aiMode = _aiMode;
 		}
 	};
 
-	public List<PlayerControllerMapping> playerControllerMappings = new List<PlayerControllerMapping>() {
-		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon1), 
-		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon2), 
-		new PlayerControllerMapping(PlayerID.AI, ControlID.Cannon3), 
-		new PlayerControllerMapping(PlayerID.AI, ControlID.Runner), 
+	public List<PlayerInfo> playerInfoList = new List<PlayerInfo>() {
+		new PlayerInfo(PlayerID.Player1, ControlID.Cannon1, AIMode.On),
+		new PlayerInfo(PlayerID.Player2, ControlID.Cannon2, AIMode.On),
+		new PlayerInfo(PlayerID.Player3, ControlID.Cannon3, AIMode.On),
+		new PlayerInfo(PlayerID.Player4, ControlID.Runner , AIMode.On),
 	};
 	// public int debugPlayerNum = -1; //who is the keyboard controlling?
 	public bool debugAllow = true;
@@ -64,7 +69,7 @@ public class InputManager : MonoBehaviour
     CannonControl cc1;
     CannonControl cc2;
     CannonControl cc3;
-	PlayerControl pc1;
+	  PlayerControl pc1;
 
     private void Awake()
     {
@@ -73,34 +78,34 @@ public class InputManager : MonoBehaviour
 
 	// get the JoyNum controlling a given cannon (1 - 3) or runner (4)
 //	public int getPlayerJoyNumForController(int controller) {
-//		if(player1JoyNum == controller) 
+//		if(player1JoyNum == controller)
 //			return 1;
-//		else if(player2JoyNum == controller) 
+//		else if(player2JoyNum == controller)
 //			return 2;
-//		else if(player3JoyNum == controller) 
+//		else if(player3JoyNum == controller)
 //			return 3;
-//		else 
+//		else
 //			return 4;
 //	}
 
-	public PlayerID getPlayerIDWithControlID(ControlID cID) {
-		foreach (PlayerControllerMapping pcm in playerControllerMappings) {
+	public PlayerInfo getPlayerInfoWithControlID(ControlID cID) {
+		foreach (PlayerInfo pcm in playerInfoList) {
 			if (pcm.controlID == cID)
-				return pcm.playerID;
+				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode);
 		}
 		Debug.Log (cID);
 		Debug.Assert (false); // Controller does not exist! !!WARNING!!
-		return PlayerID.None;
+		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None);
 	}
 
-	public ControlID getControlIDWithPlayerID(PlayerID pID) {
+	public PlayerInfo getPlayerInfoWithPlayerID(PlayerID pID) {
 		PlayerID correctedPlayerID = (pID == PlayerID.Debug) ? PlayerID.Player1 : pID;
-		foreach (PlayerControllerMapping pcm in playerControllerMappings) {
+		foreach (PlayerInfo pcm in playerInfoList) {
 			if (pcm.playerID == correctedPlayerID)
-				return pcm.controlID;
-		} 
+				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode);
+		}
 
-		return ControlID.None; // Player does not exist! Not controlling anything.
+		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None); // Player does not exist! Not controlling anything.
 	}
 
     // Use this for initialization
@@ -134,16 +139,16 @@ public class InputManager : MonoBehaviour
 
 	float CalibratedGetAxis(string axis) {
 		float f = Input.GetAxis (axis);
-		return (Mathf.Abs (f) > 0.1f) ? f : 0.0f; // Safety mechanism to stop leakage of values 
+		return (Mathf.Abs (f) > 0.1f) ? f : 0.0f; // Safety mechanism to stop leakage of values
 												  // (dead range could be incorrectly set.)
 	}
 
 	void UpdateHelper(PlayerID pID) {
-		float yaw = 0.0f; 
+		float yaw = 0.0f;
 		float pitch = 0.0f;
 		float firing = 0.0f;
 
-		if (getControlIDWithPlayerID (pID) == ControlID.None)
+		if (getPlayerInfoWithPlayerID (pID).controlID == ControlID.None)
 			return;
 
 		if (pID == PlayerID.Debug) {
@@ -170,8 +175,8 @@ public class InputManager : MonoBehaviour
 			return; // PlayerID.AI;
 		}
 
-		switch(getControlIDWithPlayerID(pID)) {
-		case ControlID.Cannon1: 
+		switch(getPlayerInfoWithPlayerID(pID).controlID) {
+		case ControlID.Cannon1:
 			if (yaw != 0)
 				cc1.rotate (yaw);
 			if (pitch != 0)
@@ -179,7 +184,7 @@ public class InputManager : MonoBehaviour
 			if (firing != 0)
 				cc1.fire (firing);
 			break;
-		case ControlID.Cannon2: 
+		case ControlID.Cannon2:
 			if (yaw != 0)
 				cc2.rotate (yaw);
 			if (pitch != 0)
@@ -187,7 +192,7 @@ public class InputManager : MonoBehaviour
 			if (firing != 0)
 				cc2.fire (firing);
 			break;
-		case ControlID.Cannon3: 
+		case ControlID.Cannon3:
 			if (yaw != 0)
 				cc3.rotate (yaw);
 			if (pitch != 0)
@@ -203,18 +208,18 @@ public class InputManager : MonoBehaviour
 			break;
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
 		if (Scorekeeper.S.gameOver)
 			return;
-		
+
 		UpdateHelper (PlayerID.Player1);
 		UpdateHelper (PlayerID.Player2);
 		UpdateHelper (PlayerID.Player3);
 		UpdateHelper (PlayerID.Player4);
-	
+
 // Previous Stop Firing Code. TODO: Incorporate Above if Needed.
 //			if (Input.GetKeyDown (KeyCode.Joystick1Button5)) {
 //				switch (player1JoyNum) {
@@ -295,28 +300,28 @@ public class InputManager : MonoBehaviour
 
 
 	public void debugSwap(ControlID desiredCID) {
-		ControlID currentCID = getControlIDWithPlayerID (PlayerID.Debug);
+		ControlID currentCID = getPlayerInfoWithPlayerID (PlayerID.Debug).controlID;
 
 		float f = Random.value;
 
 		if (f <= 1.0f / 3.0f) {
-			if(getControlIDWithPlayerID(PlayerID.Player2) == ControlID.None)
-				setPlayerIDForControlID (currentCID, PlayerID.AI);
-			else 
-				setPlayerIDForControlID (currentCID, PlayerID.Player2);
+			if(getPlayerInfoWithPlayerID(PlayerID.Player2).controlID == ControlID.None)
+				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.On);
+			else
+				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.Off);
 		} else if (f > 1.0 / 3.0f && f <= 2.0f / 3.0f) {
-			if(getControlIDWithPlayerID(PlayerID.Player3) == ControlID.None)
-				setPlayerIDForControlID (currentCID, PlayerID.AI);
-			else 
-				setPlayerIDForControlID (currentCID, PlayerID.Player3);
+			if(getPlayerInfoWithPlayerID(PlayerID.Player3).controlID == ControlID.None)
+				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.On);
+			else
+				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.Off);
 		} else if (f > 2.0 / 3.0f && f <= 3.0f / 3.0f) {
-			if(getControlIDWithPlayerID(PlayerID.Player4) == ControlID.None)
-				setPlayerIDForControlID (currentCID, PlayerID.AI);
-			else 
-				setPlayerIDForControlID (currentCID, PlayerID.Player4);
+			if(getPlayerInfoWithPlayerID(PlayerID.Player4).controlID == ControlID.None)
+				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On);
+			else
+				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On);
 		}
 
-		setPlayerIDForControlID (desiredCID, PlayerID.Player1);
+		setPlayerInfoForControlID (desiredCID, PlayerID.Player1, AIMode.Off);
 	}
 
 	public void swapPlayer(ControlID cID)//, int otherController)
@@ -332,36 +337,18 @@ public class InputManager : MonoBehaviour
 		Debug.Assert(cID != ControlID.None && cID != ControlID.Runner);
 
 		// get the player currently controlling the runner
-		PlayerID playerControllingRunner  = getPlayerIDWithControlID(ControlID.Runner);
-		PlayerID playerControllingCannonThatFired = getPlayerIDWithControlID (cID);
+		PlayerInfo playerControllingRunnerInfo = getPlayerInfoWithControlID(ControlID.Runner);
+		PlayerInfo playerControllingCannonThatFiredInfo = getPlayerInfoWithControlID (cID);
 
-		if (playerControllingRunner == PlayerID.Player1)
-			setPlayerIDForControlID (cID, PlayerID.Player1);
-		else if(playerControllingRunner == PlayerID.Player2) 
-			setPlayerIDForControlID (cID, PlayerID.Player2);
-		else if(playerControllingRunner == PlayerID.Player3) 
-			setPlayerIDForControlID (cID, PlayerID.Player3);
-		else if(playerControllingRunner == PlayerID.Player4) 
-			setPlayerIDForControlID (cID, PlayerID.Player4);
-		else 
-			setPlayerIDForControlID (cID, PlayerID.AI);
-		
+		setPlayerInfoForControlID (cID, playerControllingRunnerInfo.playerID, playerControllingRunnerInfo.aiMode);
+
 		// player who shot the cannon that hit the runner cannot be the player controlling the runner!
-		Debug.Assert (playerControllingRunner != getPlayerIDWithControlID (cID));
+		Debug.Assert (playerControllingRunnerInfo.playerID != playerControllingCannonThatFiredInfo.playerID);
 
 		// Get the player currently controlling the cannon that fired.
 
-		if (playerControllingCannonThatFired == PlayerID.Player1)
-			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player1);
-		else if (playerControllingCannonThatFired == PlayerID.Player2)
-			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player2);
-		else if (playerControllingCannonThatFired == PlayerID.Player3)
-			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player3);
-		else if (playerControllingCannonThatFired == PlayerID.Player4)
-			setPlayerIDForControlID (ControlID.Runner, PlayerID.Player4);
-		else 
-			setPlayerIDForControlID (ControlID.Runner, PlayerID.AI);
-		
+		setPlayerInfoForControlID (ControlID.Runner, playerControllingCannonThatFiredInfo.playerID, 
+								   playerControllingCannonThatFiredInfo.aiMode);
 //		if (debugPlayerNum == 4)
 //			debugPlayerNum = cannonThatFired;
 //		else
@@ -374,38 +361,41 @@ public class InputManager : MonoBehaviour
         paused = true;
     }
 
-	public void setPlayerIDForControlID (ControlID cID, PlayerID pID) {
-//		if(playerControllerMappings.Where  (pcm => pcm.playerID == pID).ToList().Count == 0) 
+	public void setPlayerInfoForControlID (ControlID cID, PlayerID pID, AIMode aiMode) {
+//		if(playerControllerMappings.Where  (pcm => pcm.playerID == pID).ToList().Count == 0)
 //			playerControllerMappings.Where (pcm => pcm.controlID == cID).First ().playerID = PlayerID.AI;
-//		else 
-			playerControllerMappings.Where (pcm => pcm.controlID == cID).First ().playerID = pID;
+//		else
+		PlayerInfo pInfo = playerInfoList.Where (pcm => pcm.controlID == cID).First ();
+		pInfo.playerID = pID;
+		pInfo.aiMode = aiMode;
 	}
 
 	private void randomizePlayers(int numOfPlayers)
     {
 		List<ControlID> cIDList = new List<ControlID> () {
-			ControlID.Cannon1, 
-			ControlID.Cannon2, 
-			ControlID.Cannon3, 
+			ControlID.Cannon1,
+			ControlID.Cannon2,
+			ControlID.Cannon3,
 			ControlID.Runner
 		};
 
 		List<PlayerID> pIDList = new List<PlayerID> () {
-			PlayerID.Player1, 
-			PlayerID.Player2, 
-			PlayerID.Player3, 
+			PlayerID.Player1,
+			PlayerID.Player2,
+			PlayerID.Player3,
 			PlayerID.Player4
 		};
 
-		for(int i = 0; i < numOfPlayers; i++) {
+		int i;
+		for(i = 0; i < numOfPlayers; i++) {
 			int idx = Random.Range (0, cIDList.Count);
 			ControlID cID = cIDList[idx];
 			cIDList.RemoveAt (idx);
-			setPlayerIDForControlID (cID, pIDList[i]);
+			setPlayerInfoForControlID (cID, pIDList[i], AIMode.Off);
 		}
 
 		foreach (ControlID cID in cIDList) {
-			setPlayerIDForControlID (cID, PlayerID.AI);
+			setPlayerInfoForControlID (cID, pIDList[i++], AIMode.On);
 		}
     }
 

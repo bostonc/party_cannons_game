@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour {
 	public InputManager.ControlID cID;
 
 	void checkIfAIControlled() {
-		if (InputManager.S.getPlayerIDWithControlID (S.cID) == InputManager.PlayerID.AI)
+		if (InputManager.S.getPlayerInfoWithControlID (S.cID).aiMode == InputManager.AIMode.On)
 			onAI = true;
 		else
 			onAI = false;
