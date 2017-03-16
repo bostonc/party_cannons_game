@@ -11,16 +11,34 @@ public class RunnerHealth : MonoBehaviour {
 
 	float lastAccumulationTime = -1;
 
+	bool inSwitch;
+	int switchFrame = 0;
+	int totalSwitchFrames = 50;
+
 	void Awake () {
         // initialize to 1 for now
         runnerHealth = 1;
 	}
 
     void Start() {
-
+		inSwitch = false;
     }
 	
 	void Update () {
+
+		if (inSwitch) {
+			if (switchFrame == totalSwitchFrames) {
+				inSwitch = false;
+				switchFrame = 0;
+				Time.timeScale = 1.0f;
+				Time.fixedDeltaTime = 0.02f ;
+			} else {
+				Time.timeScale = 0.25f;
+				Time.fixedDeltaTime = 0.02f * Time.timeScale;
+				switchFrame++; 
+			}
+		}
+
 		if (Scorekeeper.S.gameOver)
 			return; // Don't update scores anymore if game is over.
 		scoreAccumulation += (int)(10 * Scorekeeper.S.fractionOfGameComplete ());
@@ -33,6 +51,10 @@ public class RunnerHealth : MonoBehaviour {
 
     // when the runner collides with something
     void OnCollisionEnter(Collision collision) {
+
+		if (inSwitch && collision.gameObject.name.Contains("CannonBall")) {
+			Destroy (collision.gameObject);
+		}
 
         // the runner collides with a powerup
         // TODO: customize the different types of powerups...
@@ -54,6 +76,8 @@ public class RunnerHealth : MonoBehaviour {
         }
 
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
+
+			inSwitch = true;
 
 			// Destroy all cannonballs when runner is killed
 			var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
