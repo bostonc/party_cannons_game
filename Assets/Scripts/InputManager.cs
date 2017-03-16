@@ -69,7 +69,7 @@ public class InputManager : MonoBehaviour
     CannonControl cc1;
     CannonControl cc2;
     CannonControl cc3;
-	  PlayerControl pc1;
+	PlayerControl pc1;
 
     private void Awake()
     {
@@ -276,9 +276,10 @@ public class InputManager : MonoBehaviour
 		}
 
         //pause
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) ||
-            Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) ||
-            Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7))
+		if (Input.GetButtonDown("Pause_D") ||
+			Input.GetButtonDown("Pause_J") || 
+			((Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer) && 
+			  Input.GetButtonDown("Pause_J_OSX"))) 	
         {
             if (paused)
             {
