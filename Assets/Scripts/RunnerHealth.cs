@@ -54,6 +54,7 @@ public class RunnerHealth : MonoBehaviour {
 
 		if (inSwitch && collision.gameObject.name.Contains("CannonBall")) {
 			Destroy (collision.gameObject);
+			return;
 		}
 
         // the runner collides with a powerup
