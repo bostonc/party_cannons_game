@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3e2d5e66901d53d409f6f981c2f800cd
-timeCreated: 1489104295
+guid: 9d66684eeaca7754eb0cf7d1184c9e16
+timeCreated: 1489792329
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: MuchoMacho
+  fontName: Razer Text Regular
   fontNames:
-  - MuchoMacho
+  - Razer Text Regular
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

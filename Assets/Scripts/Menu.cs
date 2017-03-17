@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
-    public Canvas exitMenu;
+    public GameObject exitMenu;
     public Button start;
     public Button options;
     public Button exit;
@@ -13,11 +14,11 @@ public class Menu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // default disable the exit menu
-        exitMenu.enabled = false;
+        exitMenu.SetActive(false);
 	}
 	
 	public void PressExit() {
-        exitMenu.enabled = true;
+        exitMenu.SetActive(true);
 
         start.enabled = false;
         options.enabled = false;
@@ -25,7 +26,7 @@ public class Menu : MonoBehaviour {
     }
 
     public void PressNo() {
-        exitMenu.enabled = false;
+        exitMenu.SetActive(false);
 
         start.enabled = true;
         options.enabled = true;
@@ -33,7 +34,7 @@ public class Menu : MonoBehaviour {
     }
 
     public void StartGame() {
-        Application.LoadLevel("Main");
+        SceneManager.LoadScene("Main");
     }
 
     public void ExitGame() {
