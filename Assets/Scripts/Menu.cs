@@ -7,21 +7,45 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour {
 
     public GameObject exitMenu;
+    public GameObject instructionList;
     public Button start;
     public Button options;
+    public Button instructions;
     public Button exit;
 
 	// Use this for initialization
 	void Start () {
         // default disable the exit menu
         exitMenu.SetActive(false);
-	}
-	
-	public void PressExit() {
+        instructionList.SetActive(false);
+    }
+
+    public void PressInstructions()
+    {
+        instructionList.SetActive(true);
+
+        start.enabled = false;
+        options.enabled = false;
+        instructions.enabled = false;
+        exit.enabled = false;
+    }
+
+    public void PressOkay()
+    {
+        instructionList.SetActive(false);
+
+        start.enabled = true;
+        options.enabled = true;
+        instructions.enabled = true;
+        exit.enabled = true;
+    }
+
+    public void PressExit() {
         exitMenu.SetActive(true);
 
         start.enabled = false;
         options.enabled = false;
+        instructions.enabled = false;
         exit.enabled = false;
     }
 
@@ -30,6 +54,7 @@ public class Menu : MonoBehaviour {
 
         start.enabled = true;
         options.enabled = true;
+        instructions.enabled = true;
         exit.enabled = true;
     }
 
