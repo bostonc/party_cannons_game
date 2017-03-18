@@ -132,9 +132,16 @@ public class InputManager : MonoBehaviour
 	float OsBasedGetAxis(string axis) {
 		if ((Application.platform == RuntimePlatform.OSXEditor) ||
 		    (Application.platform == RuntimePlatform.OSXPlayer))
-			return CalibratedGetAxis (axis + "_OSX");
+        {
+            print("MAC DETECTED");
+            return CalibratedGetAxis(axis + "_OSX");
+        }	
 		else
-			return CalibratedGetAxis (axis);
+        {
+            print("WINDOWS DETECTED");
+            return CalibratedGetAxis(axis);
+        }
+			
 	}
 
 	float CalibratedGetAxis(string axis) {

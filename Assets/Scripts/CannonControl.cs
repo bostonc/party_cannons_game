@@ -101,19 +101,19 @@ public class CannonControl : MonoBehaviour
 				if (shots_fired < desired_shots_fired) {
 					fire (1.0f);
 					shots_fired += 1;
-					Debug.Log (shots_fired - desired_shots_fired);
+					//Debug.Log (shots_fired - desired_shots_fired);
 				} else if (desired_pitch > current_pitch) {
 					pitch (1.0f);
-					Debug.Log (current_pitch - desired_pitch);
+					//Debug.Log (current_pitch - desired_pitch);
 				} else if (desired_pitch < current_pitch) {
 					pitch (-1.0f);
-					Debug.Log (current_pitch - desired_pitch);
+					//Debug.Log (current_pitch - desired_pitch);
 				} else if (desired_yaw > current_yaw) {
 					rotate (1.0f);
-					Debug.Log (current_yaw - desired_yaw);
+					//Debug.Log (current_yaw - desired_yaw);
 				} else if (desired_yaw < current_yaw) {
 					rotate (-1.0f);
-					Debug.Log (current_yaw - desired_yaw);
+					//Debug.Log (current_yaw - desired_yaw);
 				}
 			}
 		}
