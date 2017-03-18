@@ -275,7 +275,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 4
+    axis: 1
     joyNum: 1
   - serializedVersion: 3
     m_Name: Pitch_1_OSX
@@ -307,7 +307,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 4
+    axis: 1
     joyNum: 2
   - serializedVersion: 3
     m_Name: Pitch_2_OSX
@@ -339,7 +339,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 4
+    axis: 1
     joyNum: 3
   - serializedVersion: 3
     m_Name: Pitch_3_OSX
@@ -371,7 +371,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 4
+    axis: 1
     joyNum: 4
   - serializedVersion: 3
     m_Name: Pitch_4_OSX
