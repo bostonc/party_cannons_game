@@ -118,7 +118,7 @@ public class InputManager : MonoBehaviour
 
         pausedText.enabled = false;
 
-		string[] Joysticks = Input.GetJoystickNames ();
+        string[] Joysticks = Input.GetJoystickNames();
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
 			debugAllow = false;
 			randomizePlayers(Joysticks.Length);
