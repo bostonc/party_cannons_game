@@ -150,7 +150,9 @@ public class CannonControl : MonoBehaviour
 			return;
 		} else {
 			current_yaw += f;
-		}
+            //DO NOT REMOVE THIS LINE
+            AudioDriver.S.play(SoundType.rotate);
+        }
     }
 
     public void pitch(float f)
@@ -178,7 +180,9 @@ public class CannonControl : MonoBehaviour
   				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
 			go.GetComponent<CannonBallMetadata> ().setMetadata (cID, this);
   			lastFired = Time.time;
-  		}
+            //DO NOT REMOVE THIS LINE
+            AudioDriver.S.play(SoundType.launch);
+        }
     }
 
     public void stopFire()
