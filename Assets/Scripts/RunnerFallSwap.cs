@@ -90,13 +90,13 @@ public class RunnerFallSwap : MonoBehaviour
 			// specified, and the player with the lowest score will now take on the runner role.)
 			InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
 
-            runner.GetComponent<PlayerControl>().enabled = false;
+            //runner.GetComponent<PlayerControl>().enabled = false;
 
-            //put runner back on map
+            //put runner back on map - WHY THE HELL DOESN'T THIS WORK?????????????
             runner.transform.position = new Vector3(0f, 10f, 20f);
-
-            runner.GetComponent<PlayerControl>().enabled = true;
-        }
+            
+            
+        }//end fall handling
     }
 
 }
