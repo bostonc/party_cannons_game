@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 615248413}
   - component: {fileID: 615248412}
   - component: {fileID: 615248411}
+  - component: {fileID: 615248416}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -427,6 +428,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615248416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 615248410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f6a9a9c32cb4342b3e2c309b77cf4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSound_0: {fileID: 0}
+  rotateSound_1: {fileID: 0}
+  launchSound_0: {fileID: 0}
+  launchSound_1: {fileID: 0}
+  launchSound_2: {fileID: 0}
+  launchSound_3: {fileID: 0}
+  hitPlayerSound_0: {fileID: 0}
+  hitPlayerSound_1: {fileID: 0}
+  jumpSound_0: {fileID: 0}
+  jumpSound_1: {fileID: 0}
+  jumpSound_2: {fileID: 0}
+  gameStartSound: {fileID: 0}
+  gameEndSound: {fileID: 0}
+  swapSound: {fileID: 0}
+  splashSound: {fileID: 0}
+  highScoreSound: {fileID: 0}
+  gameMusic_0: {fileID: 0}
+  gameMusic_1: {fileID: 0}
+  gameMusic_2: {fileID: 0}
+  menuMusic_0: {fileID: 8300000, guid: c7c7a1126d98cee4e9961a8ad4ec2306, type: 3}
+  menuMusic_1: {fileID: 8300000, guid: 965cd1be855ba5846b084e844890e66c, type: 3}
+  menuMusic_2: {fileID: 8300000, guid: 5f54654b0f6dfd1429366fa3f807cfac, type: 3}
+  menuMusic_3: {fileID: 8300000, guid: b0680834fab582d4f90254cd6a1fc07d, type: 3}
+  _________________: 0
 --- !u!1 &760005952
 GameObject:
   m_ObjectHideFlags: 0

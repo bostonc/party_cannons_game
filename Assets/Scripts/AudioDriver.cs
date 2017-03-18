@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum SoundType
 {
@@ -18,6 +19,7 @@ public enum SoundType
 public class AudioDriver : MonoBehaviour
 {
     static public AudioDriver S;
+    ActiveScene scene = ActiveScene.NotSet;
 
     //NOTE: for most predictable functionality, it is best 
     //to have a separate AudioSource for each AudioClip,
@@ -43,9 +45,14 @@ public class AudioDriver : MonoBehaviour
     public AudioClip swapSound;
     public AudioClip splashSound;
     public AudioClip highScoreSound;
+    //music
     public AudioClip gameMusic_0;
     public AudioClip gameMusic_1;
     public AudioClip gameMusic_2;
+    public AudioClip menuMusic_0;
+    public AudioClip menuMusic_1;
+    public AudioClip menuMusic_2;
+    public AudioClip menuMusic_3;
 
     //SOURCES
     //cannon
@@ -63,6 +70,12 @@ public class AudioDriver : MonoBehaviour
     AudioSource musicSource;
     AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
 
+    enum ActiveScene
+    {
+        NotSet,
+        Menu,
+        Main
+    };
 
     public bool _________________;
 
@@ -70,18 +83,45 @@ public class AudioDriver : MonoBehaviour
     {
         S = this;
         generateAudioSources(); //MUST BE CALLED BEFORE ANY SOUNDS ARE MADE
+
+
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            scene = ActiveScene.Main;
+        }
+        else
+        {
+            scene = ActiveScene.Menu;
+        }
     }
 
     private void Start()
     {        
-        startBackgroundMusic();
-        play(SoundType.gameStart);  
+        if (scene == ActiveScene.Main)
+        {
+            startBackgroundMusic();
+            play(SoundType.gameStart);
+        }
+        else if (scene == ActiveScene.Menu)
+        {
+            startMenuMusic();
+        }
+    
+
+
+        
     }
 
     private void Update()
     {
-        if (!musicSource.isPlaying) startBackgroundMusic();
-
+        if (scene == ActiveScene.Main)
+        {
+            if (!musicSource.isPlaying) startBackgroundMusic();
+        }
+        else if (scene == ActiveScene.Menu)
+        {
+            if (!musicSource.isPlaying) startMenuMusic();
+        }
     }
 
     public void play(SoundType s)
@@ -151,6 +191,29 @@ public class AudioDriver : MonoBehaviour
                 break;
             case 2:
                 if (musicSource != null) musicSource.PlayOneShot(gameMusic_2);
+                break;
+            default:
+                Debug.Assert(false);
+                break;
+        }
+    }
+
+    private void startMenuMusic()
+    {
+        int num = Random.Range(0, 4);
+        switch (num)
+        {
+            case 0:
+                if (musicSource != null) musicSource.PlayOneShot(menuMusic_0);
+                break;
+            case 1:
+                if (musicSource != null) musicSource.PlayOneShot(menuMusic_1);
+                break;
+            case 2:
+                if (musicSource != null) musicSource.PlayOneShot(menuMusic_2);
+                break;
+            case 3:
+                if (musicSource != null) musicSource.PlayOneShot(menuMusic_3);
                 break;
             default:
                 Debug.Assert(false);
