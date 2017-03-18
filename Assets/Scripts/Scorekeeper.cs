@@ -39,10 +39,10 @@ public class Scorekeeper : MonoBehaviour
     bool restartTimerStarted = false;
     
 
-    int p1Score = 0;
-    int p2Score = 0;
-    int p3Score = 0;
-    int p4Score = 0;
+    public int p1Score = 0;
+    public int p2Score = 0;
+    public int p3Score = 0;
+    public int p4Score = 0;
 
     public bool gameOver = false;
     public int highscoreHolder = 0; //0 for none, else player number 1-4
