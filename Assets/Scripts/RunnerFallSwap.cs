@@ -14,8 +14,8 @@ public class RunnerFallSwap : MonoBehaviour
 	// Prefer use of PlayerID/ControlID enums wherever possible (over integers or other numeric types).
 	InputManager.PlayerID playerWithLowestScore = 0;
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
         positionCheck();
 	}
@@ -89,6 +89,13 @@ public class RunnerFallSwap : MonoBehaviour
             //swap (Get Control ID of player with lowest score. The runner will then take on the cannon 
 			// specified, and the player with the lowest score will now take on the runner role.)
 			InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
+
+            runner.GetComponent<PlayerControl>().enabled = false;
+
+            //put runner back on map
+            runner.transform.position = new Vector3(0f, 10f, 20f);
+
+            runner.GetComponent<PlayerControl>().enabled = true;
         }
     }
 

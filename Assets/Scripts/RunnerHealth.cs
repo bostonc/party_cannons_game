@@ -6,6 +6,7 @@ public class RunnerHealth : MonoBehaviour {
 
     public GameObject runner;
     public int runnerHealth;
+    public float invincibilityPeriod = 3f; //seconds
 
 	int scoreAccumulation = 0;
 
@@ -14,6 +15,7 @@ public class RunnerHealth : MonoBehaviour {
 	bool inSwitch;
 	int switchFrame = 0;
 	int totalSwitchFrames = 50;
+    float timeLastSwap = 0; //time since runner was last swapped
 
 	void Awake () {
         // initialize to 1 for now
@@ -70,9 +72,11 @@ public class RunnerHealth : MonoBehaviour {
             // destroy the gameobject
             Destroy(collision.gameObject);
 
-            //reduce player health
-            runnerHealth--;
-
+            //reduce player health if not invincible
+            if (Time.time - timeLastSwap > invincibilityPeriod)
+            {
+                runnerHealth--;
+            }
             AudioDriver.S.play(SoundType.hitPlayer);
         }
 
@@ -89,6 +93,7 @@ public class RunnerHealth : MonoBehaviour {
 			Debug.Log ("OnCollisionEnter" + Time.time);
 			// Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
 			InputManager.S.swapPlayer (collision.gameObject.GetComponent<CannonBallMetadata> ().controllerThatFired ());
+            timeLastSwap = Time.time;
 
 			Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
 			runner.GetComponent<SpriteRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
