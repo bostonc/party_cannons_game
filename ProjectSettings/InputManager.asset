@@ -51,7 +51,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 9
+    axis: 15
     joyNum: 1
   - serializedVersion: 3
     m_Name: Fire_1_OSX
@@ -74,7 +74,7 @@ InputManager:
     descriptiveName: A button. Hold for more power.
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick 2 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -83,7 +83,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 9
+    axis: 15
     joyNum: 2
   - serializedVersion: 3
     m_Name: Fire_2_OSX
@@ -106,16 +106,16 @@ InputManager:
     descriptiveName: A button. Hold for more power.
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick 3 button 0
     altNegativeButton: 
-    altPositiveButton: mouse 2
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
     type: 0
-    axis: 9
+    axis: 15
     joyNum: 3
   - serializedVersion: 3
     m_Name: Fire_3_OSX
@@ -138,7 +138,7 @@ InputManager:
     descriptiveName: A button. Hold for more power.
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick 4 button 0
     altNegativeButton: 
     altPositiveButton: mouse 2
     gravity: 1000
@@ -147,7 +147,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 9
+    axis: 15
     joyNum: 4
   - serializedVersion: 3
     m_Name: Fire_4_OSX
