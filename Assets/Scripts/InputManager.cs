@@ -133,12 +133,12 @@ public class InputManager : MonoBehaviour
 		if ((Application.platform == RuntimePlatform.OSXEditor) ||
 		    (Application.platform == RuntimePlatform.OSXPlayer))
         {
-            print("MAC DETECTED");
+            //print("MAC DETECTED");
             return CalibratedGetAxis(axis + "_OSX");
         }	
 		else
         {
-            print("WINDOWS DETECTED");
+            //print("WINDOWS DETECTED");
             return CalibratedGetAxis(axis);
         }
 			
