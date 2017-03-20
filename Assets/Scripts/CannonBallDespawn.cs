@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonBallDespawn : MonoBehaviour {
-    public float despawnSpeed = .05f;
+    public float despawnSpeed = .1f;
 
     Rigidbody rb;
 
@@ -17,8 +17,9 @@ public class CannonBallDespawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		if (gameObject.transform.position.y < -10 || rb.velocity == Vector3.zero ||
-            (rb.velocity.x < despawnSpeed && rb.velocity.y < despawnSpeed && rb.velocity.z < despawnSpeed))
+		if (gameObject.transform.position.y < -10 || (rb.velocity - Vector3.zero).magnitude < 0.2f ||
+			(Mathf.Abs(rb.velocity.x) < 2e2*despawnSpeed && Mathf.Abs(rb.velocity.y) < 2e2*despawnSpeed && 
+				Mathf.Abs(rb.velocity.z) < 1e-5*despawnSpeed))
         {
             Destroy(gameObject);
         }
