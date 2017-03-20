@@ -96,10 +96,29 @@ public class RunnerHealth : MonoBehaviour {
             timeLastSwap = Time.time;
 
 			Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
-			runner.GetComponent<SpriteRenderer> ().material = collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ();
+			setMaterial(collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ());
 			collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
 		}
 
 		runnerHealth = 1;
     }
+
+	private void setMaterial(Material mat) {
+		StartCoroutine(Blink(1.0f, runner.GetComponent<SpriteRenderer>().material, mat));
+	}
+
+	private void trueSetMaterial(Material mat) {
+		runner.GetComponent<SpriteRenderer> ().material = mat;
+	}
+
+	IEnumerator Blink(float waitTime, Material currMaterial, Material nextMaterial) {
+		float endTime = Time.time + waitTime;
+		while(Time.time < endTime) {
+			yield return new WaitForSeconds(0.1f);
+			trueSetMaterial (nextMaterial);
+			yield return new WaitForSeconds(0.1f);
+			trueSetMaterial (currMaterial);
+		}
+		trueSetMaterial (nextMaterial);
+	}
 }

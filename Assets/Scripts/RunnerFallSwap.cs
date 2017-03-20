@@ -91,10 +91,7 @@ public class RunnerFallSwap : MonoBehaviour
 			InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
 
             //runner.GetComponent<PlayerControl>().enabled = false;
-
-            //put runner back on map - WHY THE HELL DOESN'T THIS WORK?????????????
-            runner.transform.position = new Vector3(0f, 10f, 20f);
-            
+			runner.GetComponent<PlayerControl>().runReset();
             
         }//end fall handling
     }

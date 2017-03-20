@@ -228,6 +228,10 @@ public class CannonControl : MonoBehaviour
     }
 
 	public void setMaterial(Material mat) {
+		StartCoroutine(Blink(1.0f, _barrel.GetComponent<MeshRenderer>().material, mat));
+	}
+
+	private void trueSetMaterial(Material mat) {
 		_barrel.GetComponent<MeshRenderer> ().material = mat;
 		_base.GetComponent<MeshRenderer> ().material = mat;
 
@@ -239,5 +243,16 @@ public class CannonControl : MonoBehaviour
 
 	public Material getMaterial() {
 		return _base.GetComponent<MeshRenderer> ().material;
+	}
+
+	IEnumerator Blink(float waitTime, Material currMaterial, Material nextMaterial) {
+		float endTime = Time.time + waitTime;
+		while(Time.time < endTime) {
+			yield return new WaitForSeconds(0.1f);
+			trueSetMaterial (nextMaterial);
+			yield return new WaitForSeconds(0.1f);
+			trueSetMaterial (currMaterial);
+		}
+		trueSetMaterial (nextMaterial);
 	}
 }
