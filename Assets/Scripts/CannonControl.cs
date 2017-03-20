@@ -71,9 +71,42 @@ public class CannonControl : MonoBehaviour
 	void Update () {
 		checkIfAIControlled ();
 		if (onAI) {
-			if (Time.time - paused_ai_start_time < 0.5f) {
-				return;
+			//Firing
+			int fireChance = Random.Range(0,40);
+			if (fireChance == 0) {
+				fire (1.0f);
 			}
+
+			//Cannon Moving
+			//Pitch
+			if (Mathf.Approximately (current_pitch, desired_pitch)) {
+				desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
+			} else {
+				if (desired_pitch > current_pitch) {
+					pitch (0.5f);
+				} else if (desired_pitch < current_pitch) {
+					pitch (-0.5f);
+				}
+			}
+			//Yaw
+			if (Mathf.Approximately(current_yaw, desired_yaw)) {
+				
+				if (PlayerControl.S.GetComponent<Rigidbody> ().position.x > transform.position.x) {
+					desired_yaw = Random.Range (-10, (int)maxYaw);
+				} else {
+					desired_yaw = Random.Range ((int) minYaw, 10);
+				}
+
+
+			} else {
+				if (desired_yaw > current_yaw) {
+					rotate (0.5f);
+				} else if (desired_yaw < current_yaw) {
+					rotate (-0.5f);
+				}
+			}
+				
+			/*
 			paused_ai_start_time = 0.0f;
 			if (Mathf.Approximately(current_pitch, desired_pitch) && Mathf.Approximately(current_yaw, desired_yaw) && shots_fired == desired_shots_fired) {
 				int action = Random.Range (0, 4);
@@ -115,7 +148,9 @@ public class CannonControl : MonoBehaviour
 					rotate (-1.0f);
 					//Debug.Log (current_yaw - desired_yaw);
 				}
+
 			}
+			*/
 		}
 		_barrel.transform.localRotation = Quaternion.Euler (current_pitch, current_yaw, 0);
 		_base.transform.localRotation = Quaternion.Euler(0, current_yaw, 0);

@@ -43,11 +43,5 @@ public class PlatformSpawner : MonoBehaviour {
 
 			frameCounter = spawnRate;
 		}
-
-		foreach (var platform in platforms) {
-			if (platform.transform.position.x < -35) {
-				Destroy (platform);
-			}
-		}
 	}
 }
