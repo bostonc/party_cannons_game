@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Shield
+  - SpeedUp
+  - SlowDown
+  - JumpHigh
+  - Points
   layers:
   - Default
   - TransparentFX
@@ -14,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Invincible
+  - Projectile
   - 
   - 
   - 

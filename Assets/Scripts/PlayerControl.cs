@@ -6,8 +6,8 @@ public class PlayerControl : MonoBehaviour {
 
 	static public PlayerControl S;
 
-	public int speed = 10;
-	public int jumpPower = 10;
+	public float speed = 10;
+	public float jumpPower = 10;
 
 	private Rigidbody rb;
 

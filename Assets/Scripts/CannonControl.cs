@@ -209,6 +209,8 @@ public class CannonControl : MonoBehaviour
   			GameObject go = MonoBehaviour.Instantiate (Resources.Load ("CannonBall") as GameObject,
   				               barrel_top, Quaternion.identity);
 
+            go.layer = LayerMask.NameToLayer("Projectile");
+
 			go.GetComponent<Renderer> ().material = _barrel.GetComponent<Renderer> ().material;
 
   			go.GetComponent<Rigidbody> ().velocity =

@@ -38,7 +38,6 @@ public class Scorekeeper : MonoBehaviour
     float sceneLoadTime = 0;
     bool restartTimerStarted = false;
     
-
     public int p1Score = 0;
     public int p2Score = 0;
     public int p3Score = 0;
