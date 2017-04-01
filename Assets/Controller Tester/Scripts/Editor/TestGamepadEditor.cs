@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 [InitializeOnLoad]
 public static class TestGamepadEditor
@@ -13,7 +12,7 @@ public static class TestGamepadEditor
     }
     static void OnHierarchyChange()
     {
-        
+
         if (EditorApplication.currentScene.Contains("controllerTest")) 
         {
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.LandscapeLeft;
