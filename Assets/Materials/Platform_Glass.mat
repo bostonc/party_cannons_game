@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Cannon
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Platform_Glass
+  m_Shader: {fileID: 4800000, guid: 9d787bb5741b3fb41b495cd3b715fcca, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -17,6 +17,12 @@ Material:
     m_TexEnvs:
     - first:
         name: _BumpMap
+      second:
+        m_Texture: {fileID: 2800000, guid: 242497ebded4c7043aef46478f63eb90, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Cubemap
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -48,7 +54,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 242497ebded4c7043aef46478f63eb90, type: 3}
+        m_Texture: {fileID: 2800000, guid: 640c073f0a4b14f4593dceb36bf69e08, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -71,6 +77,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: _BlurReflection
+      second: 1
+    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -83,20 +92,38 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _EmissiveIntensity
+      second: 0
+    - first:
+        name: _FresnelInvert
+      second: 0
+    - first:
+        name: _FresnelOnOff
+      second: 0
+    - first:
+        name: _FresnelStrength
+      second: 0
+    - first:
+        name: _FresnelThickness
+      second: 0
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 0.5
+      second: 0.35
     - first:
         name: _GlossyReflections
       second: 1
     - first:
         name: _Metallic
-      second: 0
+      second: 0.55
     - first:
         name: _Mode
       second: 0
+    - first:
+        name: _NormalIntensity
+      second: 1
     - first:
         name: _OcclusionStrength
       second: 1
@@ -104,14 +131,26 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _ReflectionIntensity
+      second: 3
+    - first:
+        name: _Refraction
+      second: 0.1
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
         name: _SpecularHighlights
       second: 1
     - first:
+        name: _SpecularIntensity
+      second: 0.2
+    - first:
         name: _SrcBlend
       second: 1
+    - first:
+        name: _Transparency
+      second: 0.6
     - first:
         name: _UVSec
       second: 0
@@ -121,7 +160,13 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _ColorGlass
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _SpecColor
+      second: {r: 1, g: 1, b: 1, a: 1}
