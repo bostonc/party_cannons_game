@@ -10,7 +10,6 @@ public class BackgroundGeneration : MonoBehaviour
     public Material mat3;
     public GameObject backdrop;
 
-
     Renderer r;
 
     // Use this for initialization
@@ -18,7 +17,7 @@ public class BackgroundGeneration : MonoBehaviour
     {
         r = backdrop.GetComponent<Renderer>();
         int seed = Random.Range(0, 4);
-        print("seed: " + seed);
+        //print("seed: " + seed);
         switch(seed)
         {
             case 0:
