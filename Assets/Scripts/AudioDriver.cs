@@ -14,7 +14,8 @@ public enum SoundType
     swap,
     splash,
     highScore,
-    powerup
+    powerup,
+    glassBreak
 };
 
 public class AudioDriver : MonoBehaviour
@@ -47,6 +48,7 @@ public class AudioDriver : MonoBehaviour
     public AudioClip splashSound;
     public AudioClip highScoreSound;
     public AudioClip powerupSound;
+    public AudioClip glassBreakSound;
     //music
     public AudioClip gameMusic_0;
     public AudioClip gameMusic_1;
@@ -70,6 +72,7 @@ public class AudioDriver : MonoBehaviour
     AudioSource splashSource;
     AudioSource highScoreSource;
     AudioSource powerupSource;
+    AudioSource glassBreakSource;
     AudioSource musicSource;
     AudioSource generalSource; //to be used for discrete, non-overlapping sounds only!
 
@@ -172,6 +175,9 @@ public class AudioDriver : MonoBehaviour
                 break;
             case SoundType.powerup:
                 if (powerupSource != null) powerupSource.PlayOneShot(powerupSound);
+                break;
+            case SoundType.glassBreak:
+                if (glassBreakSource != null) glassBreakSource.PlayOneShot(glassBreakSound);
                 break;
             default:
                 Debug.Assert(false, "not a valid soundtype");
