@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65186196828630370}
   - component: {fileID: 114783301076024930}
   m_Layer: 0
-  m_Name: LeftMovingPlatform
+  m_Name: LeftMovingDestructPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
