@@ -31,28 +31,28 @@ public class PowerUp : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll) {
         if (coll.gameObject.tag == "SlowDown") {
-            Destroy(coll.gameObject);
-            
+            AudioDriver.S.play(SoundType.powerup);
+            Destroy(coll.gameObject);            
             currentRunner.speed *= 0.5f;
         }
         else if (coll.gameObject.tag == "SpeedUp") {
+            AudioDriver.S.play(SoundType.powerup);
             Destroy(coll.gameObject);
-
             currentRunner.speed *= 2;
         }
         else if (coll.gameObject.tag == "JumpHigh") {
+            AudioDriver.S.play(SoundType.powerup);
             Destroy(coll.gameObject);
-
             currentRunner.jumpPower *= 2;
         }
         else if (coll.gameObject.tag == "Points") {
+            AudioDriver.S.play(SoundType.powerup);
             Destroy(coll.gameObject);
-
             Scorekeeper.S.Score(InputManager.S.getPlayerInfoWithControlID(InputManager.ControlID.Runner).playerID, points);
         }
         else if (coll.gameObject.tag == "Shield") {
+            AudioDriver.S.play(SoundType.powerup);
             Destroy(coll.gameObject);
-
             runner.layer = LayerMask.NameToLayer("Invincible");
             startTime = Time.time;
             shieldsUp = true;
