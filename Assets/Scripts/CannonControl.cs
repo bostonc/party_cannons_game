@@ -203,6 +203,8 @@ public class CannonControl : MonoBehaviour
 
     public void fire(float f)
     {
+		if (RunnerHealth.isInSwitch ())
+			return;
 		// TODO: Currently thresholding input to start/stop firing. Can modify to synchronize firing rate in 
 		// proportion to given float in range which is in range [0.0f, 1.0f].
 		if (Time.time - lastFired > 60 / firing_rate && f > 0.5f) {

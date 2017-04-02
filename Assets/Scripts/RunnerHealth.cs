@@ -12,10 +12,14 @@ public class RunnerHealth : MonoBehaviour {
 
 	float lastAccumulationTime = -1;
 
-	bool inSwitch;
+	static bool inSwitch;
 	int switchFrame = 0;
 	int totalSwitchFrames = 50;
     float timeLastSwap = 0; //time since runner was last swapped
+
+	public static bool isInSwitch() {
+		return inSwitch;
+	}
 
 	void Awake () {
         // initialize to 1 for now
