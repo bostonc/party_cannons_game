@@ -168,6 +168,8 @@ public class CannonControl : MonoBehaviour
 		LineRenderer lineRenderer = go.GetComponent<LineRenderer>();
 		lineRenderer.numPositions = numSteps;
 
+		lineRenderer.material.color = getMaterial ().color;
+
 		Vector3 position = initialPosition;
 		Vector3 velocity = initialVelocity;
 		for (int i = 0; i < numSteps; ++i)
@@ -216,6 +218,13 @@ public class CannonControl : MonoBehaviour
   			go.GetComponent<Rigidbody> ().velocity =
   				(_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)) - _barrel.transform.position) * 15;
 			go.GetComponent<CannonBallMetadata> ().setMetadata (cID, this);
+			float alpha = 1.0f;
+			Gradient gradient = new Gradient();
+			gradient.SetKeys(
+				new GradientColorKey[] { new GradientColorKey(Color.black, 0.0f), new GradientColorKey(getMaterial().color, 1.0f) },
+				new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+			);
+			go.GetComponent<TrailRenderer>().colorGradient = gradient;
   			lastFired = Time.time;
             //DO NOT REMOVE THIS LINE
             AudioDriver.S.play(SoundType.launch);
