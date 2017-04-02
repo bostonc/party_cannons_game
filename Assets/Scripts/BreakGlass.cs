@@ -9,11 +9,11 @@ public class BreakGlass : MonoBehaviour {
         switch(coll.gameObject.tag)
         {
 		case "Projectile":
-			AudioDriver.S.play (SoundType.glassBreak); 
-			// Note: This is to unparent the runner AND any other children (like powerups) 
-			// of this destructible platform to avoid destroying the runner! (Happened during testing.)
-			this.gameObject.transform.DetachChildren (); 
-			Destroy(this.gameObject);
+				AudioDriver.S.play (SoundType.glassBreak); 
+				// Note: This is to unparent the runner AND any other children (like powerups) 
+				// of this destructible platform to avoid destroying the runner! (Happened during testing.)
+				this.gameObject.transform.DetachChildren (); 
+				Destroy(this.gameObject);
                 break;
             default:
                 break;
