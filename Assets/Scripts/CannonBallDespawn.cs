@@ -24,4 +24,10 @@ public class CannonBallDespawn : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
+
+	public void OnCollisionEnter(Collision coll) {
+		if (coll.gameObject.name == "Backdrop") {
+
+		}
+	}
 }
