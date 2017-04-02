@@ -2092,6 +2092,7 @@ GameObject:
   - component: {fileID: 1709186573}
   - component: {fileID: 1709186578}
   - component: {fileID: 1709186580}
+  - component: {fileID: 1709186581}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -2236,6 +2237,122 @@ MonoBehaviour:
   runner: {fileID: 1709186572}
   shieldTime: 15
   points: 10000
+--- !u!96 &1709186581
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1709186572}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 405c285e5dcff4aa39030d6b0a832a62, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 2
+  m_Parameters:
+    serializedVersion: 2
+    widthMultiplier: 1.46
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0.010362694
+        value: 0.6382979
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5958549
+        value: 0.25531915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.8704663
+        value: 0.40425524
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.31914872
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    colorGradient:
+      key0:
+        serializedVersion: 2
+        rgba: 4278190335
+      key1:
+        serializedVersion: 2
+        rgba: 4278223871
+      key2:
+        serializedVersion: 2
+        rgba: 65447
+      key3:
+        serializedVersion: 2
+        rgba: 65288
+      key4:
+        serializedVersion: 2
+        rgba: 15400704
+      key5:
+        serializedVersion: 2
+        rgba: 16723200
+      key6:
+        serializedVersion: 2
+        rgba: 16711889
+      key7:
+        serializedVersion: 2
+        rgba: 255
+      ctime0: 0
+      ctime1: 9830
+      ctime2: 19661
+      ctime3: 29491
+      ctime4: 39321
+      ctime5: 49344
+      ctime6: 57247
+      ctime7: 65535
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 8
+      m_NumAlphaKeys: 2
+    numCornerVertices: 3
+    numCapVertices: 1
+    alignment: 0
+    textureMode: 1
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
 --- !u!1 &1730360979
 GameObject:
   m_ObjectHideFlags: 0
