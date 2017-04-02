@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
     public GameObject cannon3;
     public GameObject runner; //4
 
-    public Text pausedText;
+    //public Text pausedText;
+    public GameObject pausedMenu;
 
     public bool paused = false;
 
@@ -116,7 +117,8 @@ public class InputManager : MonoBehaviour
         cc3 = cannon3.GetComponent<CannonControl>();
 		pc1 = runner.GetComponent<PlayerControl>();
 
-        pausedText.enabled = false;
+        //pausedText.enabled = false;
+        pausedMenu.SetActive(false);
 
         string[] Joysticks = Input.GetJoystickNames();
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
@@ -292,13 +294,15 @@ public class InputManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 paused = false;
-                pausedText.enabled = false;
+                //pausedText.enabled = false;
+                pausedMenu.SetActive(false);
             }
             else
             {
                 Time.timeScale = 0;
                 paused = true;
-                pausedText.enabled = true;
+                //pausedText.enabled = true;
+                pausedMenu.SetActive(true);
             }
         }
 
