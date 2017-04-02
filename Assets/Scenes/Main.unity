@@ -1402,6 +1402,8 @@ MonoBehaviour:
   swapSound: {fileID: 8300000, guid: 0541d4d080e88444c8ba2e8b8a9f3c38, type: 3}
   splashSound: {fileID: 8300000, guid: 87b35ba165fdd714292d0a4e43c46fbf, type: 3}
   highScoreSound: {fileID: 8300000, guid: d37f6e470cc03ef4caad4f5137f8fd85, type: 3}
+  powerupSound: {fileID: 8300000, guid: a4905061ae376f24786c9ef8b7f2763b, type: 3}
+  glassBreakSound: {fileID: 8300000, guid: 06b5ffd741551f04faeea32c9f76f5d6, type: 3}
   gameMusic_0: {fileID: 8300000, guid: 994a4e427e7664f44b173de0d21d2593, type: 3}
   gameMusic_1: {fileID: 8300000, guid: e30d3ed7ab7ff86469111a656a77a0af, type: 3}
   gameMusic_2: {fileID: 8300000, guid: 4007d79e5d5cfb64dbe56cc10d0c3fa2, type: 3}
@@ -1438,6 +1440,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 1605538682863606, guid: af28556b8a38b407dbf5361bb25d95af, type: 2}
+  platform_glass: {fileID: 1605538682863606, guid: 9e9be96dfc4662c4eab6cad2768f1733,
+    type: 2}
   spawnRate: 250
 --- !u!1 &1206158830
 GameObject:

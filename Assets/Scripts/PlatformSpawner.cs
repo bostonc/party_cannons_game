@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour {
 
 	public GameObject platform;
-	public int spawnRate = 250;
+    public GameObject platform_glass;
+    public int spawnRate = 250;
 
 
 	private int frameCounter = 1;
@@ -27,9 +28,10 @@ public class PlatformSpawner : MonoBehaviour {
 
 		//Procedural platform generation
 		frameCounter--;
-		if (frameCounter == 0) {
-
-			int yPos = Random.Range (0, 3);
+		if (frameCounter == 0)
+        {
+            int platSelect = Random.Range(0, 100);            
+            int yPos = Random.Range (0, 3);
 			Vector3 startPos = Vector3.zero;
 			if (yPos == 0) {
 				startPos = new Vector3 (40, 1, 20);
@@ -38,9 +40,17 @@ public class PlatformSpawner : MonoBehaviour {
 			} else if (yPos == 2) {
 				startPos = new Vector3 (40, 9, 20);
 			}
-			GameObject go = Instantiate (platform, startPos, Quaternion.identity);
+            //gen normal
+            GameObject go;
+            if (platSelect < 80)
+            {
+                go = Instantiate(platform, startPos, Quaternion.identity);
+            }
+            else //gen glass
+            {
+                go = Instantiate(platform_glass, startPos, Quaternion.identity);
+            }			
 			platforms.Add (go);
-
 			frameCounter = spawnRate;
 		}
 	}
