@@ -177,7 +177,7 @@ public class AudioDriver : MonoBehaviour
                 if (powerupSource != null) powerupSource.PlayOneShot(powerupSound);
                 break;
             case SoundType.glassBreak:
-                if (glassBreakSource != null) glassBreakSource.PlayOneShot(glassBreakSound);
+                if (glassBreakSource != null) glassBreakSource.PlayOneShot(glassBreakSound, 1);
                 break;
             default:
                 Debug.Assert(false, "not a valid soundtype");
@@ -250,6 +250,8 @@ public class AudioDriver : MonoBehaviour
         splashSource.volume = .4f;
 
         highScoreSource = gameObject.AddComponent<AudioSource>();
+        powerupSource = gameObject.AddComponent<AudioSource>();
+        glassBreakSource = gameObject.AddComponent<AudioSource>();
         musicSource = gameObject.AddComponent<AudioSource>();
         generalSource = gameObject.AddComponent<AudioSource>();
     }
