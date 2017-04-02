@@ -9,6 +9,8 @@ public class PlatformController : MonoBehaviour {
     public Vector3[] localWaypoints;
     Vector3[] globalWaypoints;
 
+	Transform prevParentGameObjOfRunner;
+
     public float speed;
     public bool cyclic;
     public float waitTime;
@@ -171,6 +173,19 @@ public class PlatformController : MonoBehaviour {
             moveBeforePlatform = _moveBeforePlatform;
         }
     }*/
+
+	public void OnCollisionEnter(Collision coll) {
+		if (coll.gameObject.name == "Runner") {
+			prevParentGameObjOfRunner = coll.gameObject.transform.parent;
+			coll.gameObject.transform.parent = this.gameObject.transform; 
+		}
+	}
+
+	public void OnCollisionExit(Collision coll) {
+		if (coll.gameObject.name == "Runner") {
+			coll.gameObject.transform.parent = prevParentGameObjOfRunner; 
+		}
+	} 
 
     void OnDrawGizmos() {
         if(localWaypoints != null) {
