@@ -1690,6 +1690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c2d4f1d76185e409e4f0026e4916e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePopupPrefab: {fileID: 1224547423980910, guid: cc1c16b4eb5c2434f960afd2077dda15,
+    type: 2}
   highScoreText: {fileID: 2052769274}
   p1ScoreText: {fileID: 926647818}
   p2ScoreText: {fileID: 1955627415}
@@ -1742,6 +1744,7 @@ MonoBehaviour:
   highScoreSound: {fileID: 8300000, guid: d37f6e470cc03ef4caad4f5137f8fd85, type: 3}
   powerupSound: {fileID: 8300000, guid: a4905061ae376f24786c9ef8b7f2763b, type: 3}
   glassBreakSound: {fileID: 8300000, guid: 06b5ffd741551f04faeea32c9f76f5d6, type: 3}
+  scoreSound: {fileID: 8300000, guid: 9d4d33d4606fc4d4a98a3af6f24db80d, type: 3}
   gameMusic_0: {fileID: 8300000, guid: 994a4e427e7664f44b173de0d21d2593, type: 3}
   gameMusic_1: {fileID: 8300000, guid: e30d3ed7ab7ff86469111a656a77a0af, type: 3}
   gameMusic_2: {fileID: 8300000, guid: 4007d79e5d5cfb64dbe56cc10d0c3fa2, type: 3}

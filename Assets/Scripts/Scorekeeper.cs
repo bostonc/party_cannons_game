@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Scorekeeper : MonoBehaviour
 {
     static public Scorekeeper S;
+    public GameObject scorePopupPrefab;
 
     public Text highScoreText;
 
@@ -285,6 +286,16 @@ public class Scorekeeper : MonoBehaviour
         print("SCENELOADTIME: " + sceneLoadTime);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public GameObject spawnPopup(string msg, Vector3 loc)
+    {
+        Instantiate(scorePopupPrefab);
+        GameObject popup = Instantiate(scorePopupPrefab);
+        ScoreTextPopup st = popup.GetComponent<ScoreTextPopup>();
+        st.construct(msg, loc);
+        //AudioDriver.S.play(SoundType.score);
+        return popup;
     }
 
 }
