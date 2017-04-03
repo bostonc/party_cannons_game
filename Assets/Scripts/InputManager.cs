@@ -175,10 +175,10 @@ public class InputManager : MonoBehaviour
         string[] Joysticks = Input.GetJoystickNames();
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
 			debugAllow = false;
-			//randomizePlayers(Joysticks.Length);
+			randomizePlayers(Joysticks.Length);
 		} else { // No controllers attached!
 			debugAllow = true;
-			//randomizePlayers (1);
+			randomizePlayers (1);
 			// debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
 		}
 
