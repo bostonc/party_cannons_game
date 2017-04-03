@@ -188,50 +188,58 @@ public class InputManager : MonoBehaviour
         PlayerID c3 = getPlayerIDWithControlID(ControlID.Cannon3);
 
         if (c1 == PlayerID.Player1) {
-            Debug.Log("IM SETTING THE COLOR1");
-
-            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+            //Debug.Log("IM SETTING THE COLOR1");
+			cannon1.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
         else if (c1 == PlayerID.Player2) {
-            Debug.Log("IM SETTING THE COLOR2");
-
-            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+            //Debug.Log("IM SETTING THE COLOR2");
+			cannon1.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
         else if (c1 == PlayerID.Player3) {
-            Debug.Log("IM SETTING THE COLOR3");
-
-            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+            //Debug.Log("IM SETTING THE COLOR3");
+			cannon1.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
         else if (c1 == PlayerID.Player4) {
-            Debug.Log("IM SETTING THE COLOR4");
-
-            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+            //Debug.Log("IM SETTING THE COLOR4");
+			cannon1.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
 
         if (c2 == PlayerID.Player1) {
-            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+			cannon2.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
         else if (c2 == PlayerID.Player2) {
-            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+			cannon2.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
         else if (c2 == PlayerID.Player3) {
-            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+			cannon2.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
         else if (c2 == PlayerID.Player4) {
-            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+			cannon2.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
 
         if (c3 == PlayerID.Player1) {
-            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+			cannon3.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
         else if (c3 == PlayerID.Player2) {
-            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+			cannon3.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
         else if (c3 == PlayerID.Player3) {
-            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+			cannon3.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
         else if (c3 == PlayerID.Player4) {
-            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+			cannon3.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
 
     }
@@ -501,16 +509,15 @@ public class InputManager : MonoBehaviour
 			PlayerID.Player4
 		};
 
-		int i;
-		for(i = 0; i < numOfPlayers; i++) {
-			int idx = Random.Range (0, cIDList.Count);
+		int idx;
+		for(idx = 0; idx < numOfPlayers; idx++) {
 			ControlID cID = cIDList[idx];
 			cIDList.RemoveAt (idx);
-			setPlayerInfoForControlID (cID, pIDList[i], AIMode.Off);
+			setPlayerInfoForControlID (cID, pIDList[idx], AIMode.Off);
 		}
 
 		foreach (ControlID cID in cIDList) {
-			setPlayerInfoForControlID (cID, pIDList[i++], AIMode.On);
+			setPlayerInfoForControlID (cID, pIDList[idx++], AIMode.On);
 		}
     }
 

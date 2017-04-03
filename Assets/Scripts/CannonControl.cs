@@ -242,7 +242,7 @@ public class CannonControl : MonoBehaviour
 		StartCoroutine(Blink(1.0f, _barrel.GetComponent<MeshRenderer>().material, mat));
 	}
 
-	private void trueSetMaterial(Material mat) {
+	public void trueSetMaterial(Material mat) {
 		_barrel.GetComponent<MeshRenderer> ().material = mat;
 		_base.GetComponent<MeshRenderer> ().material = mat;
 

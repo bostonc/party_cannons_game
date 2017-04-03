@@ -126,6 +126,7 @@ public class RunnerHealth : MonoBehaviour {
             InputManager.PlayerID newRunnerID = InputManager.S.getPlayerIDWithControlID(cID);
             InputManager.PlayerID oldRunnerID = InputManager.S.getCurrentRunnerID();
 
+
             Debug.Log("NEW" + newRunnerID);
             Debug.Log("OLD" + oldRunnerID);
 
@@ -166,10 +167,14 @@ public class RunnerHealth : MonoBehaviour {
                     break;
             }
 
-            switch (cID) {
+			Debug.Log (cID);
+			Debug.Log (oldRunnerID);
+			Debug.Log (newRunnerID);
+
+			switch (cID) {
                 case InputManager.ControlID.Cannon1:
                     switch (oldRunnerID) { //old runner becomes new cannon
-                        case InputManager.PlayerID.Player1:
+					case InputManager.PlayerID.Player1:
                             cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p1;
                             break;
                         case InputManager.PlayerID.Player2:
