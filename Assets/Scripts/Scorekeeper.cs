@@ -68,14 +68,15 @@ public class Scorekeeper : MonoBehaviour
 	void setScoreTextColor(InputManager.PlayerID pID, Text scoreText) {
 		InputManager.ControlID cID = InputManager.S.getPlayerInfoWithPlayerID (pID).controlID;
 
-		if (cID == InputManager.ControlID.Cannon1)
-			scoreText.color = cannon1.GetComponent<CannonControl> ().getMaterial ().color;
-		else if (cID == InputManager.ControlID.Cannon2)
-			scoreText.color = cannon2.GetComponent<CannonControl> ().getMaterial ().color;
-		else if (cID == InputManager.ControlID.Cannon3)
-			scoreText.color = cannon3.GetComponent<CannonControl> ().getMaterial ().color;
-		else if (cID == InputManager.ControlID.Runner)
-			scoreText.color = runner.GetComponent<Renderer> ().material.color;
+        if (cID == InputManager.ControlID.Cannon1)
+            scoreText.color = cannon1.GetComponent<CannonControl>().getMaterial().color;
+        else if (cID == InputManager.ControlID.Cannon2)
+            scoreText.color = cannon2.GetComponent<CannonControl>().getMaterial().color;
+        else if (cID == InputManager.ControlID.Cannon3)
+            scoreText.color = cannon3.GetComponent<CannonControl>().getMaterial().color;
+        else if (cID == InputManager.ControlID.Runner)
+            //scoreText.color = runner.GetComponent<SpriteRenderer> ().material.color;
+            scoreText.color = new Color(255, 255, 244);
 	}
 
     // Use this for initialization
