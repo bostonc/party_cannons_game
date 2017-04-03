@@ -309,6 +309,9 @@ public class InputManager : MonoBehaviour
 
     }//end update
 
+    public PlayerInfo getCurrentRunner() {
+        return getPlayerInfoWithControlID(ControlID.Runner);
+    }
 
 	public void debugSwap(ControlID desiredCID) {
 		ControlID currentCID = getPlayerInfoWithPlayerID (PlayerID.Debug).controlID;
