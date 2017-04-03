@@ -26,6 +26,15 @@ public class InputManager : MonoBehaviour
     public GameObject cannon3;
     public GameObject runner; //4
 
+    public GameObject cannon1Sprite;
+    public GameObject cannon2Sprite;
+    public GameObject cannon3Sprite;
+
+    public Material player1Material;
+    public Material player2Material;
+    public Material player3Material;
+    public Material player4Material;
+
     //public Text pausedText;
     public GameObject pausedMenu;
 
@@ -45,24 +54,34 @@ public class InputManager : MonoBehaviour
 		None, Cannon1, Cannon2, Cannon3, Runner
 	};
 
+    public enum PlayerColor {
+        None, Red, Blue, Green, Yellow
+    };
+
 	public class PlayerInfo {
 		public PlayerID playerID;
 		public ControlID controlID;
     	public AIMode aiMode;
+        public PlayerColor playerClr;
 
 		public PlayerInfo(PlayerID pID, ControlID cID,
-                          AIMode _aiMode) {
+                          AIMode _aiMode, PlayerColor pClr) {
 			playerID = pID;
 			controlID = cID;
      		aiMode = _aiMode;
+            playerClr = pClr;
 		}
+
+        public void SetColor(PlayerColor _color) {
+            playerClr = _color;
+        }
 	};
 
 	public List<PlayerInfo> playerInfoList = new List<PlayerInfo>() {
-		new PlayerInfo(PlayerID.Player1, ControlID.Cannon1, AIMode.On),
-		new PlayerInfo(PlayerID.Player2, ControlID.Cannon2, AIMode.On),
-		new PlayerInfo(PlayerID.Player3, ControlID.Cannon3, AIMode.On),
-		new PlayerInfo(PlayerID.Player4, ControlID.Runner , AIMode.On),
+		new PlayerInfo(PlayerID.Player1, ControlID.Cannon1, AIMode.On, PlayerColor.Red),
+		new PlayerInfo(PlayerID.Player2, ControlID.Cannon2, AIMode.On, PlayerColor.Blue),
+		new PlayerInfo(PlayerID.Player3, ControlID.Cannon3, AIMode.On, PlayerColor.Green),
+		new PlayerInfo(PlayerID.Player4, ControlID.Runner , AIMode.On, PlayerColor.Yellow),
 	};
 	// public int debugPlayerNum = -1; //who is the keyboard controlling?
 	public bool debugAllow = true;
@@ -92,22 +111,55 @@ public class InputManager : MonoBehaviour
 	public PlayerInfo getPlayerInfoWithControlID(ControlID cID) {
 		foreach (PlayerInfo pcm in playerInfoList) {
 			if (pcm.controlID == cID)
-				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode);
+				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode, pcm.playerClr);
 		}
 		Debug.Log (cID);
 		Debug.Assert (false); // Controller does not exist! !!WARNING!!
-		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None);
+		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None, PlayerColor.None);
 	}
 
 	public PlayerInfo getPlayerInfoWithPlayerID(PlayerID pID) {
 		PlayerID correctedPlayerID = (pID == PlayerID.Debug) ? PlayerID.Player1 : pID;
 		foreach (PlayerInfo pcm in playerInfoList) {
 			if (pcm.playerID == correctedPlayerID)
-				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode);
+				return new PlayerInfo (pcm.playerID, pcm.controlID, pcm.aiMode, pcm.playerClr);
 		}
 
-		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None); // Player does not exist! Not controlling anything.
+		return new PlayerInfo(PlayerID.None, ControlID.None, AIMode.None, PlayerColor.None); // Player does not exist! Not controlling anything.
 	}
+
+    public PlayerID getPlayerIDWithControlID(ControlID cID) {
+        foreach (PlayerInfo pcm in playerInfoList) {
+            if (pcm.controlID == cID)
+                return pcm.playerID;
+        }
+        return PlayerID.None;
+    }
+
+    public PlayerColor getPlayerColorWithControlID(ControlID cID) {
+        foreach (PlayerInfo pcm in playerInfoList) {
+            if (pcm.controlID == cID)
+                return pcm.playerClr;
+        }
+        return PlayerColor.None;
+    }
+
+    public PlayerColor getPlayerColorWithPlayerID(PlayerID pID) {
+        foreach(PlayerInfo pcm in playerInfoList) {
+            if (pcm.playerID == pID)
+                return pcm.playerClr;
+        }
+        return PlayerColor.None;
+    }
+
+    public PlayerID getCurrentRunnerID() {
+        foreach (PlayerInfo pcm in playerInfoList) {
+            if (pcm.controlID == ControlID.Runner) {
+                return pcm.playerID;
+            }
+        }
+        return PlayerID.None;
+    }
 
     // Use this for initialization
     void Start ()
@@ -123,12 +175,65 @@ public class InputManager : MonoBehaviour
         string[] Joysticks = Input.GetJoystickNames();
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
 			debugAllow = false;
-			randomizePlayers(Joysticks.Length);
+			//randomizePlayers(Joysticks.Length);
 		} else { // No controllers attached!
 			debugAllow = true;
-			randomizePlayers (1);
+			//randomizePlayers (1);
 			// debugPlayerNum = getPlayerJoyNumForController(1); // whatever player 1 is controlling, control that.
 		}
+
+
+        PlayerID c1 = getPlayerIDWithControlID(ControlID.Cannon1);
+        PlayerID c2 = getPlayerIDWithControlID(ControlID.Cannon2);
+        PlayerID c3 = getPlayerIDWithControlID(ControlID.Cannon3);
+
+        if (c1 == PlayerID.Player1) {
+            Debug.Log("IM SETTING THE COLOR1");
+
+            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+        }
+        else if (c1 == PlayerID.Player2) {
+            Debug.Log("IM SETTING THE COLOR2");
+
+            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+        }
+        else if (c1 == PlayerID.Player3) {
+            Debug.Log("IM SETTING THE COLOR3");
+
+            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+        }
+        else if (c1 == PlayerID.Player4) {
+            Debug.Log("IM SETTING THE COLOR4");
+
+            cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+        }
+
+        if (c2 == PlayerID.Player1) {
+            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+        }
+        else if (c2 == PlayerID.Player2) {
+            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+        }
+        else if (c2 == PlayerID.Player3) {
+            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+        }
+        else if (c2 == PlayerID.Player4) {
+            cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+        }
+
+        if (c3 == PlayerID.Player1) {
+            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+        }
+        else if (c3 == PlayerID.Player2) {
+            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+        }
+        else if (c3 == PlayerID.Player3) {
+            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+        }
+        else if (c3 == PlayerID.Player4) {
+            cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+        }
+
     }
 
 	float OsBasedGetAxis(string axis) {
@@ -308,10 +413,6 @@ public class InputManager : MonoBehaviour
 
 
     }//end update
-
-    public PlayerInfo getCurrentRunner() {
-        return getPlayerInfoWithControlID(ControlID.Runner);
-    }
 
 	public void debugSwap(ControlID desiredCID) {
 		ControlID currentCID = getPlayerInfoWithPlayerID (PlayerID.Debug).controlID;

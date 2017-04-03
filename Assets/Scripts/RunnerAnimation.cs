@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RunnerAnimation : MonoBehaviour {
-    RunnerAnimation R;
+    static public RunnerAnimation R;
 
     public Sprite[] red_left; //1
     public Sprite[] red_right;
@@ -17,24 +17,50 @@ public class RunnerAnimation : MonoBehaviour {
     public Sprite[] yellow_left; //4
     public Sprite[] yellow_right;
 
-    enum ColorSprite {
+    public enum ColorSprite {
         RED, BLUE, GREEN, YELLOW
     };
 
-    ColorSprite currentColor;
+    public ColorSprite currentColor;
 
-    InputManager.PlayerInfo currentRunner;
+    InputManager.PlayerID currentRunner;
 
     Vector3 prevPosition;
 
+    public Sprite getSprite(InputManager.PlayerID pID) {
+        switch (pID) {
+            case InputManager.PlayerID.Player1:
+                //use red
+                return red_left[0];
+            case InputManager.PlayerID.Player2:
+                //use blue
+                return blue_left[0];
+                //currentColor = ColorSprite.BLUE;
+            case InputManager.PlayerID.Player3:
+                return green_left[0];
+                //R.GetComponent<SpriteRenderer>().sprite = green_left[0];
+                //currentColor = ColorSprite.GREEN;
+                //use green
+            case InputManager.PlayerID.Player4:
+                return yellow_left[0];
+                //R.GetComponent<SpriteRenderer>().sprite = yellow_left[0];
+                //currentColor = ColorSprite.YELLOW;
+                //use yellow
+        }
+        return null;
+    }
+
+    void Awake() {
+        R = this;
+    }
+
     // Use this for initialization
     void Start () {
-        currentRunner = InputManager.S.getCurrentRunner();
-        R = this;
+        currentRunner = InputManager.S.getCurrentRunnerID();
 
         prevPosition = R.transform.position;
 
-		switch (currentRunner.playerID) {
+		switch (currentRunner) {
             case InputManager.PlayerID.Player1:
                 //use red
                 R.GetComponent<SpriteRenderer>().sprite = red_left[0];
