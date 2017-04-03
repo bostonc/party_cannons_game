@@ -97,8 +97,6 @@ public class PlayerControl : MonoBehaviour {
 
 		if (!beingReset) {
 
-			print (f);
-
 			// Variable Jump
 			if (f == 0) {
 				zerosFromInput++;

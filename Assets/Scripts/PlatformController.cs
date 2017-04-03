@@ -11,6 +11,8 @@ public class PlatformController : MonoBehaviour {
 
 	Transform prevParentGameObjOfRunner;
 
+	private int direction = 0;
+
     public float speed;
     public bool cyclic;
     public float waitTime;
@@ -32,10 +34,27 @@ public class PlatformController : MonoBehaviour {
 	}
 	
 	void Update () {
+
+
         //UpdateRaycastOrigins();
 
         Vector3 velocity = CalculatePlatformMovement();
         //CalculatePassengerMovement(velocity);
+
+		//destroy platforms
+		if (velocity.x < 0) {
+			direction = 1;
+		}
+		if (velocity.x > 0) {
+			direction = 2;
+		}
+
+		if (direction == 1 && transform.position.x < -50) {
+			Destroy (gameObject);
+		}
+		if (direction == 2 && transform.position.x > 50) {
+			Destroy (gameObject);
+		}
 
         //MovePassengers(true);
         transform.Translate(velocity);

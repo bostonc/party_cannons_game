@@ -3780,6 +3780,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &635465823
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150632287901006, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &653602828
 GameObject:
   m_ObjectHideFlags: 0
@@ -10388,6 +10430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 1605538682863606, guid: af28556b8a38b407dbf5361bb25d95af, type: 2}
+  platform2: {fileID: 1976052986232704, guid: 806bb4a91730747459ca7a5caf9e749b, type: 2}
   platform_glass: {fileID: 1605538682863606, guid: 9e9be96dfc4662c4eab6cad2768f1733,
     type: 2}
   spawnRate: 250
