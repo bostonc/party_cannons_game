@@ -9,6 +9,12 @@ public class PlayerControl : MonoBehaviour {
 	public float speed = 10;
 	public float jumpPower = 10;
 
+	//player variable jump
+	private float timeHeld = 0.0f;
+	private int zerosFromInput = 0;
+	private bool falling = false;
+	public float maxJump = 3.0f;
+
 	private Rigidbody rb;
 
 	//For AI control
@@ -87,13 +93,51 @@ public class PlayerControl : MonoBehaviour {
 
 	public void jump(float f)
 	{
+
+
 		if (!beingReset) {
+
+			print (f);
+
+			// Variable Jump
+			if (f == 0) {
+				zerosFromInput++;
+			} else {
+				zerosFromInput = 0;
+			}
+
+			if (rb.velocity.y == 0) {
+				falling = false;
+			}
+
+			if ((zerosFromInput > 3 || timeHeld > maxJump) && falling == false) {
+				
+				//start falling
+				falling = true;
+				timeHeld = 0.0f;
+				rb.velocity = new Vector3 (rb.velocity.x, -(jumpPower/2), 0);
+
+			} else {
+
+				//keep going higher
+				if (f == 1 && falling == false) {
+
+					timeHeld += Time.deltaTime;
+					rb.velocity = new Vector3 (rb.velocity.x, jumpPower * (maxJump/(maxJump + timeHeld)), 0);
+					if (gameObject.transform.parent != null)
+						gameObject.transform.parent = null;
+				}
+			}
+
+
+			/* - Old jump system
 			if (rb.velocity.y == 0 && f == 1) {
 				AudioDriver.S.play (SoundType.jump);
 				rb.velocity = new Vector3 (rb.velocity.x, jumpPower, 0);
 				if (gameObject.transform.parent != null)
 					gameObject.transform.parent = null;
 			}
+			*/
 		}
 	}
 

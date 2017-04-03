@@ -212,8 +212,7 @@ public class InputManager : MonoBehaviour
 		case ControlID.Runner:
 			if (yaw != 0)
 				pc1.move (yaw);
-			if (firing != 0)
-				pc1.jump (firing);
+			pc1.jump (firing);
 			break;
 		}
 	}
