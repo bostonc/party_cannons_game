@@ -107,8 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minFont: 0
   maxFont: 20
-  FontSizeTransitionSpeed: 5
-  riseSpeed: 0.2
+  fontTransitionSpeed: 1
+  riseSpeed: 0.01
   fadeDelay: 2
-  fadeSpeed: 0.01
+  fadeSpeed: 0.04
   msg: 
