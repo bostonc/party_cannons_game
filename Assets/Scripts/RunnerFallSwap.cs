@@ -80,7 +80,7 @@ public class RunnerFallSwap : MonoBehaviour
 
             //swap (Get Control ID of player with lowest score. The runner will then take on the cannon 
 			// specified, and the player with the lowest score will now take on the runner role.)
-			InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
+			//InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
 
             //runner.GetComponent<PlayerControl>().enabled = false;
 			runner.GetComponent<PlayerControl>().runReset();
