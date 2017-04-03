@@ -33,27 +33,19 @@ public class RunnerFallSwap : MonoBehaviour
         if (runner.transform.position.y < fallenDetectionDistance)
         {
             //who has the lowest score?
-            if (Scorekeeper.S.p1Score < Scorekeeper.S.p2Score &&
-                Scorekeeper.S.p1Score < Scorekeeper.S.p3Score &&
-                Scorekeeper.S.p1Score < Scorekeeper.S.p4Score)
+			if (scoreList[0] == Scorekeeper.S.p1Score)
             {
 				playerWithLowestScore = InputManager.PlayerID.Player1;
             }
-            else if (Scorekeeper.S.p2Score < Scorekeeper.S.p1Score &&
-                Scorekeeper.S.p2Score < Scorekeeper.S.p3Score &&
-                Scorekeeper.S.p2Score < Scorekeeper.S.p4Score)
+			else if (scoreList[0] == Scorekeeper.S.p2Score)
             {
 				playerWithLowestScore = InputManager.PlayerID.Player2;
             }
-            else if (Scorekeeper.S.p3Score < Scorekeeper.S.p1Score &&
-                Scorekeeper.S.p3Score < Scorekeeper.S.p2Score &&
-                Scorekeeper.S.p3Score < Scorekeeper.S.p4Score)
+			else if (scoreList[0] == Scorekeeper.S.p3Score)
             {
 				playerWithLowestScore = InputManager.PlayerID.Player4;
             }
-            else if (Scorekeeper.S.p4Score < Scorekeeper.S.p1Score &&
-                Scorekeeper.S.p4Score < Scorekeeper.S.p2Score &&
-                Scorekeeper.S.p4Score < Scorekeeper.S.p3Score)
+			else if (scoreList[0] == Scorekeeper.S.p4Score)
             {
 				playerWithLowestScore = InputManager.PlayerID.Player4;
             }
