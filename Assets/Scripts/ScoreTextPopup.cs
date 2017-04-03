@@ -14,13 +14,16 @@ public class ScoreTextPopup : MonoBehaviour
     Vector3 defaultSpawnLoc = new Vector3(0f, 10f, 24f);
     TextMesh tm;
     float currentFontSize = 0;
-
     float spawnTime;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
     {
         tm = gameObject.GetComponent<TextMesh>();
+    }
+
+    // Use this for initialization
+    void Start ()
+    {        
         spawnTime = Time.time;
         tm.fontSize = minFont;
         currentFontSize = minFont;

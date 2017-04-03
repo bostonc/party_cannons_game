@@ -290,7 +290,6 @@ public class Scorekeeper : MonoBehaviour
 
     public GameObject spawnPopup(string msg, Vector3 loc)
     {
-        Instantiate(scorePopupPrefab);
         GameObject popup = Instantiate(scorePopupPrefab);
         ScoreTextPopup st = popup.GetComponent<ScoreTextPopup>();
         st.construct(msg, loc);

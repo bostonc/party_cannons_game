@@ -18,6 +18,7 @@ public class PowerUp : MonoBehaviour {
 
     void Start() {
         shieldsUp = false;
+        currentRunner = runner.GetComponent<PlayerControl>();
     }
 
     void Update() {
