@@ -63,13 +63,6 @@ public class RunnerHealth : MonoBehaviour {
 			return;
 		}
 
-        // the runner collides with a powerup
-        // TODO: customize the different types of powerups...
-        if (collision.gameObject.tag == "PowerUP") {
-            // destroy the gameobject
-            Destroy(collision.gameObject);
-        }
-
         // the runner collides with a cannon projectile
         // TODO: customize the different types of projectiles that the player can be hit with...
         if (collision.gameObject.tag == "Projectile") {
