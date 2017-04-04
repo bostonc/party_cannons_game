@@ -429,22 +429,22 @@ public class InputManager : MonoBehaviour
 
 		if (f <= 1.0f / 3.0f) {
 			if(getPlayerInfoWithPlayerID(PlayerID.Player2).controlID == ControlID.None)
-				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.On);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.On, ((PlayerColor) 2));
 			else
-				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.Off);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player2, AIMode.Off, ((PlayerColor) 2));
 		} else if (f > 1.0 / 3.0f && f <= 2.0f / 3.0f) {
 			if(getPlayerInfoWithPlayerID(PlayerID.Player3).controlID == ControlID.None)
-				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.On);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.On, ((PlayerColor) 3));
 			else
-				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.Off);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player3, AIMode.Off, ((PlayerColor) 3));
 		} else if (f > 2.0 / 3.0f && f <= 3.0f / 3.0f) {
 			if(getPlayerInfoWithPlayerID(PlayerID.Player4).controlID == ControlID.None)
-				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On, ((PlayerColor) 4));
 			else
-				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On);
+				setPlayerInfoForControlID (currentCID, PlayerID.Player4, AIMode.On, ((PlayerColor) 4));
 		}
 
-		setPlayerInfoForControlID (desiredCID, PlayerID.Player1, AIMode.Off);
+		setPlayerInfoForControlID (desiredCID, PlayerID.Player1, AIMode.Off, ((PlayerColor) 1));
 	}
 
 	public void swapPlayer(ControlID cID)//, int otherController)
@@ -463,7 +463,7 @@ public class InputManager : MonoBehaviour
 		PlayerInfo playerControllingRunnerInfo = getPlayerInfoWithControlID(ControlID.Runner);
 		PlayerInfo playerControllingCannonThatFiredInfo = getPlayerInfoWithControlID (cID);
 
-		setPlayerInfoForControlID (cID, playerControllingRunnerInfo.playerID, playerControllingRunnerInfo.aiMode);
+		setPlayerInfoForControlID (cID, playerControllingRunnerInfo.playerID, playerControllingRunnerInfo.aiMode, playerControllingRunnerInfo.playerClr);
 
 		// player who shot the cannon that hit the runner cannot be the player controlling the runner!
 		Debug.Assert (playerControllingRunnerInfo.playerID != playerControllingCannonThatFiredInfo.playerID);
@@ -471,7 +471,7 @@ public class InputManager : MonoBehaviour
 		// Get the player currently controlling the cannon that fired.
 
 		setPlayerInfoForControlID (ControlID.Runner, playerControllingCannonThatFiredInfo.playerID, 
-								   playerControllingCannonThatFiredInfo.aiMode);
+			playerControllingCannonThatFiredInfo.aiMode, playerControllingCannonThatFiredInfo.playerClr);
 //		if (debugPlayerNum == 4)
 //			debugPlayerNum = cannonThatFired;
 //		else
@@ -484,40 +484,32 @@ public class InputManager : MonoBehaviour
         paused = true;
     }
 
-	public void setPlayerInfoForControlID (ControlID cID, PlayerID pID, AIMode aiMode) {
+	public void setPlayerInfoForControlID (ControlID cID, PlayerID pID, AIMode aiMode, PlayerColor pClr) {
 //		if(playerControllerMappings.Where  (pcm => pcm.playerID == pID).ToList().Count == 0)
 //			playerControllerMappings.Where (pcm => pcm.controlID == cID).First ().playerID = PlayerID.AI;
 //		else
 		PlayerInfo pInfo = playerInfoList.Where (pcm => pcm.controlID == cID).First ();
 		pInfo.playerID = pID;
 		pInfo.aiMode = aiMode;
+		pInfo.playerClr = pClr;
 	}
 
 	private void randomizePlayers(int numOfPlayers)
     {
-		List<ControlID> cIDList = new List<ControlID> () {
-			ControlID.Cannon1,
-			ControlID.Cannon2,
-			ControlID.Cannon3,
-			ControlID.Runner
-		};
-
-		List<PlayerID> pIDList = new List<PlayerID> () {
-			PlayerID.Player1,
-			PlayerID.Player2,
-			PlayerID.Player3,
-			PlayerID.Player4
-		};
 
 		int idx;
 		for(idx = 0; idx < numOfPlayers; idx++) {
-			ControlID cID = cIDList[idx];
-			cIDList.RemoveAt (idx);
-			setPlayerInfoForControlID (cID, pIDList[idx], AIMode.Off);
+			ControlID cID = ((ControlID)idx + 1);
+			PlayerID pID = ((PlayerID)idx + 1);
+			PlayerColor pClr = ((PlayerColor)idx + 1);
+			setPlayerInfoForControlID (cID, pID, AIMode.Off, pClr);
 		}
 
-		foreach (ControlID cID in cIDList) {
-			setPlayerInfoForControlID (cID, pIDList[idx++], AIMode.On);
+		for (; idx < 4; idx++) {
+			ControlID cID = ((ControlID)idx + 1);
+			PlayerID pID = ((PlayerID)idx + 1);
+			PlayerColor pClr = ((PlayerColor)idx + 1);
+			setPlayerInfoForControlID (cID, pID, AIMode.On, pClr);
 		}
     }
 
