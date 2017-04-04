@@ -36,16 +36,22 @@ public class CannonControl : MonoBehaviour
 
 	private float desired_yaw;
 	private float desired_pitch;
-	private int desired_shots_fired;
-	private int shots_fired;
+	//private int desired_shots_fired;
+	//private int shots_fired;
 
 	private float paused_ai_start_time = 0.0f;
 
 	private GameObject predictiveLine;
 
-    void checkIfAIControlled() {
-		if (InputManager.S.getPlayerInfoWithControlID(cID).aiMode == InputManager.AIMode.On)
+    void checkIfAIControlled() {			
+		if (InputManager.S.getPlayerInfoWithControlID (cID).aiMode == InputManager.AIMode.On) {
+			if (!onAI) { // This cannon was just being controlled by a player, we must reset all AI vars.
+				desired_yaw = current_yaw;
+				desired_pitch = current_pitch;
+
+			}
 			onAI = true;
+		}
 		else
 			onAI = false;
     }
@@ -60,8 +66,8 @@ public class CannonControl : MonoBehaviour
 
 		desired_yaw = current_yaw;
 		desired_pitch = current_pitch;
-		shots_fired = 0;
-		desired_shots_fired = 0;
+		//shots_fired = 0;
+		//desired_shots_fired = 0;
 
 		predictiveLine = MonoBehaviour.Instantiate (Resources.Load ("PredictiveLine") as GameObject,
 			_barrel.transform.TransformPoint (new Vector3 (0, 1, 0)), Quaternion.identity);
@@ -71,6 +77,7 @@ public class CannonControl : MonoBehaviour
 	void Update () {
 		checkIfAIControlled ();
 		if (onAI) {
+			Debug.Log (cID.ToString() + ", " + current_pitch.ToString () + ", " + current_yaw.ToString () + ", " + desired_pitch.ToString () + ", " +  desired_yaw.ToString ());
 			//Firing
 			int fireChance = Random.Range(0,40);
 			if (fireChance == 0) {
@@ -79,7 +86,7 @@ public class CannonControl : MonoBehaviour
 
 			//Cannon Moving
 			//Pitch
-			if (Mathf.Approximately (current_pitch, desired_pitch)) {
+			if (approximatelyWithDelta (current_pitch, desired_pitch, 1f)) {
 				desired_pitch = Random.Range ((int) minPitch, (int) maxPitch);
 			} else {
 				if (desired_pitch > current_pitch) {
@@ -89,7 +96,7 @@ public class CannonControl : MonoBehaviour
 				}
 			}
 			//Yaw
-			if (Mathf.Approximately(current_yaw, desired_yaw)) {
+			if (approximatelyWithDelta(current_yaw, desired_yaw, 1f)) {
 				
 				if (PlayerControl.S.GetComponent<Rigidbody> ().position.x > transform.position.x) {
 					desired_yaw = Random.Range (-10, (int)maxYaw);
@@ -265,5 +272,10 @@ public class CannonControl : MonoBehaviour
 			trueSetMaterial (currMaterial);
 		}
 		trueSetMaterial (nextMaterial);
+	}
+
+	private bool approximatelyWithDelta(float a, float b, float delta)
+	{
+		return (Mathf.Abs(a - b) < delta);
 	}
 }
