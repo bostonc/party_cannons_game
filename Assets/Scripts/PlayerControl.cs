@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour {
 	private float moveCount = 0;
 
 	private bool beingReset = false;
+	private Vector3 resetPos;
 
 	public InputManager.ControlID cID;
 
@@ -143,12 +144,13 @@ public class PlayerControl : MonoBehaviour {
 		beingReset = true;
 
 	    rb.velocity = Vector3.zero;
-		//put runner back on map - WHY THE HELL DOESN'T THIS WORK?????????????
-		rb.transform.position = new Vector3(0f, 10f, 20f);
+		//put runner back on map, with randomization on the X-axis.
+		resetPos = new Vector3(Random.Range(-15.0f, 15.0f), 10f, 20f);
+		rb.transform.position = resetPos;
 	}
 
 	private void checkForResetCompletion() {
-		if((rb.transform.position - new Vector3(0f, 10f, 20f)).magnitude < 0.1f) 
+		if((rb.transform.position - resetPos).magnitude < 0.1f) 
 			beingReset = false;
 	}
 }

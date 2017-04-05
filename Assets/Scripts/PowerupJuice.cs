@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerupJuice : MonoBehaviour {
     public bool move = true; //check whether or not u want there to be up/down juice
     public Vector3 moveVector = Vector3.up;
-    public float moveRange = 1.0f; //decides how far range of movement is
+    public float moveRange = 0.5f; //decides how far range of movement is
     public float moveSpeed = 0.5f; //decide on how fast to move the object
 
     private PowerupJuice movingObject;
@@ -21,7 +21,7 @@ public class PowerupJuice : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (move) {
-            movingObject.transform.position = startPosition + moveVector * (moveRange * Mathf.Sin(Time.timeSinceLevelLoad * moveSpeed));
+			movingObject.transform.position = transform.parent.position + 2*Vector3.up + moveVector * (moveRange * Mathf.Sin(Time.timeSinceLevelLoad * moveSpeed));
         }
 	}
 }

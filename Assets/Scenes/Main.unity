@@ -2333,7 +2333,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300080, guid: 1b335ba614bab3d4d88e20d64c5aa8a9, type: 3}
+  m_Sprite: {fileID: 21300056, guid: 1b335ba614bab3d4d88e20d64c5aa8a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2604,7 +2604,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runner: {fileID: 1709186572}
   shieldTime: 15
-  points: 10000
+  points: 10
+  probOfPowerupSpawning: 0.5
+  powerups:
+  - go: {fileID: 1612870431621736, guid: 4c6814898ec01b54fa1bb045bcd1779c, type: 2}
+    prob: 0.05
+    isRunnerPowerUp: 0
+  - go: {fileID: 1747225649013390, guid: 6daf337fe7c05de47a72d6237bb6b84c, type: 2}
+    prob: 0.05
+    isRunnerPowerUp: 0
+  - go: {fileID: 1665353516260758, guid: 34ce091909ccbb34b84b684baf86bc3d, type: 2}
+    prob: 0.3
+    isRunnerPowerUp: 0
+  - go: {fileID: 1283743854681014, guid: 6d829b21655feaa4e8bcf3b902300aaa, type: 2}
+    prob: 0.3
+    isRunnerPowerUp: 0
+  - go: {fileID: 1357924343398966, guid: fa395e3cd220d5647870b7b910d9070f, type: 2}
+    prob: 0.1
+    isRunnerPowerUp: 0
+  - go: {fileID: 1415652940810274, guid: 76a4c1a463d99614bab10a2823b8d8d7, type: 2}
+    prob: 0.2
+    isRunnerPowerUp: 0
 --- !u!96 &1709186581
 TrailRenderer:
   serializedVersion: 2
@@ -3141,7 +3161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300066, guid: 1b335ba614bab3d4d88e20d64c5aa8a9, type: 3}
+  m_Sprite: {fileID: 21300090, guid: 1b335ba614bab3d4d88e20d64c5aa8a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

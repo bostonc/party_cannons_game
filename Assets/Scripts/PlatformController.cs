@@ -50,9 +50,19 @@ public class PlatformController : MonoBehaviour {
 		}
 
 		if (direction == 1 && transform.position.x < -50) {
+			// Make sure to remove runner if it is a child of this platform
+			// (Currently, players can stay on the platform and leave the screen, getting destoryed!)
+			Transform t = this.gameObject.transform.FindChild ("Runner");
+			if (t != null) { 
+				t.parent = null;
+			} 
 			Destroy (gameObject);
 		}
 		if (direction == 2 && transform.position.x > 50) {
+			Transform t = this.gameObject.transform.FindChild ("Runner");
+			if (t != null) { 
+				t.parent = null;
+			}
 			Destroy (gameObject);
 		}
 

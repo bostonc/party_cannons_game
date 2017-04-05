@@ -77,7 +77,7 @@ public class CannonControl : MonoBehaviour
 	void Update () {
 		checkIfAIControlled ();
 		if (onAI) {
-			Debug.Log (cID.ToString() + ", " + current_pitch.ToString () + ", " + current_yaw.ToString () + ", " + desired_pitch.ToString () + ", " +  desired_yaw.ToString ());
+			//Debug.Log (cID.ToString() + ", " + current_pitch.ToString () + ", " + current_yaw.ToString () + ", " + desired_pitch.ToString () + ", " +  desired_yaw.ToString ());
 			//Firing
 			int fireChance = Random.Range(0,40);
 			if (fireChance == 0) {
