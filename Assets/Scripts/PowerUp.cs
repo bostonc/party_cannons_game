@@ -19,12 +19,7 @@ public class PowerUp : MonoBehaviour {
 
     PlayerControl currentRunner;
 
-    float startTime;
-    public float shieldTime;
-
-    bool shieldsUp;
-
-    public int points;
+	Dictionary <string, bool> powerUpState;
 
 	// Probability of a powerup spawning (P(Power Spawning))
 	public float probOfPowerupSpawning; 
@@ -32,55 +27,82 @@ public class PowerUp : MonoBehaviour {
 
 	public static PowerUp S; 
 
+	float defaultRunnerSpeed;
+	float defaultJumpPower;
+
     void Start() {
-        shieldsUp = false;
         currentRunner = runner.GetComponent<PlayerControl>();
+		defaultRunnerSpeed = currentRunner.speed;
+		defaultJumpPower = currentRunner.jumpPower;
+		powerUpState = new Dictionary<string, bool> ();
+		foreach(PowerupObjectWithData pod in powerups) {
+			powerUpState.Add (pod.go.tag, false);
+		}
 		if (S == null) {
 			S = this;
 		}
     }
 
     void Update() {
-        if (shieldsUp) {
-            if (Time.time - startTime >= shieldTime) {
-                //remove "shield"
-                runner.layer = LayerMask.NameToLayer("Default");
-            }
-        }
-    }
+		runner.layer = powerUpState ["Shield"] ? LayerMask.NameToLayer ("Invincible") :  LayerMask.NameToLayer("Default");
+
+		if (powerUpState ["SlowDown"]) {
+			currentRunner.speed = defaultRunnerSpeed * 0.5f;
+		} else if (powerUpState ["SpeedUp"]) {
+			currentRunner.speed = defaultRunnerSpeed * 2.0f;
+		} else {
+			currentRunner.speed = defaultRunnerSpeed;
+		}
+
+		if (powerUpState ["JumpHigh"]) {
+			currentRunner.jumpPower = defaultJumpPower * 2;
+		} else {
+			currentRunner.jumpPower = defaultJumpPower;
+		}
+	}
 
     void OnCollisionEnter(Collision coll) {
-        if (coll.gameObject.tag == "SlowDown") {
+		// Note: The way SlowDown/SpeedUp work is that they are not accumulative. Getting one, negates the other's effects
+		// (That is, if SlowDown was collected recently and is still active, collecting SpeedUp removes the SlowDown 
+		// effect and vice versa.) All other powerups are in a sense accumulative (except Points of course.)
+		if (coll.gameObject.tag == "SlowDown") {
+			AudioDriver.S.play (SoundType.powerup);
+			powerUpState ["SpeedUp"] = false; // Negate SpeedUp regardless of whether it is active.
+			// Give twenty points for deciding to move slower. Isn't this a disadvantageous powerup otherwise?
+			Scorekeeper.S.Score (InputManager.S.getPlayerInfoWithControlID (InputManager.ControlID.Runner).playerID, 20);
+			Scorekeeper.S.spawnPopup ("Slow Down, +20!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup (coll.gameObject.tag));
+			Destroy (coll.gameObject);     
+		} 
+
+		else if (coll.gameObject.tag == "SpeedUp") {
+			AudioDriver.S.play (SoundType.powerup);
+			powerUpState ["SlowDown"] = false; // Negate SlowDown regardless of whether it is active.
+			Scorekeeper.S.spawnPopup ("Speed Up!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup (coll.gameObject.tag));
+			Destroy (coll.gameObject);
+		} 
+
+		else if (coll.gameObject.tag == "JumpHigh") {
+			AudioDriver.S.play (SoundType.powerup);
+			Scorekeeper.S.spawnPopup ("Jump Higher!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup (coll.gameObject.tag));
+			Destroy (coll.gameObject);
+		} 
+
+		else if (coll.gameObject.tag == "Points") {
+			AudioDriver.S.play (SoundType.powerup);
+			Scorekeeper.S.Score (InputManager.S.getPlayerInfoWithControlID (InputManager.ControlID.Runner).playerID, 50);
+			Scorekeeper.S.spawnPopup ("+50!", gameObject.transform.position);
+			Destroy (coll.gameObject);
+			// No need to do call EnablePowerup as coroutine (Points has no side effects on player variables.)
+        } 
+
+		else if (coll.gameObject.tag == "Shield") {
             AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("+50!", gameObject.transform.position);
-            Destroy(coll.gameObject);            
-            currentRunner.speed *= 0.5f;
-        }
-        else if (coll.gameObject.tag == "SpeedUp") {
-            AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("+50!", gameObject.transform.position);
+            Scorekeeper.S.spawnPopup("Shields Up!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup(coll.gameObject.tag));
             Destroy(coll.gameObject);
-            currentRunner.speed *= 2;
-        }
-        else if (coll.gameObject.tag == "JumpHigh") {
-            AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("+50!", gameObject.transform.position);
-            Destroy(coll.gameObject);
-            currentRunner.jumpPower *= 2;
-        }
-        else if (coll.gameObject.tag == "Points") {
-            AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("+50!", gameObject.transform.position);
-            Destroy(coll.gameObject);
-            Scorekeeper.S.Score(InputManager.S.getPlayerInfoWithControlID(InputManager.ControlID.Runner).playerID, points);
-        }
-        else if (coll.gameObject.tag == "Shield") {
-            AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("+50!", gameObject.transform.position);
-            Destroy(coll.gameObject);
-            runner.layer = LayerMask.NameToLayer("Invincible");
-            startTime = Time.time;
-            shieldsUp = true;
         }
     }
 
@@ -102,6 +124,22 @@ public class PowerUp : MonoBehaviour {
 				}
 			}
 			return null;
+		}
+	}
+
+	// Default 2 seconds for powerups.
+	IEnumerator EnablePowerup(string powerup, float time = 5.0f) {
+		Debug.Log (powerup);
+		powerUpState [powerup] = true;
+
+		yield return new WaitForSeconds (time);
+
+		powerUpState [powerup] = false;
+	}
+
+	public void resetPowerUpStates() {
+		foreach (string key in powerUpState.Keys.ToList()){
+			powerUpState[key] = false;
 		}
 	}
 }

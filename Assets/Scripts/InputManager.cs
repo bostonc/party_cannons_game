@@ -442,6 +442,7 @@ public class InputManager : MonoBehaviour
 		}
 
 		setPlayerInfoForControlID (desiredCID, PlayerID.Player1, AIMode.Off, ((PlayerColor) 1));
+		PowerUp.S.resetPowerUpStates (); // Remove all powerups.
 	}
 
 	public void swapPlayer(ControlID cID)//, int otherController)
@@ -473,6 +474,7 @@ public class InputManager : MonoBehaviour
 //			debugPlayerNum = cannonThatFired;
 //		else
 //			debugPlayerNum = 4;
+		PowerUp.S.resetPowerUpStates (); // Remove all powerups.
     }
 
     public void gameStop()
