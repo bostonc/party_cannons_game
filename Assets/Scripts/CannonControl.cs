@@ -75,7 +75,11 @@ public class CannonControl : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
+		if (InputManager.S.paused)
+			return;
+
 		checkIfAIControlled ();
+		
 		if (onAI) {
 			//Debug.Log (cID.ToString() + ", " + current_pitch.ToString () + ", " + current_yaw.ToString () + ", " + desired_pitch.ToString () + ", " +  desired_yaw.ToString ());
 			//Firing

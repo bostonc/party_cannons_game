@@ -333,6 +333,28 @@ public class InputManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		//pause
+		if (Input.GetButtonDown("Pause_D") ||
+			Input.GetButtonDown("Pause_J") || 
+			((Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer) && 
+				Input.GetButtonDown("Pause_J_OSX"))) 	
+		{
+			if (paused)
+			{
+				Time.timeScale = 1;
+				paused = false;
+				//pausedText.enabled = false;
+				pausedMenu.SetActive(false);
+			}
+			else
+			{
+				Time.timeScale = 0;
+				paused = true;
+				//pausedText.enabled = true;
+				pausedMenu.SetActive(true);
+			}
+		}
+		
 		if (Scorekeeper.S.gameOver)
 			return;
 
@@ -395,31 +417,6 @@ public class InputManager : MonoBehaviour
 				debugSwap (ControlID.Runner);
 			}
 		}
-
-        //pause
-		if (Input.GetButtonDown("Pause_D") ||
-			Input.GetButtonDown("Pause_J") || 
-			((Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer) && 
-			  Input.GetButtonDown("Pause_J_OSX"))) 	
-        {
-            if (paused)
-            {
-                Time.timeScale = 1;
-                paused = false;
-                //pausedText.enabled = false;
-                pausedMenu.SetActive(false);
-            }
-            else
-            {
-                Time.timeScale = 0;
-                paused = true;
-                //pausedText.enabled = true;
-                pausedMenu.SetActive(true);
-            }
-        }
-
-
-
     }//end update
 
 	public void debugSwap(ControlID desiredCID) {
