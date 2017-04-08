@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 //at end of game, need to get high score name from player
 
@@ -125,24 +126,54 @@ public class Scorekeeper : MonoBehaviour
 
     //player is 1-4
 	public void Score(InputManager.PlayerID pID, int amt)
-    {
+	{
+		Dictionary<InputManager.PlayerID, int> scores = new Dictionary<InputManager.PlayerID, int>{
+			{InputManager.PlayerID.Player1, p1Score}, 
+			{InputManager.PlayerID.Player2, p2Score}, 
+			{InputManager.PlayerID.Player3, p3Score}, 
+			{InputManager.PlayerID.Player4, p4Score}
+		};
+
+		KeyValuePair<InputManager.PlayerID, int> playerWithHighestScoreInfoAbsolute = scores.OrderByDescending (x => x.Value).First();
+
+		scores.Remove (pID);
+
+		KeyValuePair<InputManager.PlayerID, int> playerWithHighestScoreInfo = scores.OrderByDescending (x => x.Value).First();
+
+
         switch(pID)
         {
 			case InputManager.PlayerID.Player1:
-                p1Score += amt;
+				p1Score += amt;
                 p1ScoreText.text = "P1: " + p1Score;
+				if (p1Score > playerWithHighestScoreInfo.Value && 
+					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player1) {
+					Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", new Vector3 (0, 0, 0));
+				}
                 break;
 			case InputManager.PlayerID.Player2:
                 p2Score += amt;
                 p2ScoreText.text = "P2: " + p2Score;
+				if (p2Score > playerWithHighestScoreInfo.Value && 
+					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player2) {
+					Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", new Vector3 (0, 0, 0));
+				}
                 break;
 			case InputManager.PlayerID.Player3:
                 p3Score += amt;
                 p3ScoreText.text = "P3: " + p3Score;
+				if (p3Score > playerWithHighestScoreInfo.Value && 
+					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player3) {
+					Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", new Vector3 (0, 0, 0));
+				}
                 break;
 			case InputManager.PlayerID.Player4:
                 p4Score += amt;
                 p4ScoreText.text = "P4: " + p4Score;
+				if (p4Score > playerWithHighestScoreInfo.Value && 
+					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player4) {
+					Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", new Vector3 (0, 0, 0));
+				}
                 break;
             default:
                 // Debug.Assert(false);
