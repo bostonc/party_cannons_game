@@ -110,133 +110,136 @@ public class RunnerHealth : MonoBehaviour {
         }
 
 		if(runnerHealth <= 0 && collision.gameObject.name.Contains("CannonBall")) {
+			swapHelper(collision.gameObject);
 
-			inSwitch = true;
-
-			// Destroy all cannonballs when runner is killed
-			var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
-			for (var i = 0; i < cannonBalls.Length; i++) {
-				Destroy (cannonBalls [i]);
-			}
-
-			Debug.Log ("OnCollisionEnter" + Time.time);
-            // Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
-            // swaps the player controlling the cannon
-            InputManager.ControlID cID = collision.gameObject.GetComponent<CannonBallMetadata>().controllerThatFired();
-            InputManager.PlayerID newRunnerID = InputManager.S.getPlayerIDWithControlID(cID);
-            InputManager.PlayerID oldRunnerID = InputManager.S.getCurrentRunnerID();
-
-
-            Debug.Log("NEW" + newRunnerID);
-            Debug.Log("OLD" + oldRunnerID);
-
-
-            //swaps the material of the player - CHANGED TO SWAP SPRITE
-            //Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
-            //setMaterial(collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ());
-            //collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
-
-            //change color of cannon
-            switch(oldRunnerID) { //old runner becomes new cannon
-                case InputManager.PlayerID.Player1:
-                    collision.gameObject.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
-                    break;
-                case InputManager.PlayerID.Player2:
-                    collision.gameObject.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
-                    break;
-                case InputManager.PlayerID.Player3:
-                    collision.gameObject.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
-                    break;
-                case InputManager.PlayerID.Player4:
-                    collision.gameObject.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
-                    break;
-            }
-
-            switch (newRunnerID) { //old runner becomes new cannon
-                case InputManager.PlayerID.Player1:
-                    RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.RED;
-                    break;
-                case InputManager.PlayerID.Player2:
-                    RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.BLUE;
-                    break;
-                case InputManager.PlayerID.Player3:
-                    RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.GREEN;
-                    break;
-                case InputManager.PlayerID.Player4:
-                    RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.YELLOW;
-                    break;
-            }
-
-			Debug.Log (cID);
-			Debug.Log (oldRunnerID);
-			Debug.Log (newRunnerID);
-
-			switch (cID) {
-                case InputManager.ControlID.Cannon1:
-                    switch (oldRunnerID) { //old runner becomes new cannon
-					case InputManager.PlayerID.Player1:
-                            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p1;
-                            break;
-                        case InputManager.PlayerID.Player2:
-                            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p2;
-                            break;
-                        case InputManager.PlayerID.Player3:
-                            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p3;
-                            break;
-                        case InputManager.PlayerID.Player4:
-                            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p4;
-                            break;
-                    }
-                    break;
-                case InputManager.ControlID.Cannon2:
-                    switch (oldRunnerID) { //old runner becomes new cannon
-                        case InputManager.PlayerID.Player1:
-                            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p1;
-                            break;
-                        case InputManager.PlayerID.Player2:
-                            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p2;
-                            break;
-                        case InputManager.PlayerID.Player3:
-                            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p3;
-                            break;
-                        case InputManager.PlayerID.Player4:
-                            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p4;
-                            break;
-                    }
-                    break;
-                case InputManager.ControlID.Cannon3:
-                    switch (oldRunnerID) { //old runner becomes new cannon
-                        case InputManager.PlayerID.Player1:
-                            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p1_l;
-                            break;
-                        case InputManager.PlayerID.Player2:
-                            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p2_l;
-                            break;
-                        case InputManager.PlayerID.Player3:
-                            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p3_l;
-                            break;
-                        case InputManager.PlayerID.Player4:
-                            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p4_l;
-                            break;
-                    }
-                    break;
-            }
-
-            //change sprite related to cannon
-            //setSprite()
-
-            //change cat
-            //change cat depending on new playerid
-            setSprite(RunnerAnimation.R.getSprite(newRunnerID));
-
-
-            InputManager.S.swapPlayer(cID);
-            timeLastSwap = Time.time;
-
-        }
-
-		runnerHealth = 1; 
+			runnerHealth = 1; 
+		}
     }
+
+	private void swapHelper(GameObject CannonballGO) {
+
+		inSwitch = true;
+
+		// Destroy all cannonballs when runner is killed
+		var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
+		for (var i = 0; i < cannonBalls.Length; i++) {
+			Destroy (cannonBalls [i]);
+		}
+
+		Debug.Log ("OnCollisionEnter" + Time.time);
+		// Debug.Log (InputManager.S.getDebugPlayerNum () + " " + PlayerControl.S.controller);
+		// swaps the player controlling the cannon
+		InputManager.ControlID cID = CannonballGO.GetComponent<CannonBallMetadata>().controllerThatFired();
+		InputManager.PlayerID newRunnerID = InputManager.S.getPlayerIDWithControlID(cID);
+		InputManager.PlayerID oldRunnerID = InputManager.S.getCurrentRunnerID();
+
+
+		//Debug.Log("NEW" + newRunnerID);
+		//Debug.Log("OLD" + oldRunnerID);
+
+
+		//swaps the material of the player - CHANGED TO SWAP SPRITE
+		//Material runnerMaterial = new Material (runner.GetComponent<SpriteRenderer> ().material);
+		//setMaterial(collision.gameObject.GetComponent<CannonBallMetadata> ().getCannonControlMaterial ());
+		//collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
+
+		//change color of cannon
+		switch(oldRunnerID) { //old runner becomes new cannon
+		case InputManager.PlayerID.Player1:
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+			break;
+		case InputManager.PlayerID.Player2:
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+			break;
+		case InputManager.PlayerID.Player3:
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+			break;
+		case InputManager.PlayerID.Player4:
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+			break;
+		}
+
+		switch (newRunnerID) { //old runner becomes new cannon
+		case InputManager.PlayerID.Player1:
+			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.RED;
+			break;
+		case InputManager.PlayerID.Player2:
+			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.BLUE;
+			break;
+		case InputManager.PlayerID.Player3:
+			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.GREEN;
+			break;
+		case InputManager.PlayerID.Player4:
+			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.YELLOW;
+			break;
+		}
+
+		//Debug.Log (cID);
+		//Debug.Log (oldRunnerID);
+		//Debug.Log (newRunnerID);
+
+		switch (cID) {
+		case InputManager.ControlID.Cannon1:
+			switch (oldRunnerID) { //old runner becomes new cannon
+			case InputManager.PlayerID.Player1:
+				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p1;
+				break;
+			case InputManager.PlayerID.Player2:
+				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p2;
+				break;
+			case InputManager.PlayerID.Player3:
+				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p3;
+				break;
+			case InputManager.PlayerID.Player4:
+				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p4;
+				break;
+			}
+			break;
+		case InputManager.ControlID.Cannon2:
+			switch (oldRunnerID) { //old runner becomes new cannon
+			case InputManager.PlayerID.Player1:
+				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p1;
+				break;
+			case InputManager.PlayerID.Player2:
+				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p2;
+				break;
+			case InputManager.PlayerID.Player3:
+				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p3;
+				break;
+			case InputManager.PlayerID.Player4:
+				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p4;
+				break;
+			}
+			break;
+		case InputManager.ControlID.Cannon3:
+			switch (oldRunnerID) { //old runner becomes new cannon
+			case InputManager.PlayerID.Player1:
+				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p1_l;
+				break;
+			case InputManager.PlayerID.Player2:
+				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p2_l;
+				break;
+			case InputManager.PlayerID.Player3:
+				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p3_l;
+				break;
+			case InputManager.PlayerID.Player4:
+				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p4_l;
+				break;
+			}
+			break;
+		}
+
+		//change sprite related to cannon
+		//setSprite()
+
+		//change cat
+		//change cat depending on new playerid
+		setSprite(RunnerAnimation.R.getSprite(newRunnerID));
+
+
+		InputManager.S.swapPlayer(cID);
+		timeLastSwap = Time.time;
+	}
 
 	private void setMaterial(Material mat) {
 		StartCoroutine(Blink(1.0f, runner.GetComponent<SpriteRenderer>().material, mat));
@@ -275,4 +278,8 @@ public class RunnerHealth : MonoBehaviour {
         }
         trueSetSprite(nextSprite);
     }
+
+	void OnParticleCollision(GameObject other) {
+		swapHelper (other.transform.parent.gameObject);
+	}
 }

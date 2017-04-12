@@ -82,6 +82,7 @@ public class RunnerFallSwap : MonoBehaviour
 			// specified, and the player with the lowest score will now take on the runner role.)
 			//InputManager.S.swapPlayer(InputManager.S.getPlayerInfoWithPlayerID(playerWithLowestScore).controlID);
 
+			runner.GetComponent<TrailRenderer> ().Clear ();
             //runner.GetComponent<PlayerControl>().enabled = false;
 			runner.GetComponent<PlayerControl>().runReset();
             

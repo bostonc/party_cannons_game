@@ -148,7 +148,7 @@ public class Scorekeeper : MonoBehaviour
                 p1ScoreText.text = "P1: " + p1Score;
 				if (p1Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player1) {
-					Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", new Vector3 (0, 0, 0));
+					Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", runner.transform.position);
 				}
                 break;
 			case InputManager.PlayerID.Player2:
@@ -156,7 +156,7 @@ public class Scorekeeper : MonoBehaviour
                 p2ScoreText.text = "P2: " + p2Score;
 				if (p2Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player2) {
-					Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", new Vector3 (0, 0, 0));
+					Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", runner.transform.position);
 				}
                 break;
 			case InputManager.PlayerID.Player3:
@@ -164,7 +164,7 @@ public class Scorekeeper : MonoBehaviour
                 p3ScoreText.text = "P3: " + p3Score;
 				if (p3Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player3) {
-					Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", new Vector3 (0, 0, 0));
+					Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", runner.transform.position);
 				}
                 break;
 			case InputManager.PlayerID.Player4:
@@ -172,7 +172,7 @@ public class Scorekeeper : MonoBehaviour
                 p4ScoreText.text = "P4: " + p4Score;
 				if (p4Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player4) {
-					Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", new Vector3 (0, 0, 0));
+					Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", runner.transform.position);
 				}
                 break;
             default:
