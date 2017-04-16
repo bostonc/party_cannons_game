@@ -65,9 +65,9 @@ public class PlayerControl : MonoBehaviour {
 				if (currentX == desiredX || moveCount == 0) {
 					moveCount = 50;
 					if (direction == 0) {
-						desiredX = currentX + 5;
+						desiredX = Mathf.Clamp (currentX + 5, -19, 19);
 					} else {
-						desiredX = currentX - 5;
+						desiredX = Mathf.Clamp (currentX - 5, -19, 19);
 					}
 				} else {
 					moveCount = moveCount - 1;
@@ -88,7 +88,8 @@ public class PlayerControl : MonoBehaviour {
 	public void move(float f)
 	{
 		if (!beingReset) {
-			transform.Translate (Time.deltaTime * speed * f, 0, 0);
+			if(rb.position.x + Time.deltaTime * speed * f < 19.0f && rb.position.x + Time.deltaTime * speed * f > -19.0f)
+				transform.Translate (Time.deltaTime * speed * f, 0, 0);
 		}
 	}
 

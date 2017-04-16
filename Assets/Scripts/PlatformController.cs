@@ -49,20 +49,24 @@ public class PlatformController : MonoBehaviour {
 			direction = 2;
 		}
 
-		if (direction == 1 && transform.position.x < -50) {
+		if (transform.position.x < -20) {
 			// Make sure to remove runner if it is a child of this platform
 			// (Currently, players can stay on the platform and leave the screen, getting destoryed!)
 			Transform t = this.gameObject.transform.FindChild ("Runner");
 			if (t != null) { 
 				t.parent = null;
 			} 
-			Destroy (gameObject);
-		}
-		if (direction == 2 && transform.position.x > 50) {
+		} else if (transform.position.x > 20) {
 			Transform t = this.gameObject.transform.FindChild ("Runner");
 			if (t != null) { 
 				t.parent = null;
-			}
+			} 
+		}
+
+		if (direction == 1 && transform.position.x < -50) {
+			Destroy (gameObject);
+		}
+		if (direction == 2 && transform.position.x > 50) {
 			Destroy (gameObject);
 		}
 
@@ -204,7 +208,7 @@ public class PlatformController : MonoBehaviour {
     }*/
 
 	public void OnCollisionEnter(Collision coll) {
-		if (coll.gameObject.name == "Runner") {
+	if (coll.gameObject.name == "Runner") {
 			prevParentGameObjOfRunner = coll.gameObject.transform.parent;
 			coll.gameObject.transform.parent = this.gameObject.transform; 
 		}
