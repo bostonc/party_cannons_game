@@ -90,6 +90,13 @@ public class RunnerHealth : MonoBehaviour {
     // when the runner collides with something
     void OnCollisionEnter(Collision collision) {
 
+		if (collision.gameObject.transform.parent != null && 
+			collision.gameObject.transform.parent.name.Contains ("Map")) {
+			if(runner.transform.parent != null)
+				runner.transform.parent = null; // platform!
+			runner.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		}
+
 		if (inSwitch && collision.gameObject.name.Contains("CannonBall")) {
 			Destroy (collision.gameObject);
 			return;
