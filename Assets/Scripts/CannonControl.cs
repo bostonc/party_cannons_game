@@ -177,7 +177,7 @@ public class CannonControl : MonoBehaviour
 		float timeDelta = 1.0f / initialVelocity.magnitude; // for example
 
 		LineRenderer lineRenderer = go.GetComponent<LineRenderer>();
-		lineRenderer.numPositions = numSteps;
+		lineRenderer.positionCount = numSteps;
 
 		lineRenderer.material.color = getMaterial ().color;
 
