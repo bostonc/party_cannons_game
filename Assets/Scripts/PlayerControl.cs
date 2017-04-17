@@ -115,20 +115,19 @@ public class PlayerControl : MonoBehaviour {
 				falling = false;
 			}
 
-			if ((zerosFromInput > 3 || timeHeld > maxJump) && falling == false) {
+			if ((zerosFromInput > 3 || timeHeld > maxJump) && rb.velocity.y > 0) {
 				
 				//start falling
 				falling = true;
-				timeHeld = 0.0f;
-				rb.velocity = new Vector3 (rb.velocity.x, -(jumpPower/2), 0);
+				rb.velocity = new Vector3 (rb.velocity.x, -rb.velocity.y, 0);
 
 			} else {
 
 				//keep going higher
 				if (f == 1 && falling == false) {
 
-					timeHeld += Time.deltaTime;
-					rb.velocity = new Vector3 (rb.velocity.x, jumpPower * (maxJump/(maxJump + timeHeld)), 0);
+					falling = true;
+					rb.velocity = new Vector3 (rb.velocity.x, jumpPower, 0);
 					if (gameObject.transform.parent != null)
 						gameObject.transform.parent = null;
 				}
