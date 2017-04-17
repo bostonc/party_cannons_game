@@ -61,7 +61,7 @@ public class PlatformSpawner : MonoBehaviour {
 				GameObject powerupGOref = PowerUp.S.getPowerUpInstanceForSpawning ();
 				if (powerupGOref != null) {
 					GameObject powerupGO = MonoBehaviour.Instantiate (powerupGOref, startPos + 2*Vector3.up, Quaternion.identity, go.transform);
-					powerupGO.transform.localScale = new Vector2 (0.3f, 0.75f);
+					powerupGO.transform.localScale = new Vector2 (0.15f, 0.8f);
 					// Note: The powerups are a child of the platforms! 
 				}
 				platforms.Add (go);

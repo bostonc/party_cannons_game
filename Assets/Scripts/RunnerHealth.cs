@@ -144,6 +144,9 @@ public class RunnerHealth : MonoBehaviour {
 		InputManager.PlayerID newRunnerID = InputManager.S.getPlayerIDWithControlID(cID);
 		InputManager.PlayerID oldRunnerID = InputManager.S.getCurrentRunnerID();
 
+        InputManager.PlayerColor newColor = InputManager.S.getPlayerColorWithPlayerID(newRunnerID);
+        InputManager.PlayerColor oldColor = InputManager.S.getPlayerColorWithPlayerID(oldRunnerID);
+
 
 		//Debug.Log("NEW" + newRunnerID);
 		//Debug.Log("OLD" + oldRunnerID);
@@ -155,22 +158,40 @@ public class RunnerHealth : MonoBehaviour {
 		//collision.gameObject.GetComponent<CannonBallMetadata> ().setCannonControlMaterial (runnerMaterial);
 
 		//change color of cannon
+        /*
 		switch(oldRunnerID) { //old runner becomes new cannon
 		case InputManager.PlayerID.Player1:
-			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material); //r
 			break;
 		case InputManager.PlayerID.Player2:
-			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material); //b
 			break;
 		case InputManager.PlayerID.Player3:
-			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material); //g
 			break;
 		case InputManager.PlayerID.Player4:
-			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+			CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material); //y
 			break;
-		}
+		}*/
 
-		switch (newRunnerID) { //old runner becomes new cannon
+        //change color of cannon
+        switch (oldColor)
+        { //old runner becomes new cannon
+            case InputManager.PlayerColor.Red:
+                CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material); //r
+                break;
+            case InputManager.PlayerColor.Blue:
+                CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material); //b
+                break;
+            case InputManager.PlayerColor.Green:
+                CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material); //g
+                break;
+            case InputManager.PlayerColor.Yellow:
+                CannonballGO.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material); //y
+                break;
+        }
+        /*
+        switch (newRunnerID) { //old runner becomes new cannon
 		case InputManager.PlayerID.Player1:
 			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.RED;
 			break;
@@ -183,14 +204,31 @@ public class RunnerHealth : MonoBehaviour {
 		case InputManager.PlayerID.Player4:
 			RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.YELLOW;
 			break;
-		}
+		}*/
 
-		//Debug.Log (cID);
-		//Debug.Log (oldRunnerID);
-		//Debug.Log (newRunnerID);
+        switch (newColor)
+        { //old runner becomes new cannon
+            case InputManager.PlayerColor.Red:
+                RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.RED;
+                break;
+            case InputManager.PlayerColor.Blue:
+                RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.BLUE;
+                break;
+            case InputManager.PlayerColor.Green:
+                RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.GREEN;
+                break;
+            case InputManager.PlayerColor.Yellow:
+                RunnerAnimation.R.currentColor = RunnerAnimation.ColorSprite.YELLOW;
+                break;
+        }
 
-		switch (cID) {
+        //Debug.Log (cID);
+        //Debug.Log (oldRunnerID);
+        //Debug.Log (newRunnerID);
+
+        switch (cID) {
 		case InputManager.ControlID.Cannon1:
+                /*
 			switch (oldRunnerID) { //old runner becomes new cannon
 			case InputManager.PlayerID.Player1:
 				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p1;
@@ -205,8 +243,27 @@ public class RunnerHealth : MonoBehaviour {
 				cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p4;
 				break;
 			}
-			break;
-		case InputManager.ControlID.Cannon2:
+			break;*/
+
+                switch (oldColor)
+                { //old runner becomes new cannon
+                    case InputManager.PlayerColor.Red:
+                        cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p1; //r
+                        break;
+                    case InputManager.PlayerColor.Blue:
+                        cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p2; //b
+                        break;
+                    case InputManager.PlayerColor.Green:
+                        cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p3; //g
+                        break;
+                    case InputManager.PlayerColor.Yellow:
+                        cannon1Sprite.GetComponent<SpriteRenderer>().sprite = p4; //y
+                        break;
+                }
+                break;
+
+            case InputManager.ControlID.Cannon2:
+                /*
 			switch (oldRunnerID) { //old runner becomes new cannon
 			case InputManager.PlayerID.Player1:
 				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p1;
@@ -221,8 +278,25 @@ public class RunnerHealth : MonoBehaviour {
 				cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p4;
 				break;
 			}
-			break;
-		case InputManager.ControlID.Cannon3:
+			break;*/
+                switch (oldColor)
+                { //old runner becomes new cannon
+                    case InputManager.PlayerColor.Red:
+                        cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p1;
+                        break;
+                    case InputManager.PlayerColor.Blue:
+                        cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p2;
+                        break;
+                    case InputManager.PlayerColor.Green:
+                        cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p3;
+                        break;
+                    case InputManager.PlayerColor.Yellow:
+                        cannon2Sprite.GetComponent<SpriteRenderer>().sprite = p4;
+                        break;
+                }
+                break;
+            case InputManager.ControlID.Cannon3:
+                /*
 			switch (oldRunnerID) { //old runner becomes new cannon
 			case InputManager.PlayerID.Player1:
 				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p1_l;
@@ -237,8 +311,24 @@ public class RunnerHealth : MonoBehaviour {
 				cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p4_l;
 				break;
 			}
-			break;
-		}
+			break;*/
+                switch (oldColor)
+                { //old runner becomes new cannon
+                    case InputManager.PlayerColor.Red:
+                        cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p1_l;
+                        break;
+                    case InputManager.PlayerColor.Blue:
+                        cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p2_l;
+                        break;
+                    case InputManager.PlayerColor.Green:
+                        cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p3_l;
+                        break;
+                    case InputManager.PlayerColor.Yellow:
+                        cannon3Sprite.GetComponent<SpriteRenderer>().sprite = p4_l;
+                        break;
+                }
+                break;
+        }
 
         //change sprite related to cannon
         //setSprite()

@@ -56,9 +56,9 @@ public class CannonAnimation : MonoBehaviour {
         {   
             if (Time.time - curr_time > 0.25f) {
                 curr_time = Time.time;
-                Debug.Log("SOMETHING IS BEING PRESSED");
-                Debug.Log(pclr);
-                Debug.Log(changeme == red[0]);
+                //Debug.Log("SOMETHING IS BEING PRESSED");
+                //Debug.Log(pclr);
+                //Debug.Log(changeme == red[0]);
                 //yield return new WaitForSeconds(1);
                 if (pclr == InputManager.PlayerColor.Red)
                 {
