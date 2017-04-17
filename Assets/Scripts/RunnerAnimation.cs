@@ -17,6 +17,8 @@ public class RunnerAnimation : MonoBehaviour {
     public Sprite[] yellow_left; //4
     public Sprite[] yellow_right;
 
+    float curr_time;
+
     public enum ColorSprite {
         RED, BLUE, GREEN, YELLOW
     };
@@ -58,6 +60,7 @@ public class RunnerAnimation : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        curr_time = Time.time;
         currentVelocity = Vector3.zero;
         currentRunner = InputManager.S.getCurrentRunnerID();
 
@@ -89,66 +92,74 @@ public class RunnerAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //direction of current movement
-        currentVelocity = R.transform.position - prevPosition;
-        currentVelocity = currentVelocity.normalized;
-        prevPosition = R.transform.position;
+        if (Time.time - curr_time > 0.2f)
+        {
+            curr_time = Time.time;
+            //direction of current movement
+            currentVelocity = R.transform.position - prevPosition;
+            currentVelocity = currentVelocity.normalized;
+            prevPosition = R.transform.position;
 
-        if (currentVelocity == Vector3.left) {
-            //change sprite
-            switch (currentColor) {
-                case ColorSprite.RED:
-                    if (R.GetComponent<SpriteRenderer>().sprite == red_left[0])
-                        R.GetComponent<SpriteRenderer>().sprite = red_left[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = red_left[0];
-                    break;
-                case ColorSprite.BLUE:
-                    if (R.GetComponent<SpriteRenderer>().sprite == blue_left[0])
-                        R.GetComponent<SpriteRenderer>().sprite = blue_left[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = blue_left[0];
-                    break;
-                case ColorSprite.GREEN:
-                    if (R.GetComponent<SpriteRenderer>().sprite == green_left[0])
-                        R.GetComponent<SpriteRenderer>().sprite = green_left[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = green_left[0];
-                    break;
-                case ColorSprite.YELLOW:
-                    if (R.GetComponent<SpriteRenderer>().sprite == yellow_left[0])
-                        R.GetComponent<SpriteRenderer>().sprite = yellow_left[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = yellow_left[0];
-                    break;
+            if (currentVelocity == Vector3.left)
+            {
+                //change sprite
+                switch (currentColor)
+                {
+                    case ColorSprite.RED:
+                        if (R.GetComponent<SpriteRenderer>().sprite == red_left[0])
+                            R.GetComponent<SpriteRenderer>().sprite = red_left[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = red_left[0];
+                        break;
+                    case ColorSprite.BLUE:
+                        if (R.GetComponent<SpriteRenderer>().sprite == blue_left[0])
+                            R.GetComponent<SpriteRenderer>().sprite = blue_left[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = blue_left[0];
+                        break;
+                    case ColorSprite.GREEN:
+                        if (R.GetComponent<SpriteRenderer>().sprite == green_left[0])
+                            R.GetComponent<SpriteRenderer>().sprite = green_left[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = green_left[0];
+                        break;
+                    case ColorSprite.YELLOW:
+                        if (R.GetComponent<SpriteRenderer>().sprite == yellow_left[0])
+                            R.GetComponent<SpriteRenderer>().sprite = yellow_left[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = yellow_left[0];
+                        break;
+                }
             }
-        }
-        else if (currentVelocity == Vector3.right) {
-            switch (currentColor) {
-                case ColorSprite.RED:
-                    if (R.GetComponent<SpriteRenderer>().sprite == red_right[0])
-                        R.GetComponent<SpriteRenderer>().sprite = red_right[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = red_right[0];
-                    break;
-                case ColorSprite.BLUE:
-                    if (R.GetComponent<SpriteRenderer>().sprite == blue_right[0])
-                        R.GetComponent<SpriteRenderer>().sprite = blue_right[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = blue_right[0];
-                    break;
-                case ColorSprite.GREEN:
-                    if (R.GetComponent<SpriteRenderer>().sprite == green_right[0])
-                        R.GetComponent<SpriteRenderer>().sprite = green_right[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = green_right[0];
-                    break;
-                case ColorSprite.YELLOW:
-                    if (R.GetComponent<SpriteRenderer>().sprite == yellow_right[0])
-                        R.GetComponent<SpriteRenderer>().sprite = yellow_right[1];
-                    else
-                        R.GetComponent<SpriteRenderer>().sprite = yellow_right[0];
-                    break;
+            else if (currentVelocity == Vector3.right)
+            {
+                switch (currentColor)
+                {
+                    case ColorSprite.RED:
+                        if (R.GetComponent<SpriteRenderer>().sprite == red_right[0])
+                            R.GetComponent<SpriteRenderer>().sprite = red_right[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = red_right[0];
+                        break;
+                    case ColorSprite.BLUE:
+                        if (R.GetComponent<SpriteRenderer>().sprite == blue_right[0])
+                            R.GetComponent<SpriteRenderer>().sprite = blue_right[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = blue_right[0];
+                        break;
+                    case ColorSprite.GREEN:
+                        if (R.GetComponent<SpriteRenderer>().sprite == green_right[0])
+                            R.GetComponent<SpriteRenderer>().sprite = green_right[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = green_right[0];
+                        break;
+                    case ColorSprite.YELLOW:
+                        if (R.GetComponent<SpriteRenderer>().sprite == yellow_right[0])
+                            R.GetComponent<SpriteRenderer>().sprite = yellow_right[1];
+                        else
+                            R.GetComponent<SpriteRenderer>().sprite = yellow_right[0];
+                        break;
+                }
             }
         }
 	}

@@ -36,7 +36,9 @@ public class InputManager : MonoBehaviour
     public Material player3Material;
     public Material player4Material;
 
-    
+    public bool cid1ismoving;
+    public bool cid2ismoving;
+    public bool cid3ismoving;
 
     //public Text pausedText;
     public GameObject pausedMenu;
@@ -169,6 +171,10 @@ public class InputManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        cid1ismoving = false;
+        cid2ismoving = false;
+        cid3ismoving = false;
+
         cc1 = cannon1.GetComponent<CannonControl>();
         cc2 = cannon2.GetComponent<CannonControl>();
         cc3 = cannon3.GetComponent<CannonControl>();
@@ -304,6 +310,8 @@ public class InputManager : MonoBehaviour
 
 		switch(getPlayerInfoWithPlayerID(pID).controlID) {
 		case ControlID.Cannon1:
+            //cid1ismoving = true;
+
 			if (yaw != 0)
 				cc1.rotate (yaw);
 			if (pitch != 0)
@@ -312,6 +320,8 @@ public class InputManager : MonoBehaviour
 				cc1.fire (firing);
 			break;
 		case ControlID.Cannon2:
+            //cid2ismoving = true;
+
 			if (yaw != 0)
 				cc2.rotate (yaw);
 			if (pitch != 0)
@@ -320,6 +330,8 @@ public class InputManager : MonoBehaviour
 				cc2.fire (firing);
 			break;
 		case ControlID.Cannon3:
+            //cid3ismoving = true;
+
 			if (yaw != 0)
 				cc3.rotate (yaw);
 			if (pitch != 0)
@@ -335,8 +347,15 @@ public class InputManager : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-	void Update ()
+    void FixedUpdate()
+    {
+        cid1ismoving = false;
+        cid2ismoving = false;
+        cid3ismoving = false;
+    }
+
+    // Update is called once per frame
+    void Update ()
 	{
 		//pause
 		if (Input.GetButtonDown("Pause_D") ||
@@ -369,6 +388,12 @@ public class InputManager : MonoBehaviour
 		UpdateHelper (PlayerID.Player2);
 		UpdateHelper (PlayerID.Player3);
 		UpdateHelper (PlayerID.Player4);
+
+        /*
+        cid1ismoving = false;
+        cid2ismoving = false;
+        cid3ismoving = false;
+        */
 
 // Previous Stop Firing Code. TODO: Incorporate Above if Needed.
 //			if (Input.GetKeyDown (KeyCode.Joystick1Button5)) {
