@@ -150,28 +150,83 @@ public class Scorekeeper : MonoBehaviour
 
         switch(pID)
         {
-			case InputManager.PlayerID.Player1:
-				p1Score += amt;
-                p1ScoreText.text = "P1: " + p1Score;
-				if (p1Score > playerWithHighestScoreInfo.Value && 
-					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player1) {
-					Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", runner.transform.position);
+		case InputManager.PlayerID.Player1:
+			p1Score += amt;
+			p1ScoreText.text = "P1: " + p1Score;
+			if (p1Score > playerWithHighestScoreInfo.Value &&
+			     playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player1) {
+
+				GameObject go;
+				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player1).controlID) {
+				case InputManager.ControlID.Cannon1:
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon2:
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon3:
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Runner:
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", runner.transform.position); 
+					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
 				}
-                break;
-			case InputManager.PlayerID.Player2:
-                p2Score += amt;
-                p2ScoreText.text = "P2: " + p2Score;
-				if (p2Score > playerWithHighestScoreInfo.Value && 
-					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player2) {
-					Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", runner.transform.position);
+			}
+            break;
+		case InputManager.PlayerID.Player2:
+            p2Score += amt;
+            p2ScoreText.text = "P2: " + p2Score;
+			if (p2Score > playerWithHighestScoreInfo.Value && 
+				playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player2) {
+				GameObject go;
+				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player2).controlID) {
+				case InputManager.ControlID.Cannon1:
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon2:
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon3:
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Runner:
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", runner.transform.position); 
+					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
 				}
-                break;
+			}
+            break;
 			case InputManager.PlayerID.Player3:
                 p3Score += amt;
                 p3ScoreText.text = "P3: " + p3Score;
 				if (p3Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player3) {
-					Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", runner.transform.position);
+				GameObject go;
+				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player3).controlID) {
+				case InputManager.ControlID.Cannon1:
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon2:
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon3:
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Runner:
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", runner.transform.position); 
+					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				}
 				}
                 break;
 			case InputManager.PlayerID.Player4:
@@ -179,7 +234,25 @@ public class Scorekeeper : MonoBehaviour
                 p4ScoreText.text = "P4: " + p4Score;
 				if (p4Score > playerWithHighestScoreInfo.Value && 
 					playerWithHighestScoreInfoAbsolute.Key != InputManager.PlayerID.Player4) {
-					Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", runner.transform.position);
+				GameObject go;
+				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player4).controlID) {
+				case InputManager.ControlID.Cannon1:
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon2:
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Cannon3:
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				case InputManager.ControlID.Runner:
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", runner.transform.position); 
+					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					break;
+				}
 				}
                 break;
             default:

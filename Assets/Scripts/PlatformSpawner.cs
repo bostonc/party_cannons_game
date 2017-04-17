@@ -34,18 +34,26 @@ public class PlatformSpawner : MonoBehaviour {
             int platSelect = Random.Range(0, 100);            
             int yPos = Random.Range (0, 4);
 			Vector3 startPos = Vector3.zero;
-			if (yPos == 0 || yPos == 3) {
+			if (yPos == 0) {
 				startPos = new Vector3 (40, 1, 20);
-			} else if (yPos == 1) {
+			} else if (yPos == 1 || yPos == 3) {
 				startPos = new Vector3 (-40, 5, 20);
 			} else if (yPos == 2) {
 				startPos = new Vector3 (40, 9, 20);
-			}
+			} 
             //gen normal
             GameObject go;
-			if (yPos == 1) {
+			if (yPos == 1 || yPos == 3) {
 
 				go = Instantiate(platform2, startPos, Quaternion.identity);
+
+				GameObject powerupGOref = PowerUp.S.getPowerUpInstanceForSpawning ();
+				if (powerupGOref != null) {
+					GameObject powerupGO = MonoBehaviour.Instantiate (powerupGOref, startPos + 2*Vector3.up, Quaternion.identity, go.transform);
+					powerupGO.transform.localScale = new Vector2 (0.15f, 0.8f);
+					// Note: The powerups are a child of the platforms! 
+				}
+
 				platforms.Add (go);
 				frameCounter = spawnRate;
 			} else {
