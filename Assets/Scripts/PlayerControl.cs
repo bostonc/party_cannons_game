@@ -50,7 +50,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (freeze)
+		if (InputManager.S.paused || freeze)
 			return;
 		if (beingReset) {
 			checkForResetCompletion ();

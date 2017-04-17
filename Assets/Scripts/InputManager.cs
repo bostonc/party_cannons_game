@@ -355,7 +355,7 @@ public class InputManager : MonoBehaviour
 			}
 		}
 		
-		if (Scorekeeper.S.gameOver)
+		if (paused || Scorekeeper.S.gameOver)
 			return;
 
 		UpdateHelper (PlayerID.Player1);
