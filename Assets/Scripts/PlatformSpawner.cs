@@ -32,9 +32,9 @@ public class PlatformSpawner : MonoBehaviour {
 		if (frameCounter == 0)
         {
             int platSelect = Random.Range(0, 100);            
-            int yPos = Random.Range (0, 3);
+            int yPos = Random.Range (0, 4);
 			Vector3 startPos = Vector3.zero;
-			if (yPos == 0) {
+			if (yPos == 0 || yPos == 3) {
 				startPos = new Vector3 (40, 1, 20);
 			} else if (yPos == 1) {
 				startPos = new Vector3 (-40, 5, 20);
