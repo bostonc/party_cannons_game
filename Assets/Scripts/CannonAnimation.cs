@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonAnimation : MonoBehaviour {
+    static public CannonAnimation C;
+
     public Sprite[] red;
     public Sprite[] blue;
     public Sprite[] green;
@@ -22,8 +24,13 @@ public class CannonAnimation : MonoBehaviour {
 
     float curr_time;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        C = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         curr_time = Time.time;
         moving = false;
         base_rotation = cannon_base.GetComponent<Transform>().rotation;

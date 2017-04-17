@@ -1391,6 +1391,7 @@ GameObject:
   - component: {fileID: 1151338228}
   - component: {fileID: 1151338227}
   - component: {fileID: 1151338226}
+  - component: {fileID: 1151338230}
   m_Layer: 5
   m_Name: SelectionMenu
   m_TagString: Untagged
@@ -1491,6 +1492,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1151338230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1151338225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4be3ddd049be648a080af091e6779c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1clr: 0
+  p2clr: 0
+  p3clr: 0
+  p4clr: 0
+  p1: {fileID: 309365989}
+  p2: {fileID: 1725120059}
+  p3: {fileID: 1482467947}
+  p4: {fileID: 53328305}
 --- !u!1 &1215414667
 GameObject:
   m_ObjectHideFlags: 0

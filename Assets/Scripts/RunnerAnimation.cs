@@ -32,20 +32,21 @@ public class RunnerAnimation : MonoBehaviour {
     Vector3 currentVelocity;
 
     public Sprite getSprite(InputManager.PlayerID pID, Vector3 dir) {
-        switch (pID) {
-            case InputManager.PlayerID.Player1:
+        InputManager.PlayerColor clr = InputManager.S.getPlayerColorWithPlayerID(pID);
+        switch (clr) {
+            case InputManager.PlayerColor.Red:
                 //use red
                 return red_left[0];
-            case InputManager.PlayerID.Player2:
+            case InputManager.PlayerColor.Blue:
                 //use blue
                 return blue_left[0];
                 //currentColor = ColorSprite.BLUE;
-            case InputManager.PlayerID.Player3:
+            case InputManager.PlayerColor.Green:
                 return green_left[0];
                 //R.GetComponent<SpriteRenderer>().sprite = green_left[0];
                 //currentColor = ColorSprite.GREEN;
                 //use green
-            case InputManager.PlayerID.Player4:
+            case InputManager.PlayerColor.Yellow:
                 return yellow_left[0];
                 //R.GetComponent<SpriteRenderer>().sprite = yellow_left[0];
                 //currentColor = ColorSprite.YELLOW;
@@ -66,23 +67,25 @@ public class RunnerAnimation : MonoBehaviour {
 
         prevPosition = R.transform.position;
 
-		switch (currentRunner) {
-            case InputManager.PlayerID.Player1:
+        InputManager.PlayerColor curr_color = InputManager.S.getPlayerColorWithPlayerID(currentRunner);
+
+		switch (curr_color) {
+            case InputManager.PlayerColor.Red:
                 //use red
                 R.GetComponent<SpriteRenderer>().sprite = red_left[0];
                 currentColor = ColorSprite.RED;
                 break;
-            case InputManager.PlayerID.Player2:
+            case InputManager.PlayerColor.Blue:
                 //use blue
                 R.GetComponent<SpriteRenderer>().sprite = blue_left[0];
                 currentColor = ColorSprite.BLUE;
                 break;
-            case InputManager.PlayerID.Player3:
+            case InputManager.PlayerColor.Green:
                 R.GetComponent<SpriteRenderer>().sprite = green_left[0];
                 currentColor = ColorSprite.GREEN;
                 //use green
                 break;
-            case InputManager.PlayerID.Player4:
+            case InputManager.PlayerColor.Yellow:
                 R.GetComponent<SpriteRenderer>().sprite = yellow_left[0];
                 currentColor = ColorSprite.YELLOW;
                 //use yellow
@@ -92,7 +95,7 @@ public class RunnerAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.time - curr_time > 0.2f)
+        if (Time.time - curr_time > 0.1f)
         {
             curr_time = Time.time;
             //direction of current movement

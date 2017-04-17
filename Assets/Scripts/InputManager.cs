@@ -184,6 +184,7 @@ public class InputManager : MonoBehaviour
         pausedMenu.SetActive(false);
 
         string[] Joysticks = Input.GetJoystickNames();
+        //print(Joysticks.Length);
 		if (Joysticks.Length > 0) { // At least 1 controller attached. No need for Keyboard (Debug) Controller.
 			debugAllow = false;
 			randomizePlayers(Joysticks.Length);
@@ -194,64 +195,103 @@ public class InputManager : MonoBehaviour
 		}
 
 
-        PlayerID c1 = getPlayerIDWithControlID(ControlID.Cannon1);
-        PlayerID c2 = getPlayerIDWithControlID(ControlID.Cannon2);
-        PlayerID c3 = getPlayerIDWithControlID(ControlID.Cannon3);
+        PlayerColor c1 = getPlayerColorWithControlID(ControlID.Cannon1);
+        PlayerColor c2 = getPlayerColorWithControlID(ControlID.Cannon2);
+        PlayerColor c3 = getPlayerColorWithControlID(ControlID.Cannon3);
+        PlayerColor rclr = getPlayerColorWithControlID(ControlID.Runner);
 
-        if (c1 == PlayerID.Player1) {
+        if (c1 == PlayerColor.Red) {
             //Debug.Log("IM SETTING THE COLOR1");
 			cannon1.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.red[0];
             //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
-        else if (c1 == PlayerID.Player2) {
+        else if (c1 == PlayerColor.Blue) {
             //Debug.Log("IM SETTING THE COLOR2");
 			cannon1.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.blue[0];
             //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
-        else if (c1 == PlayerID.Player3) {
+        else if (c1 == PlayerColor.Green) {
             //Debug.Log("IM SETTING THE COLOR3");
 			cannon1.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.green[0];
             //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
-        else if (c1 == PlayerID.Player4) {
+        else if (c1 == PlayerColor.Yellow) {
             //Debug.Log("IM SETTING THE COLOR4");
 			cannon1.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            cannon1Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.yellow[0];
             //cannon1.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
 
-        if (c2 == PlayerID.Player1) {
+        if (c2 == PlayerColor.Red) {
 			cannon2.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.red[0];
             //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
-        else if (c2 == PlayerID.Player2) {
+        else if (c2 == PlayerColor.Blue) {
 			cannon2.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.blue[0];
             //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
-        else if (c2 == PlayerID.Player3) {
+        else if (c2 == PlayerColor.Green) {
 			cannon2.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.green[0];
             //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
-        else if (c2 == PlayerID.Player4) {
+        else if (c2 == PlayerColor.Yellow) {
 			cannon2.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            cannon2Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.yellow[0];
             //cannon2.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
 
-        if (c3 == PlayerID.Player1) {
+        if (c3 == PlayerColor.Red) {
 			cannon3.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.red[0];
             //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
         }
-        else if (c3 == PlayerID.Player2) {
+        else if (c3 == PlayerColor.Blue) {
 			cannon3.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.blue[0];
             //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
         }
-        else if (c3 == PlayerID.Player3) {
+        else if (c3 == PlayerColor.Green) {
 			cannon3.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.green[0];
             //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
         }
-        else if (c3 == PlayerID.Player4) {
+        else if (c3 == PlayerColor.Yellow) {
 			cannon3.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            cannon3Sprite.GetComponent<SpriteRenderer>().sprite = CannonAnimation.C.yellow[0];
             //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
         }
+        /*
+        print(rclr);
+        if (rclr == PlayerColor.Red)
+        {
+            runner.GetComponent<SpriteRenderer>().sprite = RunnerAnimation.R.red_left[0];
+            //cannon3.GetComponent<CannonControl>().trueSetMaterial(player1Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player1Material);
+        }
+        else if (rclr == PlayerColor.Blue)
+        {
+            runner.GetComponent<SpriteRenderer>().sprite = RunnerAnimation.R.blue_left[0];
+            //cannon3.GetComponent<CannonControl>().trueSetMaterial(player2Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player2Material);
+        }
+        else if (rclr == PlayerColor.Green)
+        {
+            runner.GetComponent<SpriteRenderer>().sprite = RunnerAnimation.R.green_left[0];
+            //cannon3.GetComponent<CannonControl>().trueSetMaterial(player3Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player3Material);
+        }
+        else if (rclr == PlayerColor.Yellow)
+        {
+            runner.GetComponent<SpriteRenderer>().sprite = RunnerAnimation.R.yellow_left[0];
+            //cannon3.GetComponent<CannonControl>().trueSetMaterial(player4Material);
+            //cannon3.GetComponent<CannonBallMetadata>().setCannonControlMaterial(player4Material);
+        }*/
 
     }
 
@@ -346,13 +386,6 @@ public class InputManager : MonoBehaviour
 			break;
 		}
 	}
-
-    void FixedUpdate()
-    {
-        cid1ismoving = false;
-        cid2ismoving = false;
-        cid3ismoving = false;
-    }
 
     // Update is called once per frame
     void Update ()
@@ -527,8 +560,71 @@ public class InputManager : MonoBehaviour
 
 	private void randomizePlayers(int numOfPlayers)
     {
+        List<ControlID> cIDList = new List<ControlID>() {
+            ControlID.Cannon1,
+            ControlID.Cannon2,
+            ControlID.Cannon3,
+            ControlID.Runner
+        };
 
-		int idx;
+        List<PlayerID> pIDList = new List<PlayerID>() {
+            PlayerID.Player1,
+            PlayerID.Player2,
+            PlayerID.Player3,
+            PlayerID.Player4
+        };
+
+        
+
+        int i;
+        for (i = 0; i < numOfPlayers; i++)
+        {
+            int idx = Random.Range(0, cIDList.Count);
+            ControlID cID = cIDList[idx];
+            cIDList.RemoveAt(idx);
+            PlayerColor clr;
+            if (cID == ControlID.Cannon1)
+            {
+                clr = PlayerColor.Red;
+            }
+            else if (cID == ControlID.Cannon2)
+            {
+                clr = PlayerColor.Blue;
+            }
+            else if (cID == ControlID.Cannon3)
+            {
+                clr = PlayerColor.Green;
+            }
+            else
+            {
+                clr = PlayerColor.Yellow;
+            }
+            setPlayerInfoForControlID(cID, pIDList[i], AIMode.Off, clr);
+        }
+
+        foreach (ControlID cID in cIDList)
+        {
+            PlayerColor clr;
+            if (cID == ControlID.Cannon1)
+            {
+                clr = PlayerColor.Red;
+            }
+            else if (cID == ControlID.Cannon2)
+            {
+                clr = PlayerColor.Blue;
+            }
+            else if (cID == ControlID.Cannon3)
+            {
+                clr = PlayerColor.Green;
+            }
+            else
+            {
+                clr = PlayerColor.Yellow;
+            }
+            setPlayerInfoForControlID(cID, pIDList[i++], AIMode.On, clr);
+        }/*
+        
+        int idx;
 		for(idx = 0; idx < numOfPlayers; idx++) {
 			ControlID cID = ((ControlID)idx + 1);
 			PlayerID pID = ((PlayerID)idx + 1);
@@ -541,7 +637,7 @@ public class InputManager : MonoBehaviour
 			PlayerID pID = ((PlayerID)idx + 1);
 			PlayerColor pClr = ((PlayerColor)idx + 1);
 			setPlayerInfoForControlID (cID, pID, AIMode.On, pClr);
-		}
+		}*/
     }
 
 //	public int getDebugPlayerNum() {
