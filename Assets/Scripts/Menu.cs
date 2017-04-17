@@ -13,9 +13,17 @@ public class Menu : MonoBehaviour {
     public Button options;
     public Button instructions;
     public Button exit;
+    public GameObject okay;
+    public GameObject instructionsGO;
+    public GameObject no;
+    public GameObject exitGO;
+
+    string curr_location;
 
 	// Use this for initialization
 	void Start () {
+        curr_location = "Start";
+
         // default disable the exit menu
         exitMenu.SetActive(false);
         instructionList.SetActive(false);
@@ -35,6 +43,59 @@ public class Menu : MonoBehaviour {
 			EventSystem.current.GetComponent<StandaloneInputModule>().cancelButton = "Cancel_OSX";
 		}
     }
+    /*
+    void Update()
+    {
+        Debug.Log("Current loc: " + curr_location);
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            Debug.Log("PRESS DOWN");
+            switch (curr_location)
+            {
+                case "Start":
+                    curr_location = "Options";
+                    break;
+                case "Options":
+                    curr_location = "Instructions";
+                    break;
+                case "Instructions":
+                    curr_location = "Exit";
+                    break;
+                case "Exit": //do nothing
+                    break;
+            }
+        }
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            Debug.Log("PRESS UP");
+            switch (curr_location)
+            {
+                case "Start":// do nothing
+                    break;
+                case "Options":
+                    curr_location = "Start";
+                    break;
+                case "Instructions":
+                    curr_location = "Options";
+                    break;
+                case "Exit":
+                    curr_location = "Instructions";
+                    break;
+            }
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            Debug.Log("PRESS LEFT");
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            Debug.Log("PRESS RIGHT");
+        }
+        if (Input.GetButton("Submit"))
+        {
+            Debug.Log("PRESSED A");
+        }
+    }*/
 
     public void PressInstructions()
     {
@@ -44,6 +105,8 @@ public class Menu : MonoBehaviour {
         options.enabled = false;
         instructions.enabled = false;
         exit.enabled = false;
+
+        EventSystem.current.SetSelectedGameObject(okay);
     }
 
     public void PressOkay()
@@ -54,6 +117,8 @@ public class Menu : MonoBehaviour {
         options.enabled = true;
         instructions.enabled = true;
         exit.enabled = true;
+
+        EventSystem.current.SetSelectedGameObject(instructionsGO);
     }
 
     public void PressExit() {
@@ -63,6 +128,8 @@ public class Menu : MonoBehaviour {
         options.enabled = false;
         instructions.enabled = false;
         exit.enabled = false;
+
+        EventSystem.current.SetSelectedGameObject(no);
     }
 
     public void PressNo() {
@@ -72,6 +139,8 @@ public class Menu : MonoBehaviour {
         options.enabled = true;
         instructions.enabled = true;
         exit.enabled = true;
+
+        EventSystem.current.SetSelectedGameObject(exitGO);
     }
 
     public void StartGame() {
