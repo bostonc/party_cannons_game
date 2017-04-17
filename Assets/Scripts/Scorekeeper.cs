@@ -21,6 +21,8 @@ public class Scorekeeper : MonoBehaviour
     public Text timerText;
     public Text endGametext;
 
+    public GameObject endPanel;
+
     public GameObject cannon1;
     public GameObject cannon2;
     public GameObject cannon3;
@@ -64,6 +66,7 @@ public class Scorekeeper : MonoBehaviour
         S = this;
         highScoreText.enabled = false;
         endGametext.enabled = false;
+        endPanel.SetActive(false);
     }
 
 	void setScoreTextColor(InputManager.PlayerID pID, Text scoreText) {
@@ -283,9 +286,10 @@ public class Scorekeeper : MonoBehaviour
             winner = 4;
             winScore = p4Score;
         }
-
+        endPanel.SetActive(true);
         endGametext.enabled = true;
         endGametext.text = "Round Over\nPlayer " + winner + " wins with " + winScore + " points";
+        endGametext.text += "\n\nGet ready for another round...";
 
         switch (highscoreHolder)
         {
