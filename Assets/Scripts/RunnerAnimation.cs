@@ -27,7 +27,9 @@ public class RunnerAnimation : MonoBehaviour {
 
     Vector3 prevPosition;
 
-    public Sprite getSprite(InputManager.PlayerID pID) {
+    Vector3 currentVelocity;
+
+    public Sprite getSprite(InputManager.PlayerID pID, Vector3 dir) {
         switch (pID) {
             case InputManager.PlayerID.Player1:
                 //use red
@@ -56,6 +58,7 @@ public class RunnerAnimation : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        currentVelocity = Vector3.zero;
         currentRunner = InputManager.S.getCurrentRunnerID();
 
         prevPosition = R.transform.position;
@@ -87,7 +90,7 @@ public class RunnerAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //direction of current movement
-        Vector3 currentVelocity = R.transform.position - prevPosition;
+        currentVelocity = R.transform.position - prevPosition;
         currentVelocity = currentVelocity.normalized;
         prevPosition = R.transform.position;
 

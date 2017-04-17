@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
+
 {
     private void Start()
     {
@@ -33,5 +35,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         InputManager.S.paused = false;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

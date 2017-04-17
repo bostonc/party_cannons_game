@@ -240,12 +240,14 @@ public class RunnerHealth : MonoBehaviour {
 			break;
 		}
 
-		//change sprite related to cannon
-		//setSprite()
+        //change sprite related to cannon
+        //setSprite()
 
-		//change cat
-		//change cat depending on new playerid
-		setSprite(RunnerAnimation.R.getSprite(newRunnerID));
+        //change cat
+        //change cat depending on new playerid
+        Vector3 dir = Vector3.zero;
+        Debug.Log("CURR DIRECTION: " + gameObject.GetComponent<Rigidbody>().velocity);
+		setSprite(RunnerAnimation.R.getSprite(newRunnerID, dir));
 
 
 		InputManager.S.swapPlayer(cID);

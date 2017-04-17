@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 /*
     Debugger should be able to use PC keyboard/mouse to control each player (one at a time).
@@ -35,8 +36,12 @@ public class InputManager : MonoBehaviour
     public Material player3Material;
     public Material player4Material;
 
+    
+
     //public Text pausedText;
     public GameObject pausedMenu;
+
+    public GameObject resume;
 
     public bool paused = false;
 
@@ -345,14 +350,16 @@ public class InputManager : MonoBehaviour
 				paused = false;
 				//pausedText.enabled = false;
 				pausedMenu.SetActive(false);
-			}
+                EventSystem.current.SetSelectedGameObject(null);
+            }
 			else
 			{
 				Time.timeScale = 0;
 				paused = true;
 				//pausedText.enabled = true;
 				pausedMenu.SetActive(true);
-			}
+                EventSystem.current.SetSelectedGameObject(resume);
+            }
 		}
 		
 		if (paused || Scorekeeper.S.gameOver)
