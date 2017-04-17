@@ -11,6 +11,7 @@ TagManager:
   - JumpHigh
   - Points
   - Glass
+  - FreezeCannon
   layers:
   - Default
   - TransparentFX

@@ -44,6 +44,9 @@ public class PowerUp : MonoBehaviour {
     }
 
     void Update() {
+		if (RunnerHealth.isInSwitch ())
+			return;
+
 		runner.layer = powerUpState ["Shield"] ? LayerMask.NameToLayer ("Invincible") :  LayerMask.NameToLayer("Default");
 
 		if (powerUpState ["SlowDown"]) {

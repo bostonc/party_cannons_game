@@ -6,6 +6,9 @@ public class PlayerControl : MonoBehaviour {
 
 	static public PlayerControl S;
 
+
+	public static bool freeze;
+
 	public float speed = 10;
 	public float jumpPower = 10;
 
@@ -47,6 +50,8 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (freeze)
+			return;
 		if (beingReset) {
 			checkForResetCompletion ();
 		} else {

@@ -207,7 +207,7 @@ public class CannonControl : MonoBehaviour
 		if ((current_yaw >= maxYaw && f > 0) || (current_yaw <= minYaw && f < 0)) {
 			return;
 		} else {
-			current_yaw += f;
+			current_yaw += 1.5f*f;
             //DO NOT REMOVE THIS LINE
             AudioDriver.S.play(SoundType.rotate);
         }
@@ -218,7 +218,7 @@ public class CannonControl : MonoBehaviour
 		if ((current_pitch >= maxPitch && f > 0) || (current_pitch <= minPitch && f < 0)) {
 			return;
 		} else {
-			current_pitch += f;
+			current_pitch += 1.5f*f;
 		}
     }
 

@@ -69,7 +69,9 @@ public class RunnerHealth : MonoBehaviour {
 				inSwitch = false;
 				switchFrame = 0;
 				Time.timeScale = 1.0f;
-				Time.fixedDeltaTime = 0.02f ;
+				Time.fixedDeltaTime = 0.02f;
+				CannonControl.freeze = false;
+				PlayerControl.freeze = false;
 			} else {
 				Time.timeScale = 0.25f;
 				Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -126,6 +128,8 @@ public class RunnerHealth : MonoBehaviour {
 	private void swapHelper(GameObject CannonballGO) {
 
 		inSwitch = true;
+		CannonControl.freeze = true;
+		PlayerControl.freeze = true;
 
 		// Destroy all cannonballs when runner is killed
 		var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
