@@ -101,6 +101,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         S = this;
+        Cursor.visible = false;
     }
 
 	// get the JoyNum controlling a given cannon (1 - 3) or runner (4)

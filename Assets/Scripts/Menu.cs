@@ -20,8 +20,13 @@ public class Menu : MonoBehaviour {
 
     string curr_location;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        Cursor.visible = false;
+    }
+
+    // Use this for initialization
+    void Start () {
         curr_location = "Start";
 
         // default disable the exit menu
