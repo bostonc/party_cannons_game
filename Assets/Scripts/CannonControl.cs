@@ -14,6 +14,8 @@ using UnityEngine;
 
 public class CannonControl : MonoBehaviour
 {
+	public static bool freeze;
+	
 	private float maxYaw = 45;
 	private float minYaw = -45;
 
@@ -75,7 +77,15 @@ public class CannonControl : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-		if (InputManager.S.paused)
+		if (freeze) {
+			// Destroy all cannonballs when runner is killed
+			var cannonBalls = GameObject.FindGameObjectsWithTag ("Projectile");
+			for (var i = 0; i < cannonBalls.Length; i++) {
+				Destroy (cannonBalls [i]);
+			}
+		}
+
+		if (InputManager.S.paused || freeze)
 			return;
 
 		checkIfAIControlled ();
@@ -177,7 +187,7 @@ public class CannonControl : MonoBehaviour
 		float timeDelta = 1.0f / initialVelocity.magnitude; // for example
 
 		LineRenderer lineRenderer = go.GetComponent<LineRenderer>();
-		lineRenderer.positionCount = numSteps;
+		lineRenderer.numPositions = numSteps;
 
 		lineRenderer.material.color = getMaterial ().color;
 

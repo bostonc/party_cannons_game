@@ -59,6 +59,9 @@ public class PowerUp : MonoBehaviour {
 		} else {
 			currentRunner.jumpPower = defaultJumpPower;
 		}
+
+
+		CannonControl.freeze = powerUpState ["FreezeCannon"];
 	}
 
     void OnCollisionEnter(Collision coll) {
@@ -73,37 +76,34 @@ public class PowerUp : MonoBehaviour {
 			Scorekeeper.S.spawnPopup ("Slow Down, +20!", gameObject.transform.position);
 			StartCoroutine (EnablePowerup (coll.gameObject.tag));
 			Destroy (coll.gameObject);     
-		} 
-
-		else if (coll.gameObject.tag == "SpeedUp") {
+		} else if (coll.gameObject.tag == "SpeedUp") {
 			AudioDriver.S.play (SoundType.powerup);
 			powerUpState ["SlowDown"] = false; // Negate SlowDown regardless of whether it is active.
 			Scorekeeper.S.spawnPopup ("Speed Up!", gameObject.transform.position);
 			StartCoroutine (EnablePowerup (coll.gameObject.tag));
 			Destroy (coll.gameObject);
-		} 
-
-		else if (coll.gameObject.tag == "JumpHigh") {
+		} else if (coll.gameObject.tag == "JumpHigh") {
 			AudioDriver.S.play (SoundType.powerup);
 			Scorekeeper.S.spawnPopup ("Jump Higher!", gameObject.transform.position);
 			StartCoroutine (EnablePowerup (coll.gameObject.tag));
 			Destroy (coll.gameObject);
-		} 
-
-		else if (coll.gameObject.tag == "Points") {
+		} else if (coll.gameObject.tag == "Points") {
 			AudioDriver.S.play (SoundType.powerup);
 			Scorekeeper.S.Score (InputManager.S.getPlayerInfoWithControlID (InputManager.ControlID.Runner).playerID, 50);
 			Scorekeeper.S.spawnPopup ("+50!", gameObject.transform.position);
 			Destroy (coll.gameObject);
 			// No need to do call EnablePowerup as coroutine (Points has no side effects on player variables.)
-        } 
-
-		else if (coll.gameObject.tag == "Shield") {
-            AudioDriver.S.play(SoundType.powerup);
-            Scorekeeper.S.spawnPopup("Shields Up!", gameObject.transform.position);
-			StartCoroutine (EnablePowerup(coll.gameObject.tag));
-            Destroy(coll.gameObject);
-        }
+		} else if (coll.gameObject.tag == "Shield") {
+			AudioDriver.S.play (SoundType.powerup);
+			Scorekeeper.S.spawnPopup ("Shields Up!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup (coll.gameObject.tag));
+			Destroy (coll.gameObject);
+		} else if (coll.gameObject.tag == "FreezeCannon") {
+			AudioDriver.S.play (SoundType.powerup);
+			Scorekeeper.S.spawnPopup ("Freeze Cannons!", gameObject.transform.position);
+			StartCoroutine (EnablePowerup (coll.gameObject.tag));
+			Destroy (coll.gameObject);
+		}
     }
 
 	public GameObject getPowerUpInstanceForSpawning() {

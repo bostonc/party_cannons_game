@@ -209,8 +209,10 @@ public class PlatformController : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision coll) {
 	if (coll.gameObject.name == "Runner") {
-			prevParentGameObjOfRunner = coll.gameObject.transform.parent;
-			coll.gameObject.transform.parent = this.gameObject.transform; 
+			if (coll.gameObject.transform.position.y > gameObject.transform.position.y) {
+				prevParentGameObjOfRunner = coll.gameObject.transform.parent;
+				coll.gameObject.transform.parent = this.gameObject.transform; 
+			}
 		}
 	}
 
