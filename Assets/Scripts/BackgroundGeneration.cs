@@ -21,7 +21,8 @@ public class BackgroundGeneration : MonoBehaviour
         switch(seed)
         {
             case 0:
-                r.material = mat0;
+                //r.material = mat0;
+                r.material = mat2;
                 break;
             case 1:
                 r.material = mat1;
