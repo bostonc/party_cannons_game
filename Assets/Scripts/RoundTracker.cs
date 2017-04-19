@@ -59,6 +59,8 @@ public class RoundTracker : MonoBehaviour {
                 break;
         }
     }
+
+    //public void resetScore()
     
     public void updateRound()
     {
