@@ -381,7 +381,7 @@ public class Scorekeeper : MonoBehaviour
             endGametext.text = "Game over\n";
         }
 
-        endGametext.text += "Player " + winner + " wins Round " + RoundTracker.R.num_rounds + "/4 with " + winScore + " points";
+        endGametext.text += "Player " + winner + " wins Round " + RoundTracker.R.num_rounds + " with " + winScore + " points";
         if (RoundTracker.R.num_rounds < 4)
         {
             endGametext.text += "\n\nGet ready for another round...";
