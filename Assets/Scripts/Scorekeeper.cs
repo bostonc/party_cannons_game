@@ -64,6 +64,7 @@ public class Scorekeeper : MonoBehaviour
 
     private void Awake()
     {
+        RoundTracker.R.updateRound();
         S = this;
         highScoreText.enabled = false;
         endGametext.enabled = false;
@@ -87,7 +88,7 @@ public class Scorekeeper : MonoBehaviour
     void Start ()
     {
 
-        RoundTracker.R.updateRound();
+        
         roundCounter.text = (RoundTracker.R.num_rounds).ToString();
 
         if (cannon1 != null) c1Pos = cannon1.transform.position;

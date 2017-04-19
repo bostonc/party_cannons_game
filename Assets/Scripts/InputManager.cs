@@ -575,32 +575,46 @@ public class InputManager : MonoBehaviour
             PlayerID.Player4
         };
 
-        
+        if (RoundTracker.R.num_rounds == 2)
+        {
+            cIDList = new List<ControlID>()
+            {
+                ControlID.Runner,
+                ControlID.Cannon1,
+                ControlID.Cannon2,
+                ControlID.Cannon3
+            };
+        }
+        else if (RoundTracker.R.num_rounds == 3)
+        {
+            cIDList = new List<ControlID>()
+            {
+                ControlID.Cannon3,
+                ControlID.Runner,
+                ControlID.Cannon1,
+                ControlID.Cannon2
+                
+            };
+        }
+        else if (RoundTracker.R.num_rounds == 4)
+        {
+            cIDList = new List<ControlID>()
+            {
+                ControlID.Cannon2,
+                ControlID.Cannon3,
+                ControlID.Runner,
+                ControlID.Cannon1
+                
+            };
+        }
 
-        int i;
+        /*int i;
         for (i = 0; i < numOfPlayers; i++)
         {
             int idx = Random.Range(0, cIDList.Count);
             ControlID cID = cIDList[idx];
             cIDList.RemoveAt(idx);
             PlayerColor clr;
-            /*
-            if (cID == ControlID.Cannon1)
-            {
-                clr = PlayerColor.Red;
-            }
-            else if (cID == ControlID.Cannon2)
-            {
-                clr = PlayerColor.Blue;
-            }
-            else if (cID == ControlID.Cannon3)
-            {
-                clr = PlayerColor.Green;
-            }
-            else
-            {
-                clr = PlayerColor.Yellow;
-            }*/
 
             if (pIDList[i] == PlayerID.Player1)
             {
@@ -626,23 +640,6 @@ public class InputManager : MonoBehaviour
         {
             PlayerColor clr;
 
-            /*if (cID == ControlID.Cannon1)
-            {
-                clr = PlayerColor.Red;
-            }
-            else if (cID == ControlID.Cannon2)
-            {
-                clr = PlayerColor.Blue;
-            }
-            else if (cID == ControlID.Cannon3)
-            {
-                clr = PlayerColor.Green;
-            }
-            else
-            {
-                clr = PlayerColor.Yellow;
-            }*/
-
             if (pIDList[i] == PlayerID.Player1)
             {
                 clr = PlayerColor.Red;
@@ -661,23 +658,23 @@ public class InputManager : MonoBehaviour
             }
 
             setPlayerInfoForControlID(cID, pIDList[i++], AIMode.On, clr);
-        }
-        /*
-        
+        }*/
         int idx;
-		for(idx = 0; idx < numOfPlayers; idx++) {
-			ControlID cID = ((ControlID)idx + 1);
-			PlayerID pID = ((PlayerID)idx + 1);
-			PlayerColor pClr = ((PlayerColor)idx + 1);
-			setPlayerInfoForControlID (cID, pID, AIMode.Off, pClr);
-		}
+        for (idx = 0; idx < numOfPlayers; idx++)
+        {
+            ControlID cID = cIDList[idx];
+            PlayerID pID = ((PlayerID)idx + 1);
+            PlayerColor pClr = ((PlayerColor)idx + 1);
+            setPlayerInfoForControlID(cID, pID, AIMode.Off, pClr);
+        }
 
-		for (; idx < 4; idx++) {
-			ControlID cID = ((ControlID)idx + 1);
-			PlayerID pID = ((PlayerID)idx + 1);
-			PlayerColor pClr = ((PlayerColor)idx + 1);
-			setPlayerInfoForControlID (cID, pID, AIMode.On, pClr);
-		}*/
+        for (; idx < 4; idx++)
+        {
+            ControlID cID = cIDList[idx];
+            PlayerID pID = ((PlayerID)idx + 1);
+            PlayerColor pClr = ((PlayerColor)idx + 1);
+            setPlayerInfoForControlID(cID, pID, AIMode.On, pClr);
+        }
     }
 
 //	public int getDebugPlayerNum() {
