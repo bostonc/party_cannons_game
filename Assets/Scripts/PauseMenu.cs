@@ -22,7 +22,9 @@ public class PauseMenu : MonoBehaviour
     public void PressRestart()
     {
         unpause();
+        RoundTracker.R.restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void PressQuit()

@@ -612,6 +612,51 @@ MonoBehaviour:
   menuMusic_2: {fileID: 8300000, guid: 5f54654b0f6dfd1429366fa3f807cfac, type: 3}
   menuMusic_3: {fileID: 8300000, guid: b0680834fab582d4f90254cd6a1fc07d, type: 3}
   _________________: 0
+--- !u!1 &630656773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 630656775}
+  - component: {fileID: 630656774}
+  m_Layer: 0
+  m_Name: Round Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &630656774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630656773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a762680d9dcf34c8d89731919652b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num_rounds: 0
+  p1_score: 0
+  p2_score: 0
+  p3_score: 0
+  p4_score: 0
+--- !u!4 &630656775
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630656773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 368.5, y: 210.99692, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &760005952
 GameObject:
   m_ObjectHideFlags: 0

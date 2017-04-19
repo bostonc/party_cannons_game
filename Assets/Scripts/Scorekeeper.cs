@@ -85,6 +85,9 @@ public class Scorekeeper : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+
+        RoundTracker.R.updateRound();
+
         if (cannon1 != null) c1Pos = cannon1.transform.position;
         if (cannon2 != null) c2Pos = cannon2.transform.position;
         if (cannon3 != null) c3Pos = cannon3.transform.position;
@@ -331,6 +334,11 @@ public class Scorekeeper : MonoBehaviour
         int winner = 0;
         int winScore = 0;
 
+        RoundTracker.R.updateScore(1, p1Score);
+        RoundTracker.R.updateScore(2, p2Score);
+        RoundTracker.R.updateScore(3, p3Score);
+        RoundTracker.R.updateScore(4, p4Score);
+
         if (p1Score > p2Score &&
             p1Score > p3Score &&
             p1Score > p4Score)
@@ -361,17 +369,19 @@ public class Scorekeeper : MonoBehaviour
         }
         endPanel.SetActive(true);
         endGametext.enabled = true;
-        endGametext.text = "Round Over\nPlayer " + winner + " wins with " + winScore + " points";
+        endGametext.text = "Round Over\nPlayer " + winner + " wins Round " + RoundTracker.R.num_rounds + "/4 with " + winScore + " points";
         endGametext.text += "\n\nGet ready for another round...";
 
-        switch (highscoreHolder)
+        Debug.Log(RoundTracker.R.num_rounds);
+
+        /*switch (highscoreHolder)
         {
             case 0:
                 break;
             default:
                 endGametext.text += "\nas a new HIGH SCORE!";
                 break;
-        }        
+        }*/
     }//endgame
 
     //called in update
@@ -399,6 +409,7 @@ public class Scorekeeper : MonoBehaviour
         print("SCENELOADTIME: " + sceneLoadTime);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //RoundTracker.R.restart();
     }
 
     public GameObject spawnPopup(string msg, Vector3 loc)
