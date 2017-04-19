@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour {
     public GameObject no;
     public GameObject exitGO;
 
-    string curr_location;
+    //string curr_location;
 
     void Awake()
     {
@@ -27,7 +27,7 @@ public class Menu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        curr_location = "Start";
+        //curr_location = "Start";
 
         // default disable the exit menu
         exitMenu.SetActive(false);

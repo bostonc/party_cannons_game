@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundTracker : MonoBehaviour {
 
@@ -34,12 +35,13 @@ public class RoundTracker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (num_rounds == 4)
-        {
-            //do something
-            Debug.Log("4 rounds have passed");
-        }
+		
 	}
+
+    public void resetEverything()
+    {
+        Start();
+    }
 
     public void updateScore(int pnum, int score)
     {

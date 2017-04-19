@@ -20,6 +20,7 @@ public class Scorekeeper : MonoBehaviour
     public Text p4ScoreText;
     public Text timerText;
     public Text endGametext;
+    public Text roundCounter;
 
     public GameObject endPanel;
 
@@ -87,6 +88,7 @@ public class Scorekeeper : MonoBehaviour
     {
 
         RoundTracker.R.updateRound();
+        roundCounter.text = (RoundTracker.R.num_rounds).ToString();
 
         if (cannon1 != null) c1Pos = cannon1.transform.position;
         if (cannon2 != null) c2Pos = cannon2.transform.position;
@@ -369,8 +371,28 @@ public class Scorekeeper : MonoBehaviour
         }
         endPanel.SetActive(true);
         endGametext.enabled = true;
-        endGametext.text = "Round Over\nPlayer " + winner + " wins Round " + RoundTracker.R.num_rounds + "/4 with " + winScore + " points";
-        endGametext.text += "\n\nGet ready for another round...";
+        if (RoundTracker.R.num_rounds < 4)
+        {
+            endGametext.text = "Round over\n";
+        }
+        else if (RoundTracker.R.num_rounds == 4)
+        {
+            endGametext.text = "Game over\n";
+        }
+
+        endGametext.text += "Player " + winner + " wins Round " + RoundTracker.R.num_rounds + "/4 with " + winScore + " points";
+        if (RoundTracker.R.num_rounds < 4)
+        {
+            endGametext.text += "\n\nGet ready for another round...";
+        }
+        else if (RoundTracker.R.num_rounds == 4)
+        {
+            //SceneManager.LoadScene("End");
+            endgameTime = Time.time;
+            restartTimerStarted = true;
+            endGametext.text += "\n\nLoading results...";
+            //restartCountdown();
+        }
 
         Debug.Log(RoundTracker.R.num_rounds);
 
@@ -389,7 +411,14 @@ public class Scorekeeper : MonoBehaviour
     {
         if (Time.time - endgameTime > restartDuration && restartTimerStarted)
         {
-            restart();
+            if (RoundTracker.R.num_rounds < 4)
+            {
+                restart();
+            }
+            else if (RoundTracker.R.num_rounds == 4)
+            {
+                SceneManager.LoadScene("End");
+            }
         }
     }
 
