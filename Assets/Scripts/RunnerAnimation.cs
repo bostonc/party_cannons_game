@@ -104,7 +104,7 @@ public class RunnerAnimation : MonoBehaviour {
             curr_time = Time.time;
             
 
-            if (currentVelocity == Vector3.left)
+			if (currentVelocity.x < 0)
             {
                 //change sprite
                 switch (currentColor)
@@ -135,7 +135,7 @@ public class RunnerAnimation : MonoBehaviour {
                         break;
                 }
             }
-            else if (currentVelocity == Vector3.right)
+			else if (currentVelocity.x > 0)
             {
                 switch (currentColor)
                 {
