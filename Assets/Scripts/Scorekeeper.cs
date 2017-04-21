@@ -166,18 +166,18 @@ public class Scorekeeper : MonoBehaviour
 				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player1).controlID) {
 				case InputManager.ControlID.Cannon1:
 					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon2:
-					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon2.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon3:
-					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", cannon3.gameObject.transform.TransformPoint (3 * Vector3.up));  
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Runner:
-					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", runner.transform.position); 
+					go = Scorekeeper.S.spawnPopup ("Player 1 takes the lead!", runner.transform.TransformPoint(3 * Vector3.up)); 
 					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					break;
 				}
@@ -192,18 +192,18 @@ public class Scorekeeper : MonoBehaviour
 				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player2).controlID) {
 				case InputManager.ControlID.Cannon1:
 					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon2:
-					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon2.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon3:
-					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", cannon3.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Runner:
-					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", runner.transform.position); 
+					go = Scorekeeper.S.spawnPopup ("Player 2 takes the lead!", runner.transform.TransformPoint(3 * Vector3.up)); 
 					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					break;
 				}
@@ -218,18 +218,18 @@ public class Scorekeeper : MonoBehaviour
 				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player3).controlID) {
 				case InputManager.ControlID.Cannon1:
 					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon2:
-					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon2.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon3:
-					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", cannon3.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Runner:
-					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", runner.transform.position); 
+					go = Scorekeeper.S.spawnPopup ("Player 3 takes the lead!", runner.transform.TransformPoint(3 * Vector3.up)); 
 					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					break;
 				}
@@ -244,18 +244,18 @@ public class Scorekeeper : MonoBehaviour
 				switch (InputManager.S.getPlayerInfoWithPlayerID (InputManager.PlayerID.Player4).controlID) {
 				case InputManager.ControlID.Cannon1:
 					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon2:
-					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon2.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Cannon3:
-					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon1.gameObject.transform.TransformPoint (3 * Vector3.up)); 
-					go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", cannon3.gameObject.transform.TransformPoint (3 * Vector3.up)); 
+					go.transform.localScale = new Vector3 (0.15f, 0.15f, 0.15f);
 					break;
 				case InputManager.ControlID.Runner:
-					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", runner.transform.position); 
+					go = Scorekeeper.S.spawnPopup ("Player 4 takes the lead!", runner.transform.TransformPoint(3 * Vector3.up)); 
 					//go.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					break;
 				}
@@ -442,9 +442,9 @@ public class Scorekeeper : MonoBehaviour
         //RoundTracker.R.restart();
     }
 
-    public GameObject spawnPopup(string msg, Vector3 loc)
+	public GameObject spawnPopup(string msg, Vector3 loc)
     {
-        GameObject popup = Instantiate(scorePopupPrefab);
+		GameObject popup = Instantiate(scorePopupPrefab);
         ScoreTextPopup st = popup.GetComponent<ScoreTextPopup>();
         st.construct(msg, loc);
         //AudioDriver.S.play(SoundType.score);
