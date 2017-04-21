@@ -101,11 +101,12 @@ public class PlayerControl : MonoBehaviour {
 	public void jump(float f)
 	{
 
+        
+        if (!beingReset) {
+            
 
-		if (!beingReset) {
-
-			// Variable Jump
-			if (f == 0) {
+            // Variable Jump
+            if (f == 0) {
 				zerosFromInput++;
 			} else {
 				zerosFromInput = 0;

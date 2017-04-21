@@ -58,10 +58,15 @@ public class CannonControl : MonoBehaviour
 			onAI = false;
     }
 
+     void Awake()
+    {
+        _barrel = transform.Find("Barrel").gameObject;
+        _base = transform.Find("Base").gameObject;
+    }
+
     // Use this for initialization
     void Start () {
-		_barrel = transform.Find ("Barrel").gameObject;
-		_base = transform.Find ("Base").gameObject;
+		
 
 		current_yaw = 0;
 		current_pitch = 45;

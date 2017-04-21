@@ -95,13 +95,14 @@ public class RunnerAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //direction of current movement
+        currentVelocity = R.transform.position - prevPosition;
+        currentVelocity = currentVelocity.normalized;
+        prevPosition = R.transform.position;
         if (Time.time - curr_time > 0.1f)
         {
             curr_time = Time.time;
-            //direction of current movement
-            currentVelocity = R.transform.position - prevPosition;
-            currentVelocity = currentVelocity.normalized;
-            prevPosition = R.transform.position;
+            
 
             if (currentVelocity == Vector3.left)
             {
