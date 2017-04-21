@@ -272,7 +272,7 @@ public class Scorekeeper : MonoBehaviour
         if (highscoreHolder == player) return;
         //AudioDriver.S.play(SoundType.highScore); THIS CReATES BAD AUDIO BUG ON SWAP, NOT SURE WHY
         PlayerPrefs.SetInt("highScore", p4Score);
-        highScoreText.enabled = true;
+        //highScoreText.enabled = true;
         highScoreTime = Time.time;
         highscoreHolder = player;
     }
